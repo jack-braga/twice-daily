@@ -13,21 +13,28 @@ export function LiturgySection({ section, isCompleted, onToggle }: Props) {
       className={`py-6 border-b transition-opacity ${isCompleted ? 'opacity-40' : ''}`}
       style={{ borderColor: 'var(--color-border)' }}
     >
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <div>
-          <h2
-            className="text-lg font-semibold"
-            style={{ fontFamily: 'var(--font-ui)' }}
-          >
-            {section.title}
-          </h2>
-          {section.subtitle && (
-            <p className="text-sm mt-0.5" style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-ui)' }}>
-              {section.subtitle}
-            </p>
-          )}
-        </div>
-        {section.isCheckable && (
+      <div className="mb-3">
+        <h2
+          className="text-lg font-semibold"
+          style={{ fontFamily: 'var(--font-ui)' }}
+        >
+          {section.title}
+        </h2>
+        {section.subtitle && (
+          <p className="text-sm mt-0.5" style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-ui)' }}>
+            {section.subtitle}
+          </p>
+        )}
+      </div>
+
+      <div className="space-y-2">
+        {section.content.map((block, i) => (
+          <ContentBlock key={i} block={block} />
+        ))}
+      </div>
+
+      {section.isCheckable && (
+        <div className="flex justify-end mt-4">
           <button
             onClick={onToggle}
             className={`flex-shrink-0 w-8 h-8 rounded-full border-2 flex items-center justify-center transition-colors ${
@@ -43,14 +50,8 @@ export function LiturgySection({ section, isCompleted, onToggle }: Props) {
               </svg>
             )}
           </button>
-        )}
-      </div>
-
-      <div className="space-y-2">
-        {section.content.map((block, i) => (
-          <ContentBlock key={i} block={block} />
-        ))}
-      </div>
+        </div>
+      )}
     </section>
   );
 }
