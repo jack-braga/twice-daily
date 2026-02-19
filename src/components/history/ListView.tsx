@@ -2,6 +2,8 @@ import { useState, useEffect, useRef, useCallback, type RefObject } from 'react'
 import type { PlanId, Session } from '../../engine/types';
 import { getCompletionSummary } from '../../hooks/useCompletion';
 import { todayStr, formatDateStr, addDays } from '../../utils/date';
+import { isDateInPlanRange } from '../../utils/plan-day';
+import { getPlan } from '../../plans';
 import { DayRow } from './DayRow';
 
 interface Props {
@@ -9,6 +11,7 @@ interface Props {
   onOpen: (date: string, session: Session) => void;
   onTodayElement?: (el: HTMLElement | null) => void;
   scrollContainerRef?: RefObject<HTMLDivElement | null>;
+  planStartDate?: string | null;
 }
 
 function monthStart(dateStr: string): string {
@@ -56,7 +59,7 @@ const PULL_THRESHOLD = 60;
 const SCROLL_EDGE_PX = 50;
 const SPINNER_DURATION = 400; // ms to show spinner
 
-export function ListView({ planId, onOpen, onTodayElement, scrollContainerRef }: Props) {
+export function ListView({ planId, onOpen, onTodayElement, scrollContainerRef, planStartDate }: Props) {
   const today = todayStr();
 
   const [rangeStart, setRangeStart] = useState(() => monthStart(today));
@@ -65,7 +68,7 @@ export function ListView({ planId, onOpen, onTodayElement, scrollContainerRef }:
   const futureMonthsRef = useRef(0);
   const pastMonthsRef = useRef(0);
 
-  const [completions, setCompletions] = useState<Map<string, { morning: number; evening: number }>>(new Map());
+  const [completions, setCompletions] = useState<Map<string, Record<string, number>>>(new Map());
   const [expandedDate, setExpandedDate] = useState<string | null>(null);
 
   const todayRowRef = useRef<HTMLDivElement | null>(null);
@@ -195,6 +198,8 @@ export function ListView({ planId, onOpen, onTodayElement, scrollContainerRef }:
   }, [pullTopOffset, pullBottomOffset, loadNewer, loadOlder]);
 
   const dates = generateDateRange(rangeStart, rangeEnd).reverse();
+  const planConfig = getPlan(planId).config;
+  const isSingleSession = planConfig.sessions.length === 1 && planConfig.sessions[0] === 'daily';
 
   const handleRowClick = useCallback((dateStr: string) => {
     setExpandedDate(prev => prev === dateStr ? null : dateStr);
@@ -249,11 +254,11 @@ export function ListView({ planId, onOpen, onTodayElement, scrollContainerRef }:
       )}
 
       {dates.map(dateStr => {
-        const data = completions.get(dateStr);
-        const morningCompleted = data?.morning ?? 0;
-        const eveningCompleted = data?.evening ?? 0;
+        const data = completions.get(dateStr) ?? {};
         const isToday = dateStr === today;
         const isExpanded = expandedDate === dateStr;
+        const inRange = !planConfig.needsStartDate || !planStartDate || !planConfig.totalDays
+          || isDateInPlanRange(planStartDate, dateStr, planConfig.totalDays);
 
         const thisMonth = monthLabel(dateStr);
         let showMonthHeader = false;
@@ -281,9 +286,10 @@ export function ListView({ planId, onOpen, onTodayElement, scrollContainerRef }:
               className={`border-b mx-1 ${isToday ? 'bg-[var(--color-accent)]/5' : ''}`}
               style={{ borderColor: 'var(--color-border)' }}
             >
-              <button
-                onClick={() => handleRowClick(dateStr)}
-                className="w-full text-left px-3 py-2.5 flex items-center gap-3"
+              <div
+                role={inRange ? 'button' : undefined}
+                onClick={inRange ? () => handleRowClick(dateStr) : undefined}
+                className={`w-full text-left px-3 py-2.5 flex items-center gap-3 ${!inRange ? 'opacity-40' : ''}`}
               >
                 <div className="flex-1 min-w-0">
                   <span
@@ -303,27 +309,40 @@ export function ListView({ planId, onOpen, onTodayElement, scrollContainerRef }:
                   </span>
                 </div>
 
-                <div className="flex gap-1.5 items-center">
-                  <StatusDot completed={morningCompleted > 0} label="M" />
-                  <StatusDot completed={eveningCompleted > 0} label="E" />
-                </div>
+                {inRange ? (
+                  <div className="flex gap-1.5 items-center">
+                    {isSingleSession ? (
+                      <StatusDot completed={(data['daily'] ?? 0) > 0} />
+                    ) : (
+                      <>
+                        <StatusDot completed={(data['morning'] ?? 0) > 0} label="M" />
+                        <StatusDot completed={(data['evening'] ?? 0) > 0} label="E" />
+                      </>
+                    )}
+                  </div>
+                ) : (
+                  <span className="text-xs" style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-ui)' }}>
+                    —
+                  </span>
+                )}
 
-                <svg
-                  className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-                  style={{ color: 'var(--color-text-muted)' }}
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
+                {inRange && (
+                  <svg
+                    className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                    style={{ color: 'var(--color-text-muted)' }}
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                )}
+              </div>
 
-              {isExpanded && (
+              {isExpanded && inRange && (
                 <div className="px-3 pb-3">
                   <DayRow
                     dateStr={dateStr}
                     planId={planId}
-                    morningCompleted={morningCompleted}
-                    eveningCompleted={eveningCompleted}
+                    completions={data}
                     onOpen={onOpen}
                   />
                 </div>
@@ -389,12 +408,14 @@ function Spinner() {
   );
 }
 
-function StatusDot({ completed, label }: { completed: boolean; label: string }) {
+function StatusDot({ completed, label }: { completed: boolean; label?: string }) {
   return (
     <div className="flex items-center gap-0.5">
-      <span className="text-[10px]" style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-ui)' }}>
-        {label}
-      </span>
+      {label && (
+        <span className="text-[10px]" style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-ui)' }}>
+          {label}
+        </span>
+      )}
       <div
         className="w-2 h-2 rounded-full"
         style={{

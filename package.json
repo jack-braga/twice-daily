@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "build:data": "tsx scripts/parse-usfm.ts --variant kjv && tsx scripts/parse-usfm.ts --variant asv && tsx scripts/parse-usfm.ts --variant lsv && tsx scripts/parse-usfm.ts --variant web-usa && tsx scripts/parse-usfm.ts --variant web-brit && tsx scripts/parse-usfm.ts --variant web-updated && tsx scripts/parse-lectionary-original.ts && tsx scripts/parse-lectionary-revised.ts && tsx scripts/parse-mcheyne.ts && tsx scripts/scrape-liturgy-texts.ts && tsx scripts/validate-readings.ts"
+    "build:data": "tsx scripts/parse-usfm.ts --variant kjv && tsx scripts/parse-usfm.ts --variant asv && tsx scripts/parse-usfm.ts --variant lsv && tsx scripts/parse-usfm.ts --variant web-usa && tsx scripts/parse-usfm.ts --variant web-brit && tsx scripts/parse-usfm.ts --variant web-updated && tsx scripts/parse-lectionary-original.ts && tsx scripts/parse-lectionary-revised.ts && tsx scripts/parse-mcheyne.ts && tsx scripts/parse-bibleproject.ts && tsx scripts/scrape-liturgy-texts.ts && tsx scripts/validate-readings.ts"
   },
   "dependencies": {
     "dexie": "^4.0.0",

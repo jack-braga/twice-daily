@@ -2,7 +2,7 @@
 // Liturgical Calendar Types
 // ============================================================
 
-export type Session = 'morning' | 'evening';
+export type Session = 'morning' | 'evening' | 'daily';
 
 export type LiturgicalSeason =
   | 'advent'
@@ -97,7 +97,7 @@ export interface PsalterDay {
 // Lectionary Types
 // ============================================================
 
-export type PlanId = '1662-original' | '1662-revised' | 'mcheyne';
+export type PlanId = '1662-original' | '1662-revised' | 'mcheyne' | 'bibleproject';
 
 export interface DailyReadings {
   first: ReadingRef[]; // OT readings (may have alternates)
@@ -143,4 +143,6 @@ export interface DailyPlan {
   season?: LiturgicalSeason;
   liturgicalDay?: LiturgicalDay;
   sessions: DailySession[];
+  planDay?: number;        // for sequential plans: current day (1-based)
+  planTotalDays?: number;  // for sequential plans: total days in plan
 }

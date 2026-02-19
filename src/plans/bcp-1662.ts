@@ -695,6 +695,8 @@ export const bcp1662OriginalPlan = createBcpPlan('1662-original', {
   description: 'The original 1662 BCP lectionary — civil calendar readings.',
   hasPsalter: true,
   hasLiturgy: true,
+  sessions: ['morning', 'evening'],
+  needsStartDate: false,
 });
 
 export const bcp1662RevisedPlan = createBcpPlan('1662-revised', {
@@ -703,4 +705,6 @@ export const bcp1662RevisedPlan = createBcpPlan('1662-revised', {
   description: 'The 1922 revised lectionary — liturgical calendar readings.',
   hasPsalter: true,
   hasLiturgy: true,
+  sessions: ['morning', 'evening'],
+  needsStartDate: false,
 });

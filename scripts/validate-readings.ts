@@ -212,6 +212,18 @@ function validateMcheyne() {
   }
 }
 
+// ─── Validate BibleProject ────────────────────────────────────────────
+
+function validateBibleProject() {
+  const data: { day: number; section: string; reading: ReadingRef[]; psalm: ReadingRef }[] =
+    JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'lectionary', 'bibleproject.json'), 'utf-8'));
+
+  for (const day of data) {
+    validateRefs(day.reading, `bibleproject day${day.day} reading`);
+    validateRef(day.psalm, `bibleproject day${day.day} psalm`);
+  }
+}
+
 // ─── Main ───────────────────────────────────────────────────────────────
 
 function main() {
@@ -230,6 +242,9 @@ function main() {
 
   console.log('Validating M\'Cheyne...');
   validateMcheyne();
+
+  console.log('Validating BibleProject...');
+  validateBibleProject();
 
   console.log(`\nValidation complete: ${totalRefs} refs checked, ${errors} errors, ${warnings} warnings`);
 

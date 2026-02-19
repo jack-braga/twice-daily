@@ -1,11 +1,13 @@
 import type { Session, PlanId } from '../../engine/types';
 import { resolveLiturgicalDay } from '../../engine/calendar';
+import { getPlan } from '../../plans';
 
 /** Total checkable sections per plan type */
 const TOTAL_SECTIONS: Record<string, number> = {
   '1662-original': 8,
   '1662-revised': 8,
   'mcheyne': 2,
+  'bibleproject': 2,
 };
 
 interface SessionProgress {
@@ -16,10 +18,10 @@ interface SessionProgress {
 interface Props {
   dateStr: string;
   planId: PlanId;
-  morningCompleted: number;
-  eveningCompleted: number;
+  completions: Record<string, number>;  // session → completed count
   onOpen: (date: string, session: Session) => void;
   compact?: boolean;
+  outOfRange?: boolean;
 }
 
 function formatDayDate(dateStr: string): string {
@@ -56,13 +58,70 @@ function ProgressBar({ progress }: { progress: SessionProgress }) {
   );
 }
 
-export function DayRow({ dateStr, planId, morningCompleted, eveningCompleted, onOpen, compact }: Props) {
+export function DayRow({ dateStr, planId, completions, onOpen, compact, outOfRange }: Props) {
   const date = new Date(dateStr + 'T00:00:00');
   const litDay = resolveLiturgicalDay(date);
   const total = TOTAL_SECTIONS[planId] ?? 8;
 
-  const morningProgress: SessionProgress = { completed: morningCompleted, total };
-  const eveningProgress: SessionProgress = { completed: eveningCompleted, total };
+  if (outOfRange) {
+    return (
+      <div className="py-3 text-center">
+        <span className="text-xs" style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-ui)' }}>
+          No reading for this date
+        </span>
+      </div>
+    );
+  }
+  const planConfig = getPlan(planId).config;
+  const isSingleSession = planConfig.sessions.length === 1 && planConfig.sessions[0] === 'daily';
+
+  if (isSingleSession) {
+    const dailyProgress: SessionProgress = { completed: completions['daily'] ?? 0, total };
+
+    if (compact) {
+      return (
+        <div className="py-2">
+          <div className="text-xs font-medium mb-1" style={{ fontFamily: 'var(--font-ui)' }}>
+            {formatDayDate(dateStr)}
+          </div>
+          <button
+            onClick={() => onOpen(dateStr, 'daily')}
+            className="flex items-center gap-1.5 w-full text-left"
+          >
+            <ProgressBar progress={dailyProgress} />
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="py-3">
+        <div className="flex items-baseline justify-between mb-2">
+          <div>
+            <span className="text-sm font-medium" style={{ fontFamily: 'var(--font-ui)' }}>
+              {formatDayDate(dateStr)}
+            </span>
+          </div>
+        </div>
+        <button
+          onClick={() => onOpen(dateStr, 'daily')}
+          className="flex items-center gap-2 w-full text-left px-2 py-1.5 rounded-md hover:bg-[var(--color-border)]/30 transition-colors"
+        >
+          <span className="text-xs font-medium w-20" style={{ fontFamily: 'var(--font-ui)' }}>
+            Reading
+          </span>
+          <ProgressBar progress={dailyProgress} />
+          <span className="text-xs" style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-ui)' }}>
+            Open
+          </span>
+        </button>
+      </div>
+    );
+  }
+
+  // Two-session plans (morning/evening)
+  const morningProgress: SessionProgress = { completed: completions['morning'] ?? 0, total };
+  const eveningProgress: SessionProgress = { completed: completions['evening'] ?? 0, total };
 
   if (compact) {
     return (

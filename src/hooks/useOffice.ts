@@ -13,6 +13,7 @@ export function useOffice(
   session: Session,
   planId: PlanId,
   translation: Translation,
+  planStartDate?: string | null,
 ): UseOfficeResult {
   const [plan, setPlan] = useState<DailyPlan | null>(null);
   const [loading, setLoading] = useState(true);
@@ -23,7 +24,7 @@ export function useOffice(
     setLoading(true);
     setError(null);
 
-    assembleOffice(date, session, planId, translation)
+    assembleOffice(date, session, planId, translation, planStartDate ?? undefined)
       .then(result => {
         if (!cancelled) {
           setPlan(result);
@@ -38,7 +39,7 @@ export function useOffice(
       });
 
     return () => { cancelled = true; };
-  }, [date.toISOString(), session, planId, translation]);
+  }, [date.toISOString(), session, planId, translation, planStartDate]);
 
   return { plan, loading, error };
 }

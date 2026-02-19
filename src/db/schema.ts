@@ -3,7 +3,7 @@ import Dexie, { type EntityTable } from 'dexie';
 export interface CompletionRecord {
   id?: number;
   date: string;       // ISO date YYYY-MM-DD
-  session: 'morning' | 'evening';
+  session: string;  // 'morning' | 'evening' | 'daily' — widened for flexible plan sessions
   planId: string;
   completedAt: string; // ISO timestamp
   sectionsCompleted: string[]; // section IDs

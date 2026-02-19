@@ -4,7 +4,8 @@
  * Resolves the daily readings for each plan:
  *   - 1662 Original: keyed by MM-DD in the civil calendar
  *   - 1662 Revised: keyed by liturgical day name (e.g., "advent1", "trinity-5-monday")
- *   - M'Cheyne: keyed by day-of-year (1-365/366)
+ *   - M'Cheyne: keyed by plan day (1-365), computed from anchor start date
+ *   - BibleProject: keyed by plan day (1-358), computed from anchor start date
  *
  * Each returns a DailyReadings (first + second lesson) for morning and evening.
  */
@@ -49,6 +50,8 @@ let revised1662: {
 
 let mcheyne: { day: number; morning: ReadingRef[]; evening: ReadingRef[] }[] | null = null;
 
+let bibleproject: { day: number; section: string; reading: ReadingRef[]; psalm: ReadingRef }[] | null = null;
+
 async function loadLectionary(planId: PlanId): Promise<void> {
   if (planId === '1662-original' && !original1662) {
     const resp = await fetch(`${import.meta.env.BASE_URL}data/lectionary/1662-original.json`);
@@ -59,10 +62,13 @@ async function loadLectionary(planId: PlanId): Promise<void> {
   } else if (planId === 'mcheyne' && !mcheyne) {
     const resp = await fetch(`${import.meta.env.BASE_URL}data/lectionary/mcheyne.json`);
     mcheyne = await resp.json();
+  } else if (planId === 'bibleproject' && !bibleproject) {
+    const resp = await fetch(`${import.meta.env.BASE_URL}data/lectionary/bibleproject.json`);
+    bibleproject = await resp.json();
   }
 }
 
-// ─── Day-of-year helper ────────────────────────────────────────────────
+// ─── Day-of-year helper (fallback for M'Cheyne without anchor) ───────
 
 function dayOfYear(date: Date): number {
   const start = new Date(date.getFullYear(), 0, 1);
@@ -75,11 +81,6 @@ function dayOfYear(date: Date): number {
 const DAY_NAMES = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
 function computeRevisedKey(litDay: LiturgicalDay): string {
-  // Try to match the key format used in the parsed data
-  // Format examples: "advent1", "advent1-monday", "lent3-saturday", "trinity15-monday"
-  // Sundays: "advent1", "lent3", "trinity5", "palmsunday", "easterday"
-  // Weekdays: "advent1-monday", "lent3-friday", "trinity5-wednesday"
-
   const season = litDay.season;
   const week = litDay.weekOfSeason;
   const dow = litDay.dayOfWeek;
@@ -100,7 +101,6 @@ function computeRevisedKey(litDay: LiturgicalDay): string {
     if (key) return key;
   }
 
-  // Build the key from season + week + day
   let prefix: string;
 
   switch (season) {
@@ -114,7 +114,6 @@ function computeRevisedKey(litDay: LiturgicalDay): string {
       prefix = `epiphany${week}`;
       break;
     case 'pre-lent':
-      // Septuagesima, Sexagesima, Quinquagesima
       if (week === 1) prefix = 'septuagesima';
       else if (week === 2) prefix = 'sexagesima';
       else prefix = 'quinquagesima';
@@ -155,6 +154,7 @@ export async function resolveReadings(
   session: Session,
   planId: PlanId,
   litDay?: LiturgicalDay,
+  planDay?: number,
 ): Promise<DailyReadings> {
   await loadLectionary(planId);
 
@@ -164,7 +164,9 @@ export async function resolveReadings(
     case '1662-revised':
       return resolve1662Revised(date, session, litDay);
     case 'mcheyne':
-      return resolveMcheyne(date, session);
+      return resolveMcheyne(date, session, planDay);
+    case 'bibleproject':
+      return resolveBibleProject(planDay);
   }
 }
 
@@ -220,20 +222,25 @@ function resolve1662Revised(_date: Date, session: Session, litDay?: LiturgicalDa
   return { first: [], second: [] };
 }
 
-function resolveMcheyne(date: Date, session: Session): DailyReadings {
+function resolveMcheyne(date: Date, session: Session, planDay?: number): DailyReadings {
   if (!mcheyne) return { first: [], second: [] };
 
-  let doy = dayOfYear(date);
-
-  // Leap year Feb 29: use same readings as Feb 28
-  const year = date.getFullYear();
-  const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-  if (isLeapYear && date.getMonth() === 1 && date.getDate() === 29) {
-    doy = dayOfYear(new Date(year, 1, 28));
-  }
-  // After Feb 29 in a leap year, adjust day number back by 1
-  if (isLeapYear && doy > 60) {
-    doy--;
+  // Use planDay from anchor if available, otherwise fall back to dayOfYear
+  let doy: number;
+  if (planDay != null) {
+    doy = planDay;
+  } else {
+    doy = dayOfYear(date);
+    // Leap year Feb 29: use same readings as Feb 28
+    const year = date.getFullYear();
+    const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+    if (isLeapYear && date.getMonth() === 1 && date.getDate() === 29) {
+      doy = dayOfYear(new Date(year, 1, 28));
+    }
+    // After Feb 29 in a leap year, adjust day number back by 1
+    if (isLeapYear && doy > 60) {
+      doy--;
+    }
   }
 
   // Clamp to 365
@@ -248,5 +255,17 @@ function resolveMcheyne(date: Date, session: Session): DailyReadings {
   return {
     first: readings.length > 0 ? [readings[0]!] : [],
     second: readings.length > 1 ? [readings[1]!] : [],
+  };
+}
+
+function resolveBibleProject(planDay?: number): DailyReadings {
+  if (!bibleproject || planDay == null) return { first: [], second: [] };
+
+  const entry = bibleproject.find(d => d.day === planDay);
+  if (!entry) return { first: [], second: [] };
+
+  return {
+    first: entry.reading,
+    second: [entry.psalm],
   };
 }

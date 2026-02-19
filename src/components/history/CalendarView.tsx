@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import type { PlanId, Session } from '../../engine/types';
 import { getCompletionSummary } from '../../hooks/useCompletion';
 import { todayStr, formatDateStr } from '../../utils/date';
+import { isDateInPlanRange } from '../../utils/plan-day';
+import { getPlan } from '../../plans';
 import { DayRow } from './DayRow';
 
 export type CalendarZoom = 'week' | 'month' | 'year';
@@ -14,6 +16,7 @@ interface Props {
   onTodayElement?: (el: HTMLElement | null) => void;
   /** Increment to navigate focus to today's date. */
   todayTrigger?: number;
+  planStartDate?: string | null;
 }
 
 const DAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
@@ -40,10 +43,12 @@ function getWeekDays(dateStr: string): string[] {
   return days;
 }
 
-export function CalendarView({ planId, zoom, onZoomChange, onOpen, onTodayElement, todayTrigger }: Props) {
+export function CalendarView({ planId, zoom, onZoomChange, onOpen, onTodayElement, todayTrigger, planStartDate }: Props) {
   const today = todayStr();
   const [focusDate, setFocusDate] = useState(today);
-  const [completions, setCompletions] = useState<Map<string, { morning: number; evening: number }>>(new Map());
+  const planConfig = getPlan(planId).config;
+  const isSingleSession = planConfig.sessions.length === 1 && planConfig.sessions[0] === 'daily';
+  const [completions, setCompletions] = useState<Map<string, Record<string, number>>>(new Map());
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const gestureRef = useRef<{ startDist: number; startZoom: CalendarZoom } | null>(null);
 
@@ -119,17 +124,27 @@ export function CalendarView({ planId, zoom, onZoomChange, onOpen, onTodayElemen
     if (e.deltaY > 0 && idx > 0) onZoomChange(zoomLevels[idx - 1]!);
   }, [zoom, onZoomChange]);
 
+  const isInRange = useCallback((dateStr: string) => {
+    return !planConfig.needsStartDate || !planStartDate || !planConfig.totalDays
+      || isDateInPlanRange(planStartDate, dateStr, planConfig.totalDays);
+  }, [planConfig, planStartDate]);
+
   const getCellStatus = useCallback((dateStr: string) => {
+    if (!isInRange(dateStr)) return 'out-of-range';
     const data = completions.get(dateStr);
     if (!data) return 'none';
-    if (data.morning > 0 && data.evening > 0) return 'complete';
-    if (data.morning > 0 || data.evening > 0) return 'partial';
+    if (isSingleSession) {
+      return (data['daily'] ?? 0) > 0 ? 'complete' : 'none';
+    }
+    if ((data['morning'] ?? 0) > 0 && (data['evening'] ?? 0) > 0) return 'complete';
+    if ((data['morning'] ?? 0) > 0 || (data['evening'] ?? 0) > 0) return 'partial';
     return 'none';
-  }, [completions]);
+  }, [completions, isSingleSession, isInRange]);
 
   const cellColor = useCallback((status: string) => {
     if (status === 'complete') return 'var(--color-check)';
     if (status === 'partial') return 'var(--color-check-partial)';
+    if (status === 'out-of-range') return 'transparent';
     return 'var(--color-border)';
   }, []);
 
@@ -163,6 +178,7 @@ export function CalendarView({ planId, zoom, onZoomChange, onOpen, onTodayElemen
           selectedDate={selectedDate} onSelect={setSelectedDate}
           completions={completions} planId={planId} onOpen={onOpen}
           onTodayElement={onTodayElement} cellSize="lg"
+          isInRange={isInRange}
         />
       )}
 
@@ -173,6 +189,7 @@ export function CalendarView({ planId, zoom, onZoomChange, onOpen, onTodayElemen
           selectedDate={selectedDate} onSelect={setSelectedDate}
           completions={completions} planId={planId} onOpen={onOpen}
           onTodayElement={onTodayElement}
+          isInRange={isInRange}
         />
       )}
 
@@ -191,15 +208,16 @@ export function CalendarView({ planId, zoom, onZoomChange, onOpen, onTodayElemen
 
 function GridView({
   days, today, getCellStatus, cellColor, selectedDate, onSelect,
-  completions, planId, onOpen, onTodayElement, cellSize,
+  completions, planId, onOpen, onTodayElement, cellSize, isInRange,
 }: {
   days: string[]; today: string;
   getCellStatus: (d: string) => string; cellColor: (s: string) => string;
   selectedDate: string | null; onSelect: (d: string | null) => void;
-  completions: Map<string, { morning: number; evening: number }>;
+  completions: Map<string, Record<string, number>>;
   planId: PlanId; onOpen: (d: string, s: Session) => void;
   onTodayElement?: (el: HTMLElement | null) => void;
   cellSize: 'sm' | 'lg';
+  isInRange: (d: string) => boolean;
 }) {
   return (
     <div>
@@ -237,9 +255,9 @@ function GridView({
         <div className="mt-3 px-3 py-2 border-t" style={{ borderColor: 'var(--color-border)' }}>
           <DayRow
             dateStr={selectedDate} planId={planId}
-            morningCompleted={completions.get(selectedDate)?.morning ?? 0}
-            eveningCompleted={completions.get(selectedDate)?.evening ?? 0}
+            completions={completions.get(selectedDate) ?? {}}
             onOpen={onOpen}
+            outOfRange={!isInRange(selectedDate)}
           />
         </div>
       )}
@@ -251,14 +269,15 @@ function GridView({
 
 function MonthGrid({
   year, month, today, getCellStatus, cellColor, selectedDate, onSelect,
-  completions, planId, onOpen, onTodayElement,
+  completions, planId, onOpen, onTodayElement, isInRange,
 }: {
   year: number; month: number; today: string;
   getCellStatus: (d: string) => string; cellColor: (s: string) => string;
   selectedDate: string | null; onSelect: (d: string | null) => void;
-  completions: Map<string, { morning: number; evening: number }>;
+  completions: Map<string, Record<string, number>>;
   planId: PlanId; onOpen: (d: string, s: Session) => void;
   onTodayElement?: (el: HTMLElement | null) => void;
+  isInRange: (d: string) => boolean;
 }) {
   const days = getMonthDays(year, month);
   const firstDayOfWeek = new Date(year, month, 1).getDay();
@@ -308,9 +327,9 @@ function MonthGrid({
             <div className="mx-3 my-1 px-3 py-2 rounded-lg" style={{ backgroundColor: 'var(--color-border)/20' }}>
               <DayRow
                 dateStr={selectedDate} planId={planId}
-                morningCompleted={completions.get(selectedDate)?.morning ?? 0}
-                eveningCompleted={completions.get(selectedDate)?.evening ?? 0}
+                completions={completions.get(selectedDate) ?? {}}
                 onOpen={onOpen}
+                outOfRange={!isInRange(selectedDate)}
               />
             </div>
           )}

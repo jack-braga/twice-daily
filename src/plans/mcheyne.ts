@@ -24,6 +24,9 @@ export const mcheynePlan: PlanAssembler = {
     description: "Robert Murray M'Cheyne's Bible reading plan — read through the whole Bible in a year.",
     hasPsalter: false,
     hasLiturgy: false,
+    sessions: ['morning', 'evening'],
+    totalDays: 365,
+    needsStartDate: true,
   },
 
   async assembleSections(
@@ -31,8 +34,9 @@ export const mcheynePlan: PlanAssembler = {
     session: Session,
     litDay: LiturgicalDay,
     translation: Translation,
+    planDay?: number,
   ): Promise<SessionSection[]> {
-    const readings = await resolveReadings(date, session, 'mcheyne', litDay);
+    const readings = await resolveReadings(date, session, 'mcheyne', litDay, planDay);
     const sections: SessionSection[] = [];
 
     // First reading

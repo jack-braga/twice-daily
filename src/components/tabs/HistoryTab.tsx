@@ -8,9 +8,10 @@ type ViewMode = 'list' | 'calendar';
 interface Props {
   planId: PlanId;
   onNavigateToOffice: (date: string, session: Session) => void;
+  planStartDate?: string | null;
 }
 
-export function HistoryTab({ planId, onNavigateToOffice }: Props) {
+export function HistoryTab({ planId, onNavigateToOffice, planStartDate }: Props) {
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [calendarZoom, setCalendarZoom] = useState<CalendarZoom>('month');
   const todayElRef = useRef<HTMLElement | null>(null);
@@ -79,6 +80,7 @@ export function HistoryTab({ planId, onNavigateToOffice }: Props) {
             onOpen={onNavigateToOffice}
             onTodayElement={handleTodayElement}
             scrollContainerRef={listScrollRef}
+            planStartDate={planStartDate}
           />
         ) : (
           <CalendarView
@@ -88,6 +90,7 @@ export function HistoryTab({ planId, onNavigateToOffice }: Props) {
             onOpen={onNavigateToOffice}
             onTodayElement={handleTodayElement}
             todayTrigger={todayTrigger}
+            planStartDate={planStartDate}
           />
         )}
       </div>

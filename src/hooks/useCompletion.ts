@@ -121,17 +121,22 @@ export async function getCompletionsForDateRange(
     .toArray();
 }
 
-/** Get completion summary for a date range: Map<date, { morning, evening }> with section counts. */
+/** Clear all completion records for a given plan. */
+export async function clearCompletionsForPlan(planId: string): Promise<number> {
+  return db.completions.where('date').above('').filter(r => r.planId === planId).delete();
+}
+
+/** Get completion summary for a date range: Map<date, Record<session, count>>. */
 export async function getCompletionSummary(
   startDate: string,
   endDate: string,
   planId: string,
-): Promise<Map<string, { morning: number; evening: number }>> {
+): Promise<Map<string, Record<string, number>>> {
   const records = await getCompletionsForDateRange(startDate, endDate, planId);
-  const summary = new Map<string, { morning: number; evening: number }>();
+  const summary = new Map<string, Record<string, number>>();
 
   for (const r of records) {
-    const existing = summary.get(r.date) ?? { morning: 0, evening: 0 };
+    const existing = summary.get(r.date) ?? {};
     existing[r.session] = r.sectionsCompleted.length;
     summary.set(r.date, existing);
   }

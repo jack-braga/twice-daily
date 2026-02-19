@@ -3,7 +3,11 @@ import { OfficeTab } from './components/tabs/OfficeTab';
 import { HistoryTab } from './components/tabs/HistoryTab';
 import { SettingsTab } from './components/tabs/SettingsTab';
 import { useSettings } from './hooks/useSettings';
+import { usePlanStartDate } from './hooks/usePlanStartDate';
+import { clearCompletionsForPlan } from './hooks/useCompletion';
+import { getPlan } from './plans';
 import type { Session } from './engine/types';
+import { todayStr } from './utils/date';
 
 type Tab = 'office' | 'history' | 'settings';
 
@@ -25,6 +29,7 @@ function formatOfficeSubtext(dateStr: string, session: Session): string {
   if (!dateStr) return '';
   const d = new Date(dateStr + 'T00:00:00');
   const shortDate = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  if (session === 'daily') return shortDate;
   const sessionAbbr = session === 'morning' ? 'MP' : 'EP';
   return `${shortDate} \u00B7 ${sessionAbbr}`;
 }
@@ -32,6 +37,27 @@ function formatOfficeSubtext(dateStr: string, session: Session): string {
 export function App() {
   const [activeTab, setActiveTab] = useState<Tab>(tabFromPath);
   const { settings, updateSetting, updateLastRead, loaded } = useSettings();
+  const { startDate: planStartDate, updateStartDate, loaded: startDateLoaded } = usePlanStartDate(settings.planId);
+  const planConfig = getPlan(settings.planId).config;
+
+  // Auto-set start date to today when a sequential plan is first selected and no date exists
+  useEffect(() => {
+    if (startDateLoaded && planConfig.needsStartDate && !planStartDate) {
+      updateStartDate(todayStr());
+    }
+  }, [startDateLoaded, planConfig.needsStartDate, planStartDate, updateStartDate]);
+
+  const handleRestartPlan = useCallback(() => {
+    clearCompletionsForPlan(settings.planId).then(() => {
+      updateStartDate(todayStr());
+    });
+  }, [updateStartDate, settings.planId]);
+
+  const handleStartDateChange = useCallback((newDate: string) => {
+    clearCompletionsForPlan(settings.planId).then(() => {
+      updateStartDate(newDate);
+    });
+  }, [updateStartDate, settings.planId]);
 
   // Navigation state: set by History tab to open a specific date+session in the Office tab
   const [navigateDate, setNavigateDate] = useState<string | undefined>();
@@ -62,7 +88,7 @@ export function App() {
     setNavigateSession(undefined);
   }, []);
 
-  if (!loaded) {
+  if (!loaded || !startDateLoaded) {
     return (
       <div className="min-h-screen flex items-center justify-center" style={{ color: 'var(--color-text-muted)' }}>
         Loading...
@@ -83,16 +109,24 @@ export function App() {
             navigateDate={navigateDate}
             navigateSession={navigateSession}
             onNavigateConsumed={handleNavigateConsumed}
+            planStartDate={planStartDate}
+            onRestartPlan={handleRestartPlan}
           />
         )}
         {activeTab === 'history' && (
           <HistoryTab
             planId={settings.planId}
             onNavigateToOffice={handleNavigateToOffice}
+            planStartDate={planStartDate}
           />
         )}
         {activeTab === 'settings' && (
-          <SettingsTab settings={settings} onUpdate={updateSetting} />
+          <SettingsTab
+            settings={settings}
+            onUpdate={updateSetting}
+            planStartDate={planStartDate}
+            onStartDateChange={handleStartDateChange}
+          />
         )}
       </main>
 

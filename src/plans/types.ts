@@ -6,6 +6,9 @@ export interface PlanConfig {
   description: string;
   hasPsalter: boolean;
   hasLiturgy: boolean;
+  sessions: readonly Session[];  // e.g., ['morning', 'evening'] or ['daily']
+  totalDays?: number;            // for sequential plans (358, 365)
+  needsStartDate: boolean;       // true for plans that use date anchoring
 }
 
 export interface PlanAssembler {
@@ -15,5 +18,6 @@ export interface PlanAssembler {
     session: Session,
     litDay: LiturgicalDay,
     translation: Translation,
+    planDay?: number,
   ): Promise<SessionSection[]>;
 }
