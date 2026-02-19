@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import type { AppSettings } from '../../hooks/useSettings';
 import type { PlanId, Translation } from '../../engine/types';
 import type { ThemeSetting } from '../../utils/theme';
+import { FONT_PRESETS, BODY_FONTS, UI_FONTS, resolvePreset, getBodyFontStack, getUiFontStack } from '../../utils/fonts';
 
 interface Props {
   settings: AppSettings;
@@ -35,6 +37,10 @@ const THEMES: { id: ThemeSetting; label: string }[] = [
 ];
 
 export function SettingsTab({ settings, onUpdate }: Props) {
+  const [forceCustom, setForceCustom] = useState(false);
+  const derivedPreset = resolvePreset(settings.fontBody, settings.fontUi);
+  const isCustom = forceCustom || derivedPreset === 'custom';
+
   return (
     <div className="px-4 py-6 max-w-2xl mx-auto">
       <h1 className="text-2xl font-semibold mb-6" style={{ fontFamily: 'var(--font-ui)' }}>
@@ -102,6 +108,78 @@ export function SettingsTab({ settings, onUpdate }: Props) {
             </button>
           ))}
         </div>
+      </SettingGroup>
+
+      {/* Font */}
+      <SettingGroup label="Font">
+        {FONT_PRESETS.map(p => (
+          <RadioOption
+            key={p.id}
+            selected={!isCustom && derivedPreset === p.id}
+            onSelect={() => {
+              setForceCustom(false);
+              onUpdate('fontBody', p.body);
+              onUpdate('fontUi', p.ui);
+            }}
+            label={p.label}
+            description={p.description}
+          />
+        ))}
+        <RadioOption
+          selected={isCustom}
+          onSelect={() => setForceCustom(true)}
+          label="Custom"
+          description="Choose reading and interface fonts independently"
+        />
+
+        {isCustom && (
+          <div className="mt-3 ml-4 border-l-2 pl-4" style={{ borderColor: 'var(--color-border)' }}>
+            <div className="mb-4">
+              <div className="text-xs font-medium mb-2"
+                style={{ fontFamily: 'var(--font-ui)', color: 'var(--color-text-muted)' }}>
+                Reading Font
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {BODY_FONTS.map(f => (
+                  <button
+                    key={f.id}
+                    onClick={() => onUpdate('fontBody', f.id)}
+                    className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                      settings.fontBody === f.id
+                        ? 'bg-[var(--color-accent)] text-[var(--color-accent-contrast)]'
+                        : 'bg-[var(--color-border)] text-[var(--color-text)]'
+                    }`}
+                    style={{ fontFamily: getBodyFontStack(f.id) }}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="text-xs font-medium mb-2"
+                style={{ fontFamily: 'var(--font-ui)', color: 'var(--color-text-muted)' }}>
+                Interface Font
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {UI_FONTS.map(f => (
+                  <button
+                    key={f.id}
+                    onClick={() => onUpdate('fontUi', f.id)}
+                    className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
+                      settings.fontUi === f.id
+                        ? 'bg-[var(--color-accent)] text-[var(--color-accent-contrast)]'
+                        : 'bg-[var(--color-border)] text-[var(--color-text)]'
+                    }`}
+                    style={{ fontFamily: getUiFontStack(f.id) }}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </SettingGroup>
 
     </div>

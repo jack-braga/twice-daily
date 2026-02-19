@@ -2,12 +2,15 @@ import { useState, useEffect, useCallback } from 'react';
 import { db } from '../db/schema';
 import type { PlanId, Translation, Session } from '../engine/types';
 import { applyTheme, type ThemeSetting } from '../utils/theme';
+import { applyFonts, type BodyFontId, type UiFontId } from '../utils/fonts';
 
 export interface AppSettings {
   planId: PlanId;
   translation: Translation;
   textSize: 'small' | 'medium' | 'large';
   theme: ThemeSetting;
+  fontBody: BodyFontId;
+  fontUi: UiFontId;
   lastReadDate: string;     // "YYYY-MM-DD", empty = first launch
   lastReadSession: Session; // "morning" | "evening"
 }
@@ -17,6 +20,8 @@ const DEFAULTS: AppSettings = {
   translation: 'kjv',
   textSize: 'medium',
   theme: 'system',
+  fontBody: 'georgia',
+  fontUi: 'system-sans',
   lastReadDate: '',
   lastReadSession: 'morning',
 };
@@ -36,6 +41,8 @@ export function useSettings() {
         translation: (map.get('translation') as Translation) ?? DEFAULTS.translation,
         textSize: (map.get('textSize') as AppSettings['textSize']) ?? DEFAULTS.textSize,
         theme: (map.get('theme') as ThemeSetting) ?? DEFAULTS.theme,
+        fontBody: (map.get('fontBody') as BodyFontId) ?? DEFAULTS.fontBody,
+        fontUi: (map.get('fontUi') as UiFontId) ?? DEFAULTS.fontUi,
         lastReadDate: map.get('lastReadDate') ?? DEFAULTS.lastReadDate,
         lastReadSession: (map.get('lastReadSession') as Session) ?? DEFAULTS.lastReadSession,
       });
@@ -61,6 +68,11 @@ export function useSettings() {
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
   }, [settings.theme]);
+
+  // Apply fonts
+  useEffect(() => {
+    applyFonts(settings.fontBody, settings.fontUi);
+  }, [settings.fontBody, settings.fontUi]);
 
   const updateSetting = useCallback(async <K extends keyof AppSettings>(key: K, value: AppSettings[K]) => {
     setSettings(prev => ({ ...prev, [key]: value }));

@@ -18,6 +18,10 @@
           document.documentElement.dataset.theme = 'dark';
           document.querySelector('meta[name="theme-color"]').content = '#1c1a17';
         }
+        var fb = localStorage.getItem('td-font-body');
+        var fu = localStorage.getItem('td-font-ui');
+        if (fb) document.documentElement.style.setProperty('--font-body', fb);
+        if (fu) document.documentElement.style.setProperty('--font-ui', fu);
       })();
     </script>
     <div id="root"></div>
