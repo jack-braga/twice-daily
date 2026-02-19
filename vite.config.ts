@@ -5,6 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 import { qrcode } from 'vite-plugin-qrcode';
 
 export default defineConfig({
+  base: '/twice-daily/',
   server: {
     host: true, // expose to network for mobile testing
   },
@@ -43,8 +44,8 @@ export default defineConfig({
         background_color: '#faf9f6',
         display: 'standalone',
         icons: [
-          { src: '/icon-192.png', sizes: '192x192', type: 'image/png' },
-          { src: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+          { src: 'icon-192.png', sizes: '192x192', type: 'image/png' },
+          { src: 'icon-512.png', sizes: '512x512', type: 'image/png' },
         ],
       },
     }),

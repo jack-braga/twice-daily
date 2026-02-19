@@ -31,7 +31,7 @@ export async function loadBook(translation: Translation, bookName: string): Prom
   if (cached) return cached;
 
   try {
-    const response = await fetch(`/data/bible/${translation}/${bookId}.json`);
+    const response = await fetch(`${import.meta.env.BASE_URL}data/bible/${translation}/${bookId}.json`);
     if (!response.ok) return null;
 
     const book: BibleBook = await response.json();

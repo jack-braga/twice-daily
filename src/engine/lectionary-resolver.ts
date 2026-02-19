@@ -51,13 +51,13 @@ let mcheyne: { day: number; morning: ReadingRef[]; evening: ReadingRef[] }[] | n
 
 async function loadLectionary(planId: PlanId): Promise<void> {
   if (planId === '1662-original' && !original1662) {
-    const resp = await fetch('/data/lectionary/1662-original.json');
+    const resp = await fetch(`${import.meta.env.BASE_URL}data/lectionary/1662-original.json`);
     original1662 = await resp.json();
   } else if (planId === '1662-revised' && !revised1662) {
-    const resp = await fetch('/data/lectionary/1662-revised.json');
+    const resp = await fetch(`${import.meta.env.BASE_URL}data/lectionary/1662-revised.json`);
     revised1662 = await resp.json();
   } else if (planId === 'mcheyne' && !mcheyne) {
-    const resp = await fetch('/data/lectionary/mcheyne.json');
+    const resp = await fetch(`${import.meta.env.BASE_URL}data/lectionary/mcheyne.json`);
     mcheyne = await resp.json();
   }
 }

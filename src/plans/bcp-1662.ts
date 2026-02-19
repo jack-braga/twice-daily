@@ -63,15 +63,15 @@ let collects: CollectEntry[] | null = null;
 
 async function loadLiturgyData(): Promise<void> {
   if (!morningPrayer) {
-    const resp = await fetch('/data/liturgy/morning-prayer.json');
+    const resp = await fetch(`${import.meta.env.BASE_URL}data/liturgy/morning-prayer.json`);
     morningPrayer = await resp.json();
   }
   if (!eveningPrayer) {
-    const resp = await fetch('/data/liturgy/evening-prayer.json');
+    const resp = await fetch(`${import.meta.env.BASE_URL}data/liturgy/evening-prayer.json`);
     eveningPrayer = await resp.json();
   }
   if (!collects) {
-    const resp = await fetch('/data/liturgy/collects.json');
+    const resp = await fetch(`${import.meta.env.BASE_URL}data/liturgy/collects.json`);
     collects = await resp.json();
   }
 }
