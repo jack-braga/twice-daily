@@ -6,8 +6,18 @@ import { useSettings } from './hooks/useSettings';
 import { usePlanStartDate } from './hooks/usePlanStartDate';
 import { clearCompletionsForPlan } from './hooks/useCompletion';
 import { getPlan } from './plans';
-import type { Session } from './engine/types';
+import type { Session, Translation } from './engine/types';
 import { todayStr } from './utils/date';
+
+const TRANSLATION_SHORT: Record<Translation, string> = {
+  'kjv': 'KJV',
+  'asv': 'ASV',
+  'lsv': 'LSV',
+  'web-usa': 'WEB (US)',
+  'web-brit': 'WEB (GB)',
+  'web-updated': 'WEB (Updated)',
+};
+import { BookOpen, CalendarDays, Settings as SettingsIcon, type LucideIcon } from 'lucide-react';
 
 type Tab = 'office' | 'history' | 'settings';
 
@@ -131,36 +141,36 @@ export function App() {
       </main>
 
       <nav
-        className="fixed bottom-0 left-0 right-0 border-t flex justify-around items-center h-16 bg-[var(--color-surface)]/95 backdrop-blur-sm"
+        className="fixed bottom-0 left-0 right-0 border-t flex justify-around items-stretch h-[72px] bg-[var(--color-surface)]/95 backdrop-blur-sm"
         style={{ fontFamily: 'var(--font-ui)', borderColor: 'var(--color-border)' }}
       >
         <TabButton
           active={activeTab === 'office'}
           onClick={() => navigate('office')}
           label="Office"
+          icon={BookOpen}
           subtext={formatOfficeSubtext(settings.lastReadDate, settings.lastReadSession)}
         />
-        <TabButton active={activeTab === 'history'} onClick={() => navigate('history')} label="History" />
-        <TabButton active={activeTab === 'settings'} onClick={() => navigate('settings')} label="Settings" />
+        <TabButton active={activeTab === 'history'} onClick={() => navigate('history')} label="History" icon={CalendarDays} subtext={planConfig.name} />
+        <TabButton active={activeTab === 'settings'} onClick={() => navigate('settings')} label="Settings" icon={SettingsIcon} subtext={TRANSLATION_SHORT[settings.translation]} />
       </nav>
     </div>
   );
 }
 
-function TabButton({ active, onClick, label, subtext }: { active: boolean; onClick: () => void; label: string; subtext?: string }) {
+function TabButton({ active, onClick, label, icon: Icon, subtext }: { active: boolean; onClick: () => void; label: string; icon: LucideIcon; subtext?: string }) {
   return (
     <button
       onClick={onClick}
-      className={`flex-1 h-full flex flex-col items-center justify-center transition-colors ${
+      className={`flex-1 flex flex-col items-center justify-center gap-0.5 pt-2 pb-1.5 transition-colors ${
         active ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-muted)]'
       }`}
     >
-      <span className="text-sm font-medium">{label}</span>
-      {subtext && (
-        <span className="text-[10px] leading-tight mt-0.5 opacity-70 truncate max-w-full px-1">
-          {subtext}
-        </span>
-      )}
+      <Icon size={20} strokeWidth={2} />
+      <span className="text-xs font-medium leading-tight">{label}</span>
+      <span className="text-[10px] leading-tight opacity-70 truncate max-w-full px-1 min-h-[14px]">
+        {subtext || '\u00A0'}
+      </span>
     </button>
   );
 }
