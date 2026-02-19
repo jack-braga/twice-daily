@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**Twice Daily** is an offline-first Progressive Web App (PWA) that programmatically assembles the Anglican Daily Office (Morning & Evening Prayer) from the 1662 Book of Common Prayer. The user opens the app, sees a scrollable liturgy for the correct time of day, checks off sections as they pray, and their completion history is tracked.
+**Twice Daily** is an offline-first Progressive Web App (PWA) that programmatically assembles the Anglican Daily Office (Morning & Evening Prayer) from the 1662 Book of Common Prayer. The app has three tabs: **Office** (shows the liturgy — remembers what the user was last reading and auto-advances to today's morning prayer on a new day), **History** (list and calendar views with completion tracking), and **Settings** (plan, translation, text size). Users check off sections as they pray and their progress is tracked.
 
 ### MVP Scope
 - **3 Bible translations**: KJV, WEB (American), WEB (British)
@@ -92,6 +92,8 @@ USFM parser handles: `\c`, `\v`, `\p`, `\q1/q2` (poetry), `\d` (superscriptions)
 |--------|-------------|--------|
 | `scripts/scrape-liturgy-texts.ts` | `scripts/data/liturgy-raw/*.html` (6 HTML files from eskimo.com's 1987 Cambridge Final Standard Text edition) | `public/data/liturgy/morning-prayer.json` (21 sections), `evening-prayer.json` (20 sections), `collects.json` (246 entries), `prayers.json` (9 prayers) |
 
+**Liturgy text verification**: The scraped liturgy JSON has been cross-checked against the Church of England's digital BCP and the 1662 Baskerville printing (PDF). Post-scraping corrections applied to the JSON files include: missing "Priest." speaker tags on versicles, "show" → "shew" (traditional BCP spelling), missing "The Lord's Name be praised" response, missing Lord's Prayer rubric, corrected EP rubric articles/punctuation. The opening sentences, The Grace, and Easter Anthems are no longer stored as static text — they are loaded dynamically from the Bible translation at runtime.
+
 ### Validator
 
 | Script | Purpose |
@@ -118,7 +120,7 @@ USFM parser handles: `\c`, `\v`, `\p`, `\q1/q2` (poetry), `\d` (superscriptions)
 | File | Purpose |
 |------|---------|
 | `types.ts` | `PlanConfig` and `PlanAssembler` interfaces |
-| `bcp-1662.ts` | Shared BCP plan implementation for both Original and Revised lectionaries. Builds 8 sections per session: Preparation, Psalms, First Lesson, Canticle 1, Second Lesson, Canticle 2, Creed, Prayers. Handles: Lenten canticle swap (Te Deum → Benedicite), Day 19 Venite omission, Easter Anthems, collect-of-day lookup. |
+| `bcp-1662.ts` | Shared BCP plan implementation for both Original and Revised lectionaries. Builds 8 sections per session: Preparation, Psalms, First Lesson, Canticle 1, Second Lesson, Canticle 2, Creed, Prayers. Handles: opening sentence rotation (11 sentences, day-of-year based), Lenten canticle swap (Te Deum → Benedicite), Day 19 Venite omission, Easter Anthems, collect-of-day lookup. **Dynamic Bible text**: Opening Sentences (11 refs), The Grace (2 Cor 13:14), and Easter Anthems (1 Cor 5:7-8, Rom 6:9-11, 1 Cor 15:20-22) are all loaded from the user's selected Bible translation at runtime. |
 | `mcheyne.ts` | M'Cheyne plan — 2 pure scripture sections per session, no liturgical wrapper. |
 | `index.ts` | Plan registry: `PLANS` map + `getPlan(planId)` |
 
@@ -138,10 +140,10 @@ USFM parser handles: `\c`, `\v`, `\p`, `\q1/q2` (poetry), `\d` (superscriptions)
 
 | File | Purpose |
 |------|---------|
-| `useSettings.ts` | Loads/persists settings (planId, translation, textSize, cutoffHour) from IndexedDB. Applies text size to CSS custom property. |
+| `useSettings.ts` | Loads/persists settings (planId, translation, textSize, lastReadDate, lastReadSession) from IndexedDB. Applies text size to CSS custom property. Provides `updateLastRead()` for persisting the user's last-read date+session. |
 | `useDate.ts` | Returns the "current" date, supporting `?date=YYYY-MM-DD` query param override. |
 | `useOffice.ts` | Calls `assembleOffice()` and returns the `DailyPlan` with loading/error states. |
-| `useCompletion.ts` | Tracks which sections are completed for a date/session, persists to IndexedDB. Provides `toggleSection()`, `isSessionComplete`, `markSessionComplete()`. |
+| `useCompletion.ts` | Tracks which sections are completed for a date/session, persists to IndexedDB. Provides `toggleSection()`, `isSessionComplete`, `markSessionComplete()`. Also exports `getCompletionsForDateRange()` and `getCompletionSummary()` for the History tab. |
 
 ### Components (`src/components/`)
 
@@ -149,15 +151,18 @@ USFM parser handles: `\c`, `\v`, `\p`, `\q1/q2` (poetry), `\d` (superscriptions)
 |------|---------|
 | `office/LiturgySection.tsx` | Renders a `SessionSection` — title, subtitle, content blocks (rubric, static text, scripture, versicle-response, heading), checkmark toggle button. |
 | `office/ScriptureReading.tsx` | Renders Bible verses — handles both prose (inline verse numbers) and poetry (indented lines). Psalm superscriptions shown in italic. |
-| `tabs/NowTab.tsx` | Main view — shows the assembled office for today's session. Morning/evening toggle, liturgical season color dot, scroll-to-next on check. |
-| `tabs/HistoryTab.tsx` | 12-week heatmap + recent session log. |
-| `tabs/SettingsTab.tsx` | Reading plan picker, translation picker, text size, morning/evening cutoff time. |
+| `tabs/OfficeTab.tsx` | Main reading view. Remembers last-read date+session, auto-advances to today's morning on a new day. Morning/evening toggle, liturgical season color dot, scroll-to-next on check. Accepts `navigateDate`/`navigateSession` from History tab. |
+| `tabs/HistoryTab.tsx` | Two view modes (List/Calendar) with segmented controls. Calendar supports week/month/year zoom with pinch-to-zoom and segmented control. "Today" floating button. Delegates to `history/ListView.tsx`, `history/CalendarView.tsx`. |
+| `tabs/SettingsTab.tsx` | Reading plan picker, translation picker, text size. |
+| `history/DayRow.tsx` | Shared component showing a day's morning/evening progress bars with "Open" buttons. Used in both list expanded rows and calendar inline details. |
+| `history/ListView.tsx` | Infinite-scroll list of days using `IntersectionObserver`. Expandable rows with `DayRow` detail. |
+| `history/CalendarView.tsx` | Week/month/year calendar grids. Tap a day to see inline `DayRow` detail. Pinch-to-zoom gesture support. Year view shows mini month grids (tap to zoom into month). |
 
 ### App Shell
 
 | File | Purpose |
 |------|---------|
-| `App.tsx` | 3-tab navigation (Now, History, Settings). Wires `useSettings` into child components. |
+| `App.tsx` | 3-tab navigation (Office, History, Settings). Wires `useSettings` into child components. Manages navigate state for History→Office tab transitions. |
 | `main.tsx` | React 19 root render. |
 | `index.css` | CSS custom properties for fonts, colors, liturgical season colors. Tailwind v4 import. |
 
@@ -220,10 +225,17 @@ References are stored in the lectionary data but no Bible text is rendered. The 
 ## PWA Configuration
 
 Configured in `vite.config.ts`:
+- **Base path**: `/twice-daily/` (for GitHub Pages subdirectory deployment)
 - **Precache**: All app assets (HTML, CSS, JS, icons)
 - **Runtime cache**: `CacheFirst` for `/data/bible/**/*.json` and `/data/(lectionary|liturgy)/*.json`
 - **Manifest**: standalone display, theme color `#1a1a2e`, bg `#faf9f6`
 - **Service worker**: `autoUpdate` registration type
+
+**Important**: All `fetch()` calls in the app use `import.meta.env.BASE_URL` as a prefix (e.g., `` `${import.meta.env.BASE_URL}data/bible/...` ``) to support the GitHub Pages subdirectory deployment.
+
+## Deployment
+
+Deployed to GitHub Pages at `https://jack-braga.github.io/twice-daily/`. The `base: '/twice-daily/'` setting in `vite.config.ts` ensures all asset paths are relative to the subdirectory.
 
 ---
 
@@ -255,9 +267,9 @@ Run with: `npm test`
 ## Known Limitations / Future Work
 
 1. **Collect lookup**: The collect-of-day mapping (`bcp-1662.ts` `buildCollectMap()`) matches collects by searching the `occasion` text field. Some collects may not match if the scraped occasion text doesn't contain the expected keywords.
-2. **Opening sentences**: Currently always uses the first opening sentence. Could be randomized or seasonally selected.
-3. **Alternative canticles**: The BCP provides alternatives (Jubilate for Benedictus, Cantate Domino for Magnificat, etc.) but the app currently always uses the primary canticle. A toggle could be added.
-4. **First Evensong**: The 1662 Revised lectionary has `firstEvensong` readings for some holy days (the eve before). This is not yet wired into the calendar resolver.
-5. **No dark mode** (future feature).
-6. **No font picker** (CSS custom properties are ready: `--font-body`, `--font-ui`).
-7. **No Litany** support (the HTML is downloaded in `scripts/data/liturgy-raw/litany.html` but not yet parsed or included).
+2. **Alternative canticles**: The BCP provides alternatives (Jubilate for Benedictus, Cantate Domino for Magnificat, etc.) but the app currently always uses the primary canticle. A toggle could be added.
+3. **First Evensong**: The 1662 Revised lectionary has `firstEvensong` readings for some holy days (the eve before). This is not yet wired into the calendar resolver.
+4. **No dark mode** (future feature).
+5. **No font picker** (CSS custom properties are ready: `--font-body`, `--font-ui`).
+6. **No Litany** support (the HTML is downloaded in `scripts/data/liturgy-raw/litany.html` but not yet parsed or included).
+7. **Heatmap component**: A GitHub-style 12-week contribution heatmap was built but is currently unused (kept as commented-out code in `HistoryTab.tsx` for potential future use elsewhere).

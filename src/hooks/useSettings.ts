@@ -1,19 +1,21 @@
 import { useState, useEffect, useCallback } from 'react';
 import { db } from '../db/schema';
-import type { PlanId, Translation } from '../engine/types';
+import type { PlanId, Translation, Session } from '../engine/types';
 
 export interface AppSettings {
   planId: PlanId;
   translation: Translation;
   textSize: 'small' | 'medium' | 'large';
-  cutoffHour: number; // 0-23, default 12
+  lastReadDate: string;     // "YYYY-MM-DD", empty = first launch
+  lastReadSession: Session; // "morning" | "evening"
 }
 
 const DEFAULTS: AppSettings = {
   planId: '1662-original',
   translation: 'kjv',
   textSize: 'medium',
-  cutoffHour: 12,
+  lastReadDate: '',
+  lastReadSession: 'morning',
 };
 
 const TEXT_SIZE_MAP = { small: '16px', medium: '18px', large: '21px' } as const;
@@ -30,7 +32,8 @@ export function useSettings() {
         planId: (map.get('planId') as PlanId) ?? DEFAULTS.planId,
         translation: (map.get('translation') as Translation) ?? DEFAULTS.translation,
         textSize: (map.get('textSize') as AppSettings['textSize']) ?? DEFAULTS.textSize,
-        cutoffHour: parseInt(map.get('cutoffHour') ?? String(DEFAULTS.cutoffHour), 10),
+        lastReadDate: map.get('lastReadDate') ?? DEFAULTS.lastReadDate,
+        lastReadSession: (map.get('lastReadSession') as Session) ?? DEFAULTS.lastReadSession,
       });
       setLoaded(true);
     })();
@@ -46,5 +49,11 @@ export function useSettings() {
     await db.settings.put({ key, value: String(value) });
   }, []);
 
-  return { settings, updateSetting, loaded };
+  const updateLastRead = useCallback(async (date: string, session: Session) => {
+    setSettings(prev => ({ ...prev, lastReadDate: date, lastReadSession: session }));
+    await db.settings.put({ key: 'lastReadDate', value: date });
+    await db.settings.put({ key: 'lastReadSession', value: session });
+  }, []);
+
+  return { settings, updateSetting, updateLastRead, loaded };
 }

@@ -75,24 +75,6 @@ export function SettingsTab({ settings, onUpdate }: Props) {
         </div>
       </SettingGroup>
 
-      {/* Cutoff Hour */}
-      <SettingGroup label="Morning/Evening Cutoff">
-        <div className="flex items-center gap-3">
-          <input
-            type="time"
-            value={`${String(settings.cutoffHour).padStart(2, '0')}:00`}
-            onChange={e => {
-              const h = parseInt(e.target.value.split(':')[0]!, 10);
-              if (!isNaN(h)) onUpdate('cutoffHour', h);
-            }}
-            className="px-3 py-2 rounded-lg border text-sm"
-            style={{ borderColor: 'var(--color-border)', fontFamily: 'var(--font-ui)' }}
-          />
-          <span className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
-            Before this: Morning Prayer. After: Evening Prayer.
-          </span>
-        </div>
-      </SettingGroup>
     </div>
   );
 }

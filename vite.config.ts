@@ -17,6 +17,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        navigateFallback: '/twice-daily/index.html',
+        navigateFallbackDenylist: [/\/data\//],
         runtimeCaching: [
           {
             urlPattern: /\/data\/bible\/.+\.json$/,

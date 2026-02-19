@@ -10,6 +10,7 @@
 import type { DailyPlan, DailySession, Session, PlanId, Translation } from './types';
 import { resolveLiturgicalDay } from './calendar';
 import { getPlan } from '../plans';
+import { formatDateStr } from '../utils/date';
 
 /**
  * Assemble the complete office for a given date, session, plan, and translation.
@@ -36,7 +37,7 @@ export async function assembleOffice(
   };
 
   return {
-    date: date.toISOString().split('T')[0]!,
+    date: formatDateStr(date),
     planId,
     season: litDay.season,
     liturgicalDay: litDay,
@@ -64,7 +65,7 @@ export async function assembleBothSessions(
   const eveningTitle = plan.config.hasLiturgy ? 'Evening Prayer' : 'Evening Readings';
 
   return {
-    date: date.toISOString().split('T')[0]!,
+    date: formatDateStr(date),
     planId,
     season: litDay.season,
     liturgicalDay: litDay,

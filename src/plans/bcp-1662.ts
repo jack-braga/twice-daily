@@ -37,6 +37,39 @@ const APOCRYPHAL_BOOKS = new Set([
   'Bel and the Dragon', '2 Esdras', '1 Esdras',
 ]);
 
+// ─── Bible verse references for dynamic loading ─────────────────────────
+
+/** Opening Sentences — 11 sentences, each with one or two Bible refs.
+ *  The BCP says "some one or more of these Sentences of the Scriptures." */
+const OPENING_SENTENCES: { refs: ReadingRef[] }[] = [
+  { refs: [{ book: 'Ezekiel', startChapter: 18, startVerse: 27, endChapter: 18, endVerse: 27 }] },
+  { refs: [{ book: 'Psalms', startChapter: 51, startVerse: 3, endChapter: 51, endVerse: 3 }] },
+  { refs: [{ book: 'Psalms', startChapter: 51, startVerse: 9, endChapter: 51, endVerse: 9 }] },
+  { refs: [{ book: 'Psalms', startChapter: 51, startVerse: 17, endChapter: 51, endVerse: 17 }] },
+  { refs: [{ book: 'Joel', startChapter: 2, startVerse: 13, endChapter: 2, endVerse: 13 }] },
+  { refs: [{ book: 'Daniel', startChapter: 9, startVerse: 9, endChapter: 9, endVerse: 10 }] },
+  { refs: [
+    { book: 'Jeremiah', startChapter: 10, startVerse: 24, endChapter: 10, endVerse: 24 },
+    { book: 'Psalms', startChapter: 6, startVerse: 1, endChapter: 6, endVerse: 1 },
+  ] },
+  { refs: [{ book: 'Matthew', startChapter: 3, startVerse: 2, endChapter: 3, endVerse: 2 }] },
+  { refs: [{ book: 'Luke', startChapter: 15, startVerse: 18, endChapter: 15, endVerse: 19 }] },
+  { refs: [{ book: 'Psalms', startChapter: 143, startVerse: 2, endChapter: 143, endVerse: 2 }] },
+  { refs: [{ book: '1 John', startChapter: 1, startVerse: 8, endChapter: 1, endVerse: 9 }] },
+];
+
+/** The Grace — 2 Corinthians 13:14 */
+const GRACE_REF: ReadingRef = {
+  book: '2 Corinthians', startChapter: 13, startVerse: 14, endChapter: 13, endVerse: 14,
+};
+
+/** Easter Anthems — compiled from three passages */
+const EASTER_ANTHEM_REFS: ReadingRef[] = [
+  { book: '1 Corinthians', startChapter: 5, startVerse: 7, endChapter: 5, endVerse: 8 },
+  { book: 'Romans', startChapter: 6, startVerse: 9, endChapter: 6, endVerse: 11 },
+  { book: '1 Corinthians', startChapter: 15, startVerse: 20, endChapter: 15, endVerse: 22 },
+];
+
 // ─── Cached liturgy data ────────────────────────────────────────────────
 
 interface LiturgyPiece {
@@ -117,20 +150,28 @@ function pickOpeningSentenceIndex(date: Date): number {
   return dayOfYear % 11; // 11 opening sentences available
 }
 
-function buildPreparation(session: Session, date: Date): SessionSection {
+async function buildPreparation(session: Session, date: Date, translation: Translation): Promise<SessionSection> {
   const content: SectionContent[] = [];
 
-  // Opening sentences — rotate daily through all 11
+  // Opening sentences — rotate daily, loaded from selected Bible translation
   const opening = getLiturgySection(session, 'opening-sentences');
   if (opening) {
-    // Add the rubric
     const rubric = opening.pieces.find(p => p.type === 'rubric');
     if (rubric) content.push(pieceToContent(rubric));
-    // Pick sentence based on day of year (rotating through all 11)
-    const textPieces = opening.pieces.filter(p => p.type === 'text');
+
     const idx = pickOpeningSentenceIndex(date);
-    const sentence = textPieces[idx % textPieces.length];
-    if (sentence) content.push(pieceToContent(sentence));
+    const sentence = OPENING_SENTENCES[idx % OPENING_SENTENCES.length]!;
+    const refLabels: string[] = [];
+    for (const ref of sentence.refs) {
+      const result = await loadReading(translation, ref);
+      if (result && result.verses.length > 0) {
+        content.push({ type: 'scripture', reference: ref, verses: result.verses });
+      }
+      refLabels.push(formatRef(ref));
+    }
+    if (refLabels.length > 0) {
+      content.push({ type: 'rubric', text: refLabels.join('; ') });
+    }
   }
 
   // Exhortation
@@ -190,19 +231,17 @@ async function buildPsalms(
     const omitVenite = shouldOmitVenite(date);
 
     if (isEaster) {
-      // Easter Anthems replace Venite
+      // Easter Anthems replace Venite — loaded from selected Bible translation
       content.push({ type: 'heading', text: 'Easter Anthems' });
       content.push({ type: 'rubric', text: 'On Easter Day, instead of the Psalm O come, let us sing, etc. these Anthems shall be sung or said.' });
-      // The Easter Anthems are a compilation of 1 Cor 5:7-8, Rom 6:9-11, 1 Cor 15:20-22
+      for (const ref of EASTER_ANTHEM_REFS) {
+        const result = await loadReading(translation, ref);
+        if (result && result.verses.length > 0) {
+          content.push({ type: 'scripture', reference: ref, verses: result.verses });
+          content.push({ type: 'rubric', text: formatRef(ref) });
+        }
+      }
       content.push({ type: 'static-text', text:
-        'CHRIST our Passover is sacrificed for us : therefore let us keep the feast;\n' +
-        'Not with the old leaven, nor with the leaven of malice and wickedness : but with the unleavened bread of sincerity and truth. 1 Cor. v. 7.\n\n' +
-        'CHRIST being raised from the dead dieth no more : death hath no more dominion over him.\n' +
-        'For in that he died, he died unto sin once : but in that he liveth, he liveth unto God.\n' +
-        'Likewise reckon ye also yourselves to be dead indeed unto sin : but alive unto God through Jesus Christ our Lord. Rom. vi. 9.\n\n' +
-        'CHRIST is risen from the dead : and become the firstfruits of them that slept.\n' +
-        'For since by man came death : by man came also the resurrection of the dead.\n' +
-        'For as in Adam all die : even so in Christ shall all be made alive. 1 Cor. xv. 20.\n\n' +
         'Glory be to the Father, and to the Son : and to the Holy Ghost;\n' +
         'As it was in the beginning, is now, and ever shall be : world without end. Amen.'
       });
@@ -408,7 +447,7 @@ function buildCreed(session: Session): SessionSection {
   };
 }
 
-function buildPrayers(session: Session, litDay: LiturgicalDay): SessionSection {
+async function buildPrayers(session: Session, litDay: LiturgicalDay, translation: Translation): Promise<SessionSection> {
   const content: SectionContent[] = [];
 
   // Prayers introduction (The Lord be with you / Let us pray / Kyrie)
@@ -464,11 +503,12 @@ function buildPrayers(session: Session, litDay: LiturgicalDay): SessionSection {
     content.push(...sectionPiecesToContent(state.pieces));
   }
 
-  // The Grace
-  const grace = getLiturgySection(session, 'the-grace');
-  if (grace) {
-    content.push({ type: 'heading', text: 'The Grace' });
-    content.push(...sectionPiecesToContent(grace.pieces));
+  // The Grace — 2 Corinthians 13:14, loaded from selected Bible translation
+  content.push({ type: 'heading', text: 'The Grace' });
+  const graceResult = await loadReading(translation, GRACE_REF);
+  if (graceResult && graceResult.verses.length > 0) {
+    content.push({ type: 'scripture', reference: GRACE_REF, verses: graceResult.verses });
+    content.push({ type: 'rubric', text: formatRef(GRACE_REF) });
   }
 
   return {
@@ -619,7 +659,7 @@ function createBcpPlan(planId: PlanId, config: PlanConfig): PlanAssembler {
       const sections: SessionSection[] = [];
 
       // 1. Preparation
-      sections.push(buildPreparation(session, date));
+      sections.push(await buildPreparation(session, date, translation));
 
       // 2. Psalms
       sections.push(await buildPsalms(date, session, litDay, translation));
@@ -640,7 +680,7 @@ function createBcpPlan(planId: PlanId, config: PlanConfig): PlanAssembler {
       sections.push(buildCreed(session));
 
       // 8. Prayers
-      sections.push(buildPrayers(session, litDay));
+      sections.push(await buildPrayers(session, litDay, translation));
 
       return sections;
     },

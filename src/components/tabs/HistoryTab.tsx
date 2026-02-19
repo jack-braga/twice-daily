@@ -1,132 +1,112 @@
-import { useState, useEffect } from 'react';
-import { getAllCompletions } from '../../hooks/useCompletion';
-import type { CompletionRecord } from '../../db/schema';
+import { useState, useRef, useCallback } from 'react';
+import type { PlanId, Session } from '../../engine/types';
+import { ListView } from '../history/ListView';
+import { CalendarView, type CalendarZoom } from '../history/CalendarView';
 
-export function HistoryTab() {
-  const [records, setRecords] = useState<CompletionRecord[]>([]);
-  const [loading, setLoading] = useState(true);
+type ViewMode = 'list' | 'calendar';
 
-  useEffect(() => {
-    getAllCompletions().then(r => {
-      setRecords(r);
-      setLoading(false);
-    });
+interface Props {
+  planId: PlanId;
+  onNavigateToOffice: (date: string, session: Session) => void;
+}
+
+export function HistoryTab({ planId, onNavigateToOffice }: Props) {
+  const [viewMode, setViewMode] = useState<ViewMode>('list');
+  const [calendarZoom, setCalendarZoom] = useState<CalendarZoom>('month');
+  const todayElRef = useRef<HTMLElement | null>(null);
+
+  // Incremented to signal "go to today" to CalendarView
+  const [todayTrigger, setTodayTrigger] = useState(0);
+
+  const listScrollRef = useRef<HTMLDivElement | null>(null);
+
+  const handleTodayElement = useCallback((el: HTMLElement | null) => {
+    todayElRef.current = el;
   }, []);
 
-  // Build heatmap data: date → count of sessions
-  const dateCounts = new Map<string, number>();
-  for (const r of records) {
-    dateCounts.set(r.date, (dateCounts.get(r.date) ?? 0) + 1);
-  }
-
-  // Get last 12 weeks of dates for the heatmap
-  const today = new Date();
-  const weeks: string[][] = [];
-  const startDate = new Date(today);
-  startDate.setDate(startDate.getDate() - (12 * 7) + 1);
-  // Align to Sunday
-  startDate.setDate(startDate.getDate() - startDate.getDay());
-
-  for (let w = 0; w < 12; w++) {
-    const week: string[] = [];
-    for (let d = 0; d < 7; d++) {
-      const date = new Date(startDate);
-      date.setDate(date.getDate() + w * 7 + d);
-      week.push(date.toISOString().split('T')[0]!);
+  const handleTodayPress = useCallback(() => {
+    if (viewMode === 'list') {
+      todayElRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else {
+      setTodayTrigger(n => n + 1);
     }
-    weeks.push(week);
-  }
-
-  function getCellColor(dateStr: string): string {
-    const count = dateCounts.get(dateStr) ?? 0;
-    if (count === 0) return 'var(--color-border)';
-    if (count === 1) return '#86efac';
-    return '#16a34a';
-  }
-
-  const formatRecordDate = (dateStr: string) => {
-    const d = new Date(dateStr + 'T00:00:00');
-    return d.toLocaleDateString('en-GB', { month: 'short', day: 'numeric' });
-  };
-
-  const formatTime = (isoStr: string) => {
-    const d = new Date(isoStr);
-    return d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-  };
-
-  const PLAN_LABELS: Record<string, string> = {
-    '1662-original': '1662 Original',
-    '1662-revised': '1662 Revised',
-    'mcheyne': "M'Cheyne",
-  };
+  }, [viewMode]);
 
   return (
-    <div className="px-4 py-6 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-semibold mb-6" style={{ fontFamily: 'var(--font-ui)' }}>
-        History
-      </h1>
+    <div className="max-w-2xl mx-auto relative flex flex-col h-full">
+      {/* Sticky header — always visible */}
+      <div className="shrink-0 px-4 pt-6 pb-3" style={{ backgroundColor: 'var(--color-bg, #faf9f6)' }}>
+        <div className="flex items-center justify-between mb-3">
+          <h1 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-ui)' }}>
+            History
+          </h1>
+          <button
+            onClick={handleTodayPress}
+            className="px-3 py-1 rounded-full text-xs font-medium transition-colors active:scale-95"
+            style={{
+              backgroundColor: 'var(--color-accent)',
+              color: 'white',
+              fontFamily: 'var(--font-ui)',
+            }}
+          >
+            Today
+          </button>
+        </div>
 
-      {loading && (
-        <p style={{ color: 'var(--color-text-muted)' }}>Loading...</p>
-      )}
-
-      {!loading && (
-        <>
-          {/* Heatmap */}
-          <div className="mb-8">
-            <div className="flex gap-0.5 justify-end">
-              {weeks.map((week, wi) => (
-                <div key={wi} className="flex flex-col gap-0.5">
-                  {week.map(dateStr => (
-                    <div
-                      key={dateStr}
-                      className="w-3 h-3 rounded-sm"
-                      style={{ backgroundColor: getCellColor(dateStr) }}
-                      title={`${dateStr}: ${dateCounts.get(dateStr) ?? 0} sessions`}
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
-            <div className="flex items-center gap-2 mt-2 justify-end text-xs"
-              style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-ui)' }}>
-              <span>Less</span>
-              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: 'var(--color-border)' }} />
-              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#86efac' }} />
-              <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: '#16a34a' }} />
-              <span>More</span>
-            </div>
+        <div className="flex items-center gap-3">
+          {/* View mode toggle */}
+          <div className="flex gap-1 p-0.5 rounded-lg w-fit" style={{ backgroundColor: 'var(--color-border)' }}>
+            <SegmentButton active={viewMode === 'list'} onClick={() => setViewMode('list')} label="List" />
+            <SegmentButton active={viewMode === 'calendar'} onClick={() => setViewMode('calendar')} label="Calendar" />
           </div>
 
-          {/* Recent sessions list */}
-          {records.length === 0 ? (
-            <p style={{ color: 'var(--color-text-muted)' }}>No sessions completed yet.</p>
-          ) : (
-            <div className="space-y-2">
-              {records.slice(0, 50).map((r, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-between py-2 border-b text-sm"
-                  style={{ borderColor: 'var(--color-border)', fontFamily: 'var(--font-ui)' }}
-                >
-                  <div>
-                    <span className="font-medium">{formatRecordDate(r.date)}</span>
-                    <span className="mx-2" style={{ color: 'var(--color-text-muted)' }}>&middot;</span>
-                    <span className="capitalize">{r.session} Prayer</span>
-                    <span className="mx-2" style={{ color: 'var(--color-text-muted)' }}>&middot;</span>
-                    <span style={{ color: 'var(--color-text-muted)' }}>
-                      {PLAN_LABELS[r.planId] ?? r.planId}
-                    </span>
-                  </div>
-                  <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                    {formatTime(r.completedAt)}
-                  </span>
-                </div>
-              ))}
+          {/* Calendar zoom control */}
+          {viewMode === 'calendar' && (
+            <div className="flex gap-1 p-0.5 rounded-lg w-fit" style={{ backgroundColor: 'var(--color-border)' }}>
+              <SegmentButton active={calendarZoom === 'week'} onClick={() => setCalendarZoom('week')} label="Week" />
+              <SegmentButton active={calendarZoom === 'month'} onClick={() => setCalendarZoom('month')} label="Month" />
+              <SegmentButton active={calendarZoom === 'year'} onClick={() => setCalendarZoom('year')} label="Year" />
             </div>
           )}
-        </>
-      )}
+        </div>
+      </div>
+
+      {/* Scrollable content area */}
+      <div ref={listScrollRef} className="flex-1 overflow-y-auto min-h-0 pb-20" style={{ overscrollBehaviorY: 'contain' }}>
+        {viewMode === 'list' ? (
+          <ListView
+            planId={planId}
+            onOpen={onNavigateToOffice}
+            onTodayElement={handleTodayElement}
+            scrollContainerRef={listScrollRef}
+          />
+        ) : (
+          <CalendarView
+            planId={planId}
+            zoom={calendarZoom}
+            onZoomChange={setCalendarZoom}
+            onOpen={onNavigateToOffice}
+            onTodayElement={handleTodayElement}
+            todayTrigger={todayTrigger}
+          />
+        )}
+      </div>
     </div>
+  );
+}
+
+function SegmentButton({ active, onClick, label }: { active: boolean; onClick: () => void; label: string }) {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
+        active
+          ? 'bg-white text-[var(--color-text)] shadow-sm'
+          : 'text-[var(--color-text-muted)]'
+      }`}
+      style={{ fontFamily: 'var(--font-ui)' }}
+    >
+      {label}
+    </button>
   );
 }
