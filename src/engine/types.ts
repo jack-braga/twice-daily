@@ -81,7 +81,7 @@ export interface BibleBook {
   chapters: BibleChapter[];
 }
 
-export type Translation = 'kjv' | 'web-usa' | 'web-brit';
+export type Translation = 'kjv' | 'asv' | 'lsv' | 'web-usa' | 'web-brit' | 'web-updated';
 
 // ============================================================
 // Psalter Types

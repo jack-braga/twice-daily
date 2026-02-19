@@ -42,7 +42,7 @@ const APOCRYPHAL_BOOKS = new Set([
 
 // ─── Load Bible data ────────────────────────────────────────────────────
 
-const translations = ['kjv', 'web-usa', 'web-brit'];
+const translations = ['kjv', 'asv', 'lsv', 'web-usa', 'web-brit', 'web-updated'];
 
 /** Map of translation → bookName → BibleBook */
 const bibleData = new Map<string, Map<string, BibleBook>>();

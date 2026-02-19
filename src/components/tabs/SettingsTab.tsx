@@ -15,8 +15,11 @@ const PLANS: { id: PlanId; label: string; description: string }[] = [
 
 const TRANSLATIONS: { id: Translation; label: string }[] = [
   { id: 'kjv', label: 'King James Version' },
+  { id: 'asv', label: 'American Standard Version' },
+  { id: 'lsv', label: 'Literal Standard Version' },
   { id: 'web-usa', label: 'World English Bible (US)' },
   { id: 'web-brit', label: 'World English Bible (British)' },
+  { id: 'web-updated', label: 'World English Bible (Updated)' },
 ];
 
 const TEXT_SIZES: { id: AppSettings['textSize']; label: string }[] = [

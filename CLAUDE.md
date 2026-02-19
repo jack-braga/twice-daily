@@ -5,7 +5,7 @@
 **Twice Daily** is an offline-first Progressive Web App (PWA) that programmatically assembles the Anglican Daily Office (Morning & Evening Prayer) from the 1662 Book of Common Prayer. The app has three tabs: **Office** (shows the liturgy — remembers what the user was last reading and auto-advances to today's morning prayer on a new day), **History** (list and calendar views with completion tracking), and **Settings** (plan, translation, text size). Users check off sections as they pray and their progress is tracked.
 
 ### MVP Scope
-- **3 Bible translations**: KJV, WEB (American), WEB (British)
+- **6 Bible translations**: KJV, ASV (1901), LSV, WEB (American), WEB (British), WEB (Updated)
 - **3 reading plans**:
   - 1662 Original (civil calendar lectionary)
   - 1662 Revised / 1922 (liturgical calendar lectionary)
@@ -65,14 +65,18 @@ All scripts output to `public/data/`. Sources live in `/Users/jack-braga/Documen
 | `scripts/shared/book-names.ts` | Canonical book registry — maps between KJV filenames, USFM codes, display names, abbreviations (e.g., "Isa.", "Cant.", "1 Chr."), and slug IDs. All 66 Protestant canon books. |
 | `scripts/shared/reading-ref-parser.ts` | Parses human-readable references ("Gen 1:1-25", "1 Thess 4:13", "Ps 119:1-32") into `ReadingRef` objects. Handles cross-chapter spans, abbreviation variants, Roman numeral prefixes. Most reused utility. |
 
-### Bible Parsers
+### Bible Parser
 
 | Script | Input | Output |
 |--------|-------|--------|
-| `scripts/parse-kjv.ts` | `dailyOffice/Bible-kjv-master/*.json` | `public/data/bible/kjv/{book-id}.json` (66 files) |
-| `scripts/parse-usfm.ts` | `dailyOffice/engwebp_usfm/*.usfm` (USA) and `dailyOffice/engwebpb_usfm/*.usfm` (British) | `public/data/bible/web-usa/` and `public/data/bible/web-brit/` (66 files each) |
+| `scripts/parse-usfm.ts --variant kjv` | `dailyOffice/eng-kjv_usfm/*.usfm` | `public/data/bible/kjv/` (66 files) |
+| `scripts/parse-usfm.ts --variant asv` | `dailyOffice/eng-asv_usfm/*.usfm` | `public/data/bible/asv/` (66 files) |
+| `scripts/parse-usfm.ts --variant lsv` | `dailyOffice/englsv_usfm/*.usfm` | `public/data/bible/lsv/` (66 files) |
+| `scripts/parse-usfm.ts --variant web-usa` | `dailyOffice/engwebp_usfm/*.usfm` | `public/data/bible/web-usa/` (66 files) |
+| `scripts/parse-usfm.ts --variant web-brit` | `dailyOffice/engwebpb_usfm/*.usfm` | `public/data/bible/web-brit/` (66 files) |
+| `scripts/parse-usfm.ts --variant web-updated` | `dailyOffice/engwebu_usfm/*.usfm` | `public/data/bible/web-updated/` (66 files) |
 
-USFM parser handles: `\c`, `\v`, `\p`, `\q1/q2` (poetry), `\d` (superscriptions), `\w...\w*` (strips Strong's numbers), `\f...\f*` (strips footnotes), `\qs...\qs*` (keeps Selah).
+A single unified USFM parser handles all 6 translations. USFM markers handled: `\c`, `\v`, `\p`, `\q1`/`\q2`/`\qc` (poetry), `\d` (superscriptions), `\b` (stanza breaks), `\s1`/`\ms1` (section headings — skipped), `\w...\w*` and `\+w...\+w*` (strips Strong's numbers), `\f...\f*` (strips footnotes), `\x...\x*` (strips cross-references), `\qs...\qs*` (keeps Selah), `\nd...\nd*`/`\+nd...\+nd*` (Name of Deity — strips markers), `\wj...\wj*` (Words of Jesus — strips markers), `\add...\add*` (translator-added words — strips markers), `\tl...\tl*` (transliterated — strips markers), `\bd...\bd*`/`\it...\it*` (bold/italic — strips markers). LSV-specific: `||` poetry delimiters are joined as single verses with `poetry: 1` flag. Apocryphal books (order >= 100 in book-names registry) are filtered out.
 
 ### Lectionary Parsers
 
@@ -98,7 +102,7 @@ USFM parser handles: `\c`, `\v`, `\p`, `\q1/q2` (poetry), `\d` (superscriptions)
 
 | Script | Purpose |
 |--------|---------|
-| `scripts/validate-readings.ts` | Iterates every `ReadingRef` in all 3 lectionaries, verifies book/chapter/verse exists in all 3 Bible translations. Skips apocryphal books. Fails the build on any error. **4868 refs, 0 errors.** |
+| `scripts/validate-readings.ts` | Iterates every `ReadingRef` in all 3 lectionaries, verifies book/chapter/verse exists in all 6 Bible translations. Skips apocryphal books. Fails the build on any error. **4868 refs, 0 errors.** |
 
 ---
 
@@ -243,9 +247,12 @@ Deployed to GitHub Pages at `https://jack-braga.github.io/twice-daily/`. The `ba
 
 | Source | Location | Notes |
 |--------|----------|-------|
-| KJV JSON | `dailyOffice/Bible-kjv-master/` | 66 pre-formatted JSON files |
-| WEB USA USFM | `dailyOffice/engwebp_usfm/` | Standard USFM format |
-| WEB British USFM | `dailyOffice/engwebpb_usfm/` | Standard USFM format |
+| KJV USFM | `dailyOffice/eng-kjv_usfm/` | ebible.org USFM with poetry markers, Strong's numbers, footnotes |
+| ASV USFM | `dailyOffice/eng-asv_usfm/` | ebible.org USFM with poetry markers, Strong's numbers |
+| LSV USFM | `dailyOffice/englsv_usfm/` | ebible.org USFM — uses `\|\|` inline poetry delimiters instead of `\q` markers |
+| WEB USA USFM | `dailyOffice/engwebp_usfm/` | Standard USFM format (Protestant canon only) |
+| WEB British USFM | `dailyOffice/engwebpb_usfm/` | Standard USFM format (Protestant canon only) |
+| WEB Updated USFM | `dailyOffice/engwebu_usfm/` | Standard USFM format (includes deuterocanon — parser filters to 66 books) |
 | 1662 Lectionary | `dailyOffice/1662-BCP-Lectionary/` | spagosx GitHub repo (monthly JSON files, originally CSV) |
 | 1922 Revised Lectionary | `scripts/data/1922-raw/` | 10 HTML pages scraped from eskimo.com |
 | M'Cheyne | `scripts/data/mcheyne-complete.json` | Scraped from bibleplan.org |

@@ -1,13 +1,23 @@
 /**
- * USFM Parser: Convert WEB USFM files to normalized BibleBook JSON.
+ * Unified USFM Parser: Convert USFM files to normalized BibleBook JSON.
  *
- * Usage:
- *   npx tsx scripts/parse-usfm.ts --variant usa
- *   npx tsx scripts/parse-usfm.ts --variant brit
+ * Supports 6 translation variants:
+ *   npx tsx scripts/parse-usfm.ts --variant web-usa
+ *   npx tsx scripts/parse-usfm.ts --variant web-brit
+ *   npx tsx scripts/parse-usfm.ts --variant web-updated
+ *   npx tsx scripts/parse-usfm.ts --variant kjv
+ *   npx tsx scripts/parse-usfm.ts --variant asv
+ *   npx tsx scripts/parse-usfm.ts --variant lsv
  *
- * Handles only the USFM markers we care about:
- *   \c, \v, \p, \q1, \q2, \d, \w...\w*, \f...\f*, \qs...\qs*
- * Strips Strong's concordance numbers and footnotes.
+ * Handles USFM markers:
+ *   \c, \v, \p, \q1, \q2, \qc, \d, \b
+ *   \w...\w*, \+w...\+w*, \f...\f*, \x...\x*, \qs...\qs*
+ *   \nd...\nd*, \+nd...\+nd*, \wj...\wj*, \add...\add*
+ *   \tl...\tl*, \bd...\bd*, \it...\it*
+ *   || (LSV poetry delimiter — split into separate poetry lines)
+ *
+ * Strips Strong's concordance numbers, footnotes, cross-references,
+ * and formatting markers. Keeps enclosed text.
  */
 
 import * as fs from 'node:fs';
@@ -16,9 +26,25 @@ import { BOOK_METADATA, findBookByUsfmCode } from './shared/book-names';
 
 const DATA_DIR = '/Users/jack-braga/Documents/Projects/dailyOffice';
 
-const VARIANTS: Record<string, { dir: string; suffix: string }> = {
-  usa: { dir: 'engwebp_usfm', suffix: 'engwebp' },
-  brit: { dir: 'engwebpb_usfm', suffix: 'engwebpb' },
+interface VariantConfig {
+  dir: string;
+  suffix: string;
+  outDir: string;
+  /** If true, split || into poetry lines (LSV) */
+  splitPipePoetry?: boolean;
+}
+
+const VARIANTS: Record<string, VariantConfig> = {
+  // Legacy aliases for backwards compat
+  'usa':          { dir: 'engwebp_usfm',   suffix: 'engwebp',  outDir: 'web-usa' },
+  'brit':         { dir: 'engwebpb_usfm',   suffix: 'engwebpb', outDir: 'web-brit' },
+  // Canonical names
+  'web-usa':      { dir: 'engwebp_usfm',   suffix: 'engwebp',  outDir: 'web-usa' },
+  'web-brit':     { dir: 'engwebpb_usfm',   suffix: 'engwebpb', outDir: 'web-brit' },
+  'web-updated':  { dir: 'engwebu_usfm',    suffix: 'engwebu',  outDir: 'web-updated' },
+  'kjv':          { dir: 'eng-kjv_usfm',    suffix: 'eng-kjv',  outDir: 'kjv' },
+  'asv':          { dir: 'eng-asv_usfm',    suffix: 'eng-asv',  outDir: 'asv' },
+  'lsv':          { dir: 'englsv_usfm',     suffix: 'englsv',   outDir: 'lsv', splitPipePoetry: true },
 };
 
 interface Verse {
@@ -62,21 +88,49 @@ function stripCrossRefs(line: string): string {
   return line.replace(/\\x\s.*?\\x\*/g, '');
 }
 
-/** Strip remaining inline markers we don't need */
+/** Strip remaining inline markers we don't need (keep enclosed text).
+ *  IMPORTANT: Closing markers (\xyz*) must be stripped BEFORE opening markers
+ *  (\xyz\s*), because the opening regex uses \s* which can greedily match the
+ *  bare marker without its *, leaving an orphaned asterisk. */
 function stripInlineMarkers(line: string): string {
   return line
-    .replace(/\\qs\s*/g, '')    // Selah opening — keep text
-    .replace(/\\qs\*/g, '')     // Selah closing
-    .replace(/\\+wh\s*/g, '')   // Hebrew word opening
-    .replace(/\\+wh\*/g, '')    // Hebrew word closing
-    .replace(/\\wj\s*/g, '')    // Words of Jesus opening
-    .replace(/\\wj\*/g, '')     // Words of Jesus closing
-    .replace(/\\nd\s*/g, '')    // Name of Deity opening
-    .replace(/\\nd\*/g, '')     // Name of Deity closing
-    .replace(/\\add\s*/g, '')   // Added words opening
-    .replace(/\\add\*/g, '')    // Added words closing
-    .replace(/\\w\s+/g, '')     // Remaining \w without strong's
-    .replace(/\\w\*/g, '');     // Remaining \w* closers
+    // Selah
+    .replace(/\\qs\*/g, '')
+    .replace(/\\qs\s*/g, '')
+    // Hebrew word
+    .replace(/\\\+wh\*/g, '')
+    .replace(/\\\+wh\s*/g, '')
+    // Words of Jesus
+    .replace(/\\wj\*/g, '')
+    .replace(/\\wj\s*/g, '')
+    // Name of Deity (both regular and nested)
+    .replace(/\\\+nd\*/g, '')
+    .replace(/\\\+nd\s*/g, '')
+    .replace(/\\nd\*/g, '')
+    .replace(/\\nd\s*/g, '')
+    // Translator-added words
+    .replace(/\\add\*/g, '')
+    .replace(/\\add\s*/g, '')
+    // Transliterated words
+    .replace(/\\tl\*/g, '')
+    .replace(/\\tl\s*/g, '')
+    // Bold (LSV)
+    .replace(/\\bd\*/g, '')
+    .replace(/\\bd\s*/g, '')
+    // Italic (LSV)
+    .replace(/\\it\*/g, '')
+    .replace(/\\it\s*/g, '')
+    // Remaining \w without strong's
+    .replace(/\\w\*/g, '')
+    .replace(/\\w\s+/g, '')
+    // Remaining \+w without strong's
+    .replace(/\\\+w\*/g, '')
+    .replace(/\\\+w\s+/g, '');
+}
+
+/** Strip square-bracket editorial insertions: [is] → is (LSV uses these) */
+function stripBrackets(line: string): string {
+  return line.replace(/\[([^\]]*)\]/g, '$1');
 }
 
 /** Clean up a line of verse text */
@@ -86,6 +140,7 @@ function cleanText(line: string): string {
   text = stripFootnotes(text);
   text = stripCrossRefs(text);
   text = stripInlineMarkers(text);
+  text = stripBrackets(text);
   // Clean up multiple spaces and trim
   text = text.replace(/\s+/g, ' ').trim();
   return text;
@@ -95,7 +150,13 @@ function cleanText(line: string): string {
 // USFM Parser
 // ============================================================
 
-function parseUsfmFile(content: string): { usfmCode: string; chapters: Chapter[] } | null {
+/** Regex to skip header/metadata/section markers (entire line) */
+const SKIP_LINE_RE =
+  /^\\(ide|h|toc\d|mt\d|ms\d|cl|rem|sts|s\d|r|sr|mr|sp|pi\d?|nb|b|li\d?|pc|qa|qr)\s/;
+const SKIP_LINE_BARE_RE =
+  /^\\(ide|h|toc\d|mt\d|ms\d|cl|rem|sts|s\d|r|sr|mr|sp|pi\d?|nb|b|li\d?|pc|qa|qr)$/;
+
+function parseUsfmFile(content: string, splitPipePoetry: boolean): { usfmCode: string; chapters: Chapter[] } | null {
   const lines = content.split('\n');
   let usfmCode = '';
   const chapters: Chapter[] = [];
@@ -113,8 +174,7 @@ function parseUsfmFile(content: string): { usfmCode: string; chapters: Chapter[]
     }
 
     // Skip header/metadata markers
-    if (/^\\(ide|h|toc\d|mt\d|ms\d|cl|rem|sts|s\d|r|sr|mr|sp|pi\d?|nb|b)\s/.test(line) ||
-        /^\\(ide|h|toc\d|mt\d|ms\d|cl|rem|sts|s\d|r|sr|mr|sp|pi\d?|nb|b)$/.test(line)) {
+    if (SKIP_LINE_RE.test(line) || SKIP_LINE_BARE_RE.test(line)) {
       continue;
     }
 
@@ -153,16 +213,32 @@ function parseUsfmFile(content: string): { usfmCode: string; chapters: Chapter[]
       }
     }
 
-    // Poetry markers: \q1, \q2
-    if (line.startsWith('\\q1') || line === '\\q1') {
-      currentPoetry = 1;
-      const afterQ = line.substring(3).trim();
-      if (!afterQ || !afterQ.startsWith('\\v ')) continue;
-    }
-    if (line.startsWith('\\q2') || line === '\\q2') {
-      currentPoetry = 2;
-      const afterQ = line.substring(3).trim();
-      if (!afterQ || !afterQ.startsWith('\\v ')) continue;
+    // Poetry markers: \q1, \q2, \qc
+    // IMPORTANT: Only `continue` on bare markers (no text after).
+    // When text follows without \v, it's a continuation of the previous verse
+    // and must fall through to the continuation block below.
+    {
+      const qMatch = line.match(/^\\(q[12c])\s?(.*)/);
+      const isBareQ = line === '\\q1' || line === '\\q2' || line === '\\qc';
+
+      if (qMatch || isBareQ) {
+        // Set poetry level
+        currentPoetry = line.startsWith('\\q2') ? 2 : 1;
+
+        const afterQ = qMatch ? qMatch[2]!.trim() : '';
+
+        if (!afterQ) {
+          // Bare marker (e.g. \q1 on its own line) — just set poetry mode, skip
+          continue;
+        }
+
+        if (afterQ.startsWith('\\v ')) {
+          // Has a verse marker — fall through to verse parsing below
+        } else {
+          // Has text but NO \v — this is a continuation of the previous verse.
+          // Fall through to the continuation block at the bottom.
+        }
+      }
     }
 
     // Verse marker: \v N
@@ -181,12 +257,18 @@ function parseUsfmFile(content: string): { usfmCode: string; chapters: Chapter[]
       continue;
     }
 
-    // Continuation line (no marker, or just \q1/\q2 followed by text)
-    // Append to current verse
+    // Continuation line: text that belongs to the current verse.
+    // This includes:
+    //   - Plain text continuation lines
+    //   - \q1/\q2/\qc lines with text but no \v (poetry continuations)
     if (currentVerse && line.trim()) {
-      // Check for poetry marker at start of continuation
       let contText = line;
-      if (contText.startsWith('\\q1')) {
+
+      // Strip leading poetry marker if present
+      if (contText.startsWith('\\qc')) {
+        currentPoetry = 1;
+        contText = contText.substring(3);
+      } else if (contText.startsWith('\\q1')) {
         currentPoetry = 1;
         contText = contText.substring(3);
       } else if (contText.startsWith('\\q2')) {
@@ -203,6 +285,38 @@ function parseUsfmFile(content: string): { usfmCode: string; chapters: Chapter[]
   }
 
   if (!usfmCode) return null;
+
+  // Post-processing: split || poetry delimiters (LSV)
+  if (splitPipePoetry) {
+    for (const chapter of chapters) {
+      const expandedVerses: Verse[] = [];
+      for (const verse of chapter.verses) {
+        if (verse.text.includes('||')) {
+          const segments = verse.text.split('||').map(s => s.trim()).filter(Boolean);
+          // First segment keeps the original verse number
+          expandedVerses.push({
+            verse: verse.verse,
+            text: segments[0] ?? verse.text,
+            poetry: 1,
+          });
+          // Subsequent segments become continuation entries with same verse number
+          // but are appended back to the verse text since our data model is one entry per verse.
+          // Actually — the app renders one entry per verse number. Multiple entries with the
+          // same verse number would be confusing. Better approach: keep as single verse but
+          // mark as poetry.
+          if (segments.length > 1) {
+            expandedVerses[expandedVerses.length - 1]!.text =
+              segments.join(' ');
+            expandedVerses[expandedVerses.length - 1]!.poetry = 1;
+          }
+        } else {
+          expandedVerses.push(verse);
+        }
+      }
+      chapter.verses = expandedVerses;
+    }
+  }
+
   return { usfmCode, chapters };
 }
 
@@ -216,21 +330,21 @@ function main() {
     : undefined;
 
   if (!variant || !(variant in VARIANTS)) {
-    console.error('Usage: npx tsx scripts/parse-usfm.ts --variant [usa|brit]');
+    const validVariants = [...new Set(Object.values(VARIANTS).map(v => v.outDir))].sort();
+    console.error(`Usage: npx tsx scripts/parse-usfm.ts --variant [${validVariants.join('|')}]`);
     process.exit(1);
   }
 
   const config = VARIANTS[variant]!;
   const sourceDir = path.join(DATA_DIR, config.dir);
-  const outputDir = path.resolve(import.meta.dirname, '..', 'public', 'data', 'bible',
-    variant === 'usa' ? 'web-usa' : 'web-brit');
+  const outputDir = path.resolve(import.meta.dirname, '..', 'public', 'data', 'bible', config.outDir);
 
   fs.mkdirSync(outputDir, { recursive: true });
 
   const files = fs.readdirSync(sourceDir)
     .filter(f => f.endsWith('.usfm'))
-    .filter(f => !f.startsWith('00-'))  // skip front matter
-    .filter(f => !f.startsWith('106-')) // skip glossary
+    .filter(f => !f.startsWith('00-'))   // skip front matter
+    .filter(f => !f.startsWith('106-'))  // skip glossary
     .sort();
 
   let processed = 0;
@@ -238,7 +352,7 @@ function main() {
 
   for (const file of files) {
     const content = fs.readFileSync(path.join(sourceDir, file), 'utf-8');
-    const result = parseUsfmFile(content);
+    const result = parseUsfmFile(content, config.splitPipePoetry ?? false);
 
     if (!result) {
       console.warn(`  SKIP: ${file} — no USFM ID found`);
@@ -247,7 +361,7 @@ function main() {
     }
 
     const bookMeta = findBookByUsfmCode(result.usfmCode);
-    if (!bookMeta) {
+    if (!bookMeta || bookMeta.order >= 100) {
       // Skip apocryphal/deuterocanonical books not in our 66-book canon
       skipped++;
       continue;
@@ -265,7 +379,7 @@ function main() {
     processed++;
   }
 
-  console.log(`WEB ${variant}: ${processed} books processed, ${skipped} skipped`);
+  console.log(`${config.outDir}: ${processed} books processed, ${skipped} skipped`);
 }
 
 main();
