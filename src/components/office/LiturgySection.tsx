@@ -1,13 +1,15 @@
-import type { SessionSection, SectionContent } from '../../engine/types';
+import type { SessionSection, SectionContent, ReadingRef } from '../../engine/types';
 import { ScriptureReading } from './ScriptureReading';
+import { formatRef } from '../../services/bible-loader';
 
 interface Props {
   section: SessionSection;
   isCompleted: boolean;
   onToggle: () => void;
+  onExpandScripture?: (ref: ReadingRef) => void;
 }
 
-export function LiturgySection({ section, isCompleted, onToggle }: Props) {
+export function LiturgySection({ section, isCompleted, onToggle, onExpandScripture }: Props) {
   return (
     <section
       className={`py-6 border-b transition-opacity ${isCompleted ? 'opacity-40' : ''}`}
@@ -29,7 +31,7 @@ export function LiturgySection({ section, isCompleted, onToggle }: Props) {
 
       <div className="space-y-2">
         {section.content.map((block, i) => (
-          <ContentBlock key={i} block={block} />
+          <ContentBlock key={i} block={block} onExpandScripture={onExpandScripture} />
         ))}
       </div>
 
@@ -56,7 +58,7 @@ export function LiturgySection({ section, isCompleted, onToggle }: Props) {
   );
 }
 
-function ContentBlock({ block }: { block: SectionContent }) {
+function ContentBlock({ block, onExpandScripture }: { block: SectionContent; onExpandScripture?: (ref: ReadingRef) => void }) {
   switch (block.type) {
     case 'rubric':
       return (
@@ -85,12 +87,64 @@ function ContentBlock({ block }: { block: SectionContent }) {
         </p>
       );
     case 'scripture':
-      return <ScriptureReading verses={block.verses} />;
+      return (
+        <ScriptureCard
+          reference={block.reference}
+          onExpand={onExpandScripture ? () => onExpandScripture(block.reference) : undefined}
+        >
+          <ScriptureReading verses={block.verses} />
+        </ScriptureCard>
+      );
   }
 }
 
+function ScriptureCard({
+  reference,
+  onExpand,
+  children,
+}: {
+  reference: ReadingRef;
+  onExpand?: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className="rounded-lg shadow-sm border my-3 overflow-hidden"
+      style={{ borderColor: 'var(--color-border)' }}
+    >
+      {/* Card header: reference label + expand button */}
+      <div className="flex items-center justify-between px-4 pt-3 pb-0">
+        <span
+          className="text-xs font-medium"
+          style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-ui)' }}
+        >
+          {formatRef(reference)}
+        </span>
+        {onExpand && (
+          <button
+            onClick={onExpand}
+            className="p-1.5 -mr-1 rounded transition-colors hover:bg-black/5"
+            style={{ color: 'var(--color-text-muted)' }}
+            aria-label="Open full chapter"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 3 21 3 21 9" />
+              <polyline points="9 21 3 21 3 15" />
+              <line x1="21" y1="3" x2="14" y2="10" />
+              <line x1="3" y1="21" x2="10" y2="14" />
+            </svg>
+          </button>
+        )}
+      </div>
+      {/* Card body */}
+      <div className="px-4 pb-3">
+        {children}
+      </div>
+    </div>
+  );
+}
+
 function StaticText({ text }: { text: string }) {
-  // Split on newlines for multi-line liturgical texts (psalms, canticles)
   const lines = text.split('\n');
   if (lines.length === 1) {
     return <p>{text}</p>;

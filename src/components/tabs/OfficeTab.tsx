@@ -1,9 +1,10 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
-import type { Session, PlanId, Translation, LiturgicalSeason } from '../../engine/types';
+import type { Session, PlanId, Translation, LiturgicalSeason, ReadingRef } from '../../engine/types';
 import { useOffice } from '../../hooks/useOffice';
 import { useCompletion } from '../../hooks/useCompletion';
 import { todayStr } from '../../utils/date';
 import { LiturgySection } from '../office/LiturgySection';
+import { BibleReaderModal } from '../office/BibleReaderModal';
 
 interface Props {
   planId: PlanId;
@@ -79,6 +80,7 @@ export function OfficeTab({
 
   const { plan, loading, error } = useOffice(date, session, planId, translation);
   const sectionRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const [readerRef, setReaderRef] = useState<ReadingRef | null>(null);
 
   const currentSession = plan?.sessions[0];
   const sectionIds = useMemo(
@@ -201,10 +203,20 @@ export function OfficeTab({
                 section={section}
                 isCompleted={completedSections.has(section.id)}
                 onToggle={() => handleToggle(section.id)}
+                onExpandScripture={(ref) => setReaderRef(ref)}
               />
             </div>
           ))}
         </div>
+      )}
+
+      {/* Bible Reader modal */}
+      {readerRef && (
+        <BibleReaderModal
+          originRef={readerRef}
+          translation={translation}
+          onClose={() => setReaderRef(null)}
+        />
       )}
     </div>
   );

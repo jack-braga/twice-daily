@@ -13,6 +13,7 @@
   --color-border: #e5e5e5;
   --color-accent: #1a1a2e;
   --color-check: #16a34a;
+  --color-highlight: rgba(26, 26, 46, 0.15);
 
   /* Liturgical season colours */
   --color-season-advent: #6b21a8;
