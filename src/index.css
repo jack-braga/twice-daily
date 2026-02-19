@@ -12,8 +12,13 @@
   --color-text-muted: #6b7280;
   --color-border: #e5e5e5;
   --color-accent: #1a1a2e;
+  --color-accent-contrast: #ffffff;
   --color-check: #16a34a;
+  --color-check-partial: #86efac;
   --color-highlight: rgba(26, 26, 46, 0.15);
+  --color-hover: rgba(0, 0, 0, 0.05);
+  --color-surface: #ffffff;
+  --color-error: #dc2626;
 
   /* Liturgical season colours */
   --color-season-advent: #6b21a8;
@@ -25,6 +30,33 @@
   --color-season-ascension: #c9a84c;
   --color-season-whitsun: #dc2626;
   --color-season-trinity: #16a34a;
+}
+
+:root[data-theme="dark"] {
+  --color-rubric: #e57373;
+  --color-bg: #1c1a17;
+  --color-text: #e8e4df;
+  --color-text-muted: #9ca3af;
+  --color-border: #2e2b26;
+  --color-accent: #e8e4df;
+  --color-accent-contrast: #1c1a17;
+  --color-check: #22c55e;
+  --color-check-partial: #4ade80;
+  --color-highlight: rgba(232, 228, 223, 0.1);
+  --color-hover: rgba(255, 255, 255, 0.07);
+  --color-surface: #25221d;
+  --color-error: #f87171;
+
+  /* Liturgical season colours — brightened for dark backgrounds */
+  --color-season-advent: #a855f7;
+  --color-season-christmas: #eab308;
+  --color-season-epiphany: #eab308;
+  --color-season-lent: #a855f7;
+  --color-season-holy-week: #ef4444;
+  --color-season-easter: #eab308;
+  --color-season-ascension: #eab308;
+  --color-season-whitsun: #f87171;
+  --color-season-trinity: #22c55e;
 }
 
 html {

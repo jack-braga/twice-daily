@@ -1,5 +1,6 @@
 import type { AppSettings } from '../../hooks/useSettings';
 import type { PlanId, Translation } from '../../engine/types';
+import type { ThemeSetting } from '../../utils/theme';
 
 interface Props {
   settings: AppSettings;
@@ -22,6 +23,12 @@ const TEXT_SIZES: { id: AppSettings['textSize']; label: string }[] = [
   { id: 'small', label: 'Small' },
   { id: 'medium', label: 'Medium' },
   { id: 'large', label: 'Large' },
+];
+
+const THEMES: { id: ThemeSetting; label: string }[] = [
+  { id: 'light', label: 'Light' },
+  { id: 'dark', label: 'Dark' },
+  { id: 'system', label: 'System' },
 ];
 
 export function SettingsTab({ settings, onUpdate }: Props) {
@@ -65,11 +72,30 @@ export function SettingsTab({ settings, onUpdate }: Props) {
               onClick={() => onUpdate('textSize', s.id)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                 settings.textSize === s.id
-                  ? 'bg-[var(--color-accent)] text-white'
+                  ? 'bg-[var(--color-accent)] text-[var(--color-accent-contrast)]'
                   : 'bg-[var(--color-border)] text-[var(--color-text)]'
               }`}
             >
               {s.label}
+            </button>
+          ))}
+        </div>
+      </SettingGroup>
+
+      {/* Appearance */}
+      <SettingGroup label="Appearance">
+        <div className="flex gap-2">
+          {THEMES.map(t => (
+            <button
+              key={t.id}
+              onClick={() => onUpdate('theme', t.id)}
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                settings.theme === t.id
+                  ? 'bg-[var(--color-accent)] text-[var(--color-accent-contrast)]'
+                  : 'bg-[var(--color-border)] text-[var(--color-text)]'
+              }`}
+            >
+              {t.label}
             </button>
           ))}
         </div>
@@ -108,16 +134,16 @@ function RadioOption({
       className="w-full text-left px-4 py-3 rounded-lg mb-2 transition-colors flex items-center gap-3"
       style={{
         backgroundColor: selected ? 'var(--color-accent)' : 'transparent',
-        color: selected ? 'white' : 'var(--color-text)',
+        color: selected ? 'var(--color-accent-contrast)' : 'var(--color-text)',
         fontFamily: 'var(--font-ui)',
       }}
     >
       <div
         className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
-          selected ? 'border-white' : 'border-[var(--color-border)]'
+          selected ? 'border-[var(--color-accent-contrast)]' : 'border-[var(--color-border)]'
         }`}
       >
-        {selected && <div className="w-2.5 h-2.5 rounded-full bg-white" />}
+        {selected && <div className="w-2.5 h-2.5 rounded-full bg-[var(--color-accent-contrast)]" />}
       </div>
       <div>
         <div className="font-medium text-sm">{label}</div>

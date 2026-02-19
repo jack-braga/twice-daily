@@ -35,7 +35,7 @@ export function HistoryTab({ planId, onNavigateToOffice }: Props) {
   return (
     <div className="max-w-2xl mx-auto relative flex flex-col h-full">
       {/* Sticky header — always visible */}
-      <div className="shrink-0 px-4 pt-6 pb-3" style={{ backgroundColor: 'var(--color-bg, #faf9f6)' }}>
+      <div className="shrink-0 px-4 pt-6 pb-3" style={{ backgroundColor: 'var(--color-bg)' }}>
         <div className="flex items-center justify-between mb-3">
           <h1 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-ui)' }}>
             History
@@ -45,7 +45,7 @@ export function HistoryTab({ planId, onNavigateToOffice }: Props) {
             className="px-3 py-1 rounded-full text-xs font-medium transition-colors active:scale-95"
             style={{
               backgroundColor: 'var(--color-accent)',
-              color: 'white',
+              color: 'var(--color-accent-contrast)',
               fontFamily: 'var(--font-ui)',
             }}
           >
@@ -101,7 +101,7 @@ function SegmentButton({ active, onClick, label }: { active: boolean; onClick: (
       onClick={onClick}
       className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
         active
-          ? 'bg-white text-[var(--color-text)] shadow-sm'
+          ? 'bg-[var(--color-surface)] text-[var(--color-text)] shadow-sm'
           : 'text-[var(--color-text-muted)]'
       }`}
       style={{ fontFamily: 'var(--font-ui)' }}

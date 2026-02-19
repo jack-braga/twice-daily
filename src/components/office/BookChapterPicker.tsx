@@ -44,14 +44,14 @@ export function BookChapterPicker({ currentBookName, currentChapter, onSelect, o
   }, [selectedBook, onSelect]);
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col" style={{ backgroundColor: 'var(--color-bg, #faf9f6)' }}>
+    <div className="fixed inset-0 z-50 flex flex-col" style={{ backgroundColor: 'var(--color-bg)' }}>
       {/* Header */}
       <div className="shrink-0 max-w-2xl w-full mx-auto flex items-center gap-3 px-4 pt-4 pb-3 border-b" style={{ borderColor: 'var(--color-border)' }}>
         {selectedBook ? (
           <>
             <button
               onClick={() => setSelectedBook(null)}
-              className="p-1 rounded transition-colors hover:bg-black/5"
+              className="p-1 rounded transition-colors hover:bg-[var(--color-hover)]"
               style={{ color: 'var(--color-text-muted)' }}
               aria-label="Back to book list"
             >
@@ -70,7 +70,7 @@ export function BookChapterPicker({ currentBookName, currentChapter, onSelect, o
             </h2>
             <button
               onClick={onClose}
-              className="p-1 rounded transition-colors hover:bg-black/5"
+              className="p-1 rounded transition-colors hover:bg-[var(--color-hover)]"
               style={{ color: 'var(--color-text-muted)' }}
               aria-label="Close"
             >
@@ -99,8 +99,8 @@ export function BookChapterPicker({ currentBookName, currentChapter, onSelect, o
                       onClick={() => handleChapterTap(ch)}
                       className={`aspect-square rounded-lg text-sm font-medium flex items-center justify-center transition-colors ${
                         isCurrent
-                          ? 'text-white'
-                          : 'hover:bg-black/5'
+                          ? 'text-[var(--color-accent-contrast)]'
+                          : 'hover:bg-[var(--color-hover)]'
                       }`}
                       style={isCurrent ? { backgroundColor: 'var(--color-accent)', fontFamily: 'var(--font-ui)' } : { fontFamily: 'var(--font-ui)' }}
                     >
@@ -156,7 +156,7 @@ function BookGroup({
                 isCurrent ? 'font-semibold' : ''
               }`}
               style={isCurrent
-                ? { backgroundColor: 'var(--color-accent)', color: 'white', fontFamily: 'var(--font-ui)' }
+                ? { backgroundColor: 'var(--color-accent)', color: 'var(--color-accent-contrast)', fontFamily: 'var(--font-ui)' }
                 : { fontFamily: 'var(--font-ui)' }
               }
             >

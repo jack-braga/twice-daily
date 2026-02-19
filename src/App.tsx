@@ -97,7 +97,7 @@ export function App() {
       </main>
 
       <nav
-        className="fixed bottom-0 left-0 right-0 border-t flex justify-around items-center h-16 bg-white/95 backdrop-blur-sm"
+        className="fixed bottom-0 left-0 right-0 border-t flex justify-around items-center h-16 bg-[var(--color-surface)]/95 backdrop-blur-sm"
         style={{ fontFamily: 'var(--font-ui)', borderColor: 'var(--color-border)' }}
       >
         <TabButton

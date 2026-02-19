@@ -129,7 +129,7 @@ export function CalendarView({ planId, zoom, onZoomChange, onOpen, onTodayElemen
 
   const cellColor = useCallback((status: string) => {
     if (status === 'complete') return 'var(--color-check)';
-    if (status === 'partial') return '#86efac';
+    if (status === 'partial') return 'var(--color-check-partial)';
     return 'var(--color-border)';
   }, []);
 

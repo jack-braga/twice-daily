@@ -41,7 +41,7 @@ export function LiturgySection({ section, isCompleted, onToggle, onExpandScriptu
             onClick={onToggle}
             className={`flex-shrink-0 w-8 h-8 rounded-full border-2 flex items-center justify-center transition-colors ${
               isCompleted
-                ? 'bg-[var(--color-check)] border-[var(--color-check)] text-white'
+                ? 'bg-[var(--color-check)] border-[var(--color-check)] text-[var(--color-accent-contrast)]'
                 : 'border-[var(--color-border)] text-transparent hover:border-[var(--color-check)]'
             }`}
             aria-label={isCompleted ? 'Mark incomplete' : 'Mark complete'}
@@ -123,7 +123,7 @@ function ScriptureCard({
         {onExpand && (
           <button
             onClick={onExpand}
-            className="p-1.5 -mr-1 rounded transition-colors hover:bg-black/5"
+            className="p-1.5 -mr-1 rounded transition-colors hover:bg-[var(--color-hover)]"
             style={{ color: 'var(--color-text-muted)' }}
             aria-label="Open full chapter"
           >

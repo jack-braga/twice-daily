@@ -138,7 +138,7 @@ export function BibleReaderModal({ originRef, translation, onClose }: Props) {
     : `${currentBookName} ${currentChapter}`;
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col" style={{ backgroundColor: 'var(--color-bg, #faf9f6)' }}>
+    <div className="fixed inset-0 z-50 flex flex-col" style={{ backgroundColor: 'var(--color-bg)' }}>
       {/* Header */}
       <div className="shrink-0 max-w-2xl w-full mx-auto flex items-center justify-between px-4 pt-4 pb-2">
         <h1
@@ -152,7 +152,7 @@ export function BibleReaderModal({ originRef, translation, onClose }: Props) {
         <div className="relative">
           <button
             onClick={() => setShowMenu(m => !m)}
-            className="p-2 rounded-full transition-colors hover:bg-black/5"
+            className="p-2 rounded-full transition-colors hover:bg-[var(--color-hover)]"
             style={{ color: 'var(--color-text-muted)' }}
             aria-label="Menu"
           >
@@ -170,7 +170,7 @@ export function BibleReaderModal({ originRef, translation, onClose }: Props) {
               <div className="fixed inset-0 z-10" onClick={() => setShowMenu(false)} />
               <div
                 className="absolute right-0 top-full mt-1 z-20 rounded-lg shadow-lg border py-1 min-w-[180px]"
-                style={{ backgroundColor: 'var(--color-bg, white)', borderColor: 'var(--color-border)' }}
+                style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
               >
                 <MenuButton
                   label="Go to book/chapter"
@@ -225,7 +225,7 @@ export function BibleReaderModal({ originRef, translation, onClose }: Props) {
             onClick={goToPrevChapter}
             disabled={currentChapter <= 1}
             className="pointer-events-auto p-3 rounded-full shadow-md transition-opacity disabled:opacity-20"
-            style={{ backgroundColor: 'var(--color-bg, white)', color: 'var(--color-text)' }}
+            style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-text)' }}
             aria-label="Previous chapter"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -236,7 +236,7 @@ export function BibleReaderModal({ originRef, translation, onClose }: Props) {
             onClick={goToNextChapter}
             disabled={currentChapter >= totalChapters}
             className="pointer-events-auto p-3 rounded-full shadow-md transition-opacity disabled:opacity-20"
-            style={{ backgroundColor: 'var(--color-bg, white)', color: 'var(--color-text)' }}
+            style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-text)' }}
             aria-label="Next chapter"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -263,7 +263,7 @@ function MenuButton({ label, onClick }: { label: string; onClick: () => void }) 
   return (
     <button
       onClick={onClick}
-      className="w-full text-left px-4 py-2.5 text-sm transition-colors hover:bg-black/5"
+      className="w-full text-left px-4 py-2.5 text-sm transition-colors hover:bg-[var(--color-hover)]"
       style={{ fontFamily: 'var(--font-ui)' }}
     >
       {label}

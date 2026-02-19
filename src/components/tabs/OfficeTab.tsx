@@ -149,7 +149,7 @@ export function OfficeTab({
             onClick={() => handleSessionChange('morning')}
             className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
               session === 'morning'
-                ? 'bg-[var(--color-accent)] text-white'
+                ? 'bg-[var(--color-accent)] text-[var(--color-accent-contrast)]'
                 : 'bg-[var(--color-border)] text-[var(--color-text-muted)]'
             }`}
           >
@@ -159,7 +159,7 @@ export function OfficeTab({
             onClick={() => handleSessionChange('evening')}
             className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
               session === 'evening'
-                ? 'bg-[var(--color-accent)] text-white'
+                ? 'bg-[var(--color-accent)] text-[var(--color-accent-contrast)]'
                 : 'bg-[var(--color-border)] text-[var(--color-text-muted)]'
             }`}
           >
@@ -175,7 +175,7 @@ export function OfficeTab({
         </p>
       )}
       {error && (
-        <p className="py-12 text-center text-red-600">
+        <p className="py-12 text-center" style={{ color: 'var(--color-error)' }}>
           {error}
         </p>
       )}
@@ -183,7 +183,7 @@ export function OfficeTab({
       {/* Session complete banner */}
       {isSessionComplete && !loading && (
         <div className="mb-4 p-3 rounded-lg text-center text-sm font-medium"
-          style={{ backgroundColor: 'var(--color-check)', color: 'white', fontFamily: 'var(--font-ui)' }}
+          style={{ backgroundColor: 'var(--color-check)', color: 'var(--color-accent-contrast)', fontFamily: 'var(--font-ui)' }}
         >
           Session complete
         </div>
