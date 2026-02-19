@@ -69,7 +69,7 @@
     "pieces": [
       {
         "type": "rubric",
-        "content": "general Confession to be said of the whole Congregation after the Minister, all kneeling."
+        "content": "A general Confession to be said of the whole Congregation after the Minister, all kneeling."
       },
       {
         "type": "text",
@@ -83,7 +83,7 @@
     "pieces": [
       {
         "type": "rubric",
-        "content": "Absolution or Remission of sins to be pronounced by the Priest alone, standing: the people still kneeling."
+        "content": "The Absolution, or Remission of sins, to be pronounced by the Priest alone, standing; the people still kneeling."
       },
       {
         "type": "text",
@@ -96,8 +96,12 @@
     "title": "The Lord's Prayer",
     "pieces": [
       {
+        "type": "rubric",
+        "content": "Then the Minister shall kneel, and say the Lord's Prayer; the people also kneeling, and repeating it with him."
+      },
+      {
         "type": "text",
-        "content": "OUR Father, which art in heaven, Hallowed be thy Name. Thy kingdom come. Thy will be done in earth, As it is in heaven. Give us this day our daily bread. And forgive us our trespasses, As we forgive them that trespass against us. And lead us not into temptation, But deliver us from evil. For thine is the kingdom, The power, and the glory, For ever and ever. Amen."
+        "content": "OUR Father, which art in heaven, Hallowed be thy Name, Thy kingdom come, Thy will be done, in earth as it is in heaven. Give us this day our daily bread; And forgive us our trespasses, As we forgive them that trespass against us; And lead us not into temptation, But deliver us from evil. For thine is the kingdom, the power, and the glory, For ever and ever. Amen."
       }
     ]
   },
@@ -107,12 +111,13 @@
     "pieces": [
       {
         "type": "versicle",
+        "speaker": "Priest",
         "content": "O Lord, open thou our lips."
       },
       {
         "type": "versicle",
         "speaker": "Answer",
-        "content": "And our mouth shall show forth thy praise."
+        "content": "And our mouth shall shew forth thy praise."
       },
       {
         "type": "versicle",
@@ -125,7 +130,7 @@
         "content": "O Lord, make haste to help us."
       },
       {
-        "type": "versicle",
+        "type": "rubric",
         "content": "Here, all standing up, the Priest shall say,"
       },
       {
@@ -141,6 +146,11 @@
         "type": "versicle",
         "speaker": "Priest",
         "content": "Praise ye the Lord."
+      },
+      {
+        "type": "versicle",
+        "speaker": "Answer",
+        "content": "The Lord's Name be praised."
       }
     ]
   },

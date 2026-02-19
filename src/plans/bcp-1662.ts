@@ -106,18 +106,31 @@ function sectionPiecesToContent(pieces: LiturgyPiece[]): SectionContent[] {
 
 // ─── Section builders ───────────────────────────────────────────────────
 
-function buildPreparation(session: Session): SessionSection {
+/**
+ * Pick an opening sentence. The BCP says "some one or more of these Sentences."
+ * We rotate through the 11 sentences based on the day of the year,
+ * so the user sees a different sentence each day.
+ */
+function pickOpeningSentenceIndex(date: Date): number {
+  const startOfYear = new Date(date.getFullYear(), 0, 1);
+  const dayOfYear = Math.floor((date.getTime() - startOfYear.getTime()) / 86_400_000);
+  return dayOfYear % 11; // 11 opening sentences available
+}
+
+function buildPreparation(session: Session, date: Date): SessionSection {
   const content: SectionContent[] = [];
 
-  // Opening sentences — just pick the first one (the app could randomize later)
+  // Opening sentences — rotate daily through all 11
   const opening = getLiturgySection(session, 'opening-sentences');
   if (opening) {
     // Add the rubric
     const rubric = opening.pieces.find(p => p.type === 'rubric');
     if (rubric) content.push(pieceToContent(rubric));
-    // Add the first sentence
-    const firstSentence = opening.pieces.find(p => p.type === 'text');
-    if (firstSentence) content.push(pieceToContent(firstSentence));
+    // Pick sentence based on day of year (rotating through all 11)
+    const textPieces = opening.pieces.filter(p => p.type === 'text');
+    const idx = pickOpeningSentenceIndex(date);
+    const sentence = textPieces[idx % textPieces.length];
+    if (sentence) content.push(pieceToContent(sentence));
   }
 
   // Exhortation
@@ -606,7 +619,7 @@ function createBcpPlan(planId: PlanId, config: PlanConfig): PlanAssembler {
       const sections: SessionSection[] = [];
 
       // 1. Preparation
-      sections.push(buildPreparation(session));
+      sections.push(buildPreparation(session, date));
 
       // 2. Psalms
       sections.push(await buildPsalms(date, session, litDay, translation));
