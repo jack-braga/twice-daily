@@ -121,6 +121,8 @@ export function App() {
             onNavigateConsumed={handleNavigateConsumed}
             planStartDate={planStartDate}
             onRestartPlan={handleRestartPlan}
+            readingWpm={settings.readingWpm}
+            readingComprehension={settings.readingComprehension}
           />
         )}
         {activeTab === 'history' && (

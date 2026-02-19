@@ -7,6 +7,7 @@ import { isPlanComplete } from '../../utils/plan-day';
 import { getPlan } from '../../plans';
 import { LiturgySection } from '../office/LiturgySection';
 import { BibleReaderModal } from '../office/BibleReaderModal';
+import { countSessionWords, estimateReadingTime } from '../../utils/reading-time';
 
 type LastReadChange = (date: string, session: Session) => void;
 
@@ -21,6 +22,8 @@ interface Props {
   onNavigateConsumed?: () => void;
   planStartDate?: string | null;
   onRestartPlan?: () => void;
+  readingWpm?: number;
+  readingComprehension?: number;
 }
 
 const SEASON_COLORS: Record<LiturgicalSeason, string> = {
@@ -53,6 +56,8 @@ export function OfficeTab({
   onNavigateConsumed,
   planStartDate,
   onRestartPlan,
+  readingWpm,
+  readingComprehension,
 }: Props) {
   const planConfig = getPlan(planId).config;
   const isSingleSession = planConfig.sessions.length === 1 && planConfig.sessions[0] === 'daily';
@@ -112,6 +117,14 @@ export function OfficeTab({
   const [readerRef, setReaderRef] = useState<ReadingRef | null>(null);
 
   const currentSession = plan?.sessions[0];
+
+  const readingTimeMinutes = useMemo(() => {
+    if (!readingWpm || !readingComprehension) return null;
+    if (!currentSession) return null;
+    const words = countSessionWords(currentSession.sections);
+    return estimateReadingTime(words, readingWpm, readingComprehension);
+  }, [currentSession, readingWpm, readingComprehension]);
+
   const sectionIds = useMemo(
     () => currentSession?.sections.filter(s => s.isCheckable).map(s => s.id) ?? [],
     [currentSession],
@@ -174,6 +187,12 @@ export function OfficeTab({
             <> &middot; Day {plan.planDay} of {plan.planTotalDays}</>
           )}
         </p>
+
+        {readingTimeMinutes != null && readingTimeMinutes > 0 && !loading && (
+          <p className="text-sm mt-1" style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-ui)' }}>
+            ~{readingTimeMinutes} min
+          </p>
+        )}
 
         {/* Session toggle — hidden for single-session plans */}
         {!isSingleSession && (

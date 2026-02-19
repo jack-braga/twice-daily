@@ -13,6 +13,8 @@ export interface AppSettings {
   fontUi: UiFontId;
   lastReadDate: string;     // "YYYY-MM-DD", empty = first launch
   lastReadSession: Session; // "morning" | "evening"
+  readingWpm: number;              // 0 = not configured (opt-in)
+  readingComprehension: number;    // 0.0–1.0, 0 = not configured
 }
 
 const DEFAULTS: AppSettings = {
@@ -24,6 +26,8 @@ const DEFAULTS: AppSettings = {
   fontUi: 'system-sans',
   lastReadDate: '',
   lastReadSession: 'morning',
+  readingWpm: 0,
+  readingComprehension: 0,
 };
 
 const TEXT_SIZE_MAP = { small: '16px', medium: '18px', large: '21px' } as const;
@@ -45,6 +49,8 @@ export function useSettings() {
         fontUi: (map.get('fontUi') as UiFontId) ?? DEFAULTS.fontUi,
         lastReadDate: map.get('lastReadDate') ?? DEFAULTS.lastReadDate,
         lastReadSession: (map.get('lastReadSession') as Session) ?? DEFAULTS.lastReadSession,
+        readingWpm: Number(map.get('readingWpm')) || DEFAULTS.readingWpm,
+        readingComprehension: Number(map.get('readingComprehension')) || DEFAULTS.readingComprehension,
       });
       setLoaded(true);
     })();

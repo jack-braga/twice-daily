@@ -259,6 +259,94 @@ export function SettingsTab({ settings, onUpdate, planStartDate, onStartDateChan
         )}
       </SettingGroup>
 
+      {/* Reading Speed */}
+      <SettingGroup label="Reading Speed">
+        <p className="text-sm mb-3" style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-ui)' }}>
+          Configure your reading speed to see time estimates on the Office tab.
+        </p>
+        <a
+          href="https://readingspeedtest.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-sm font-medium mb-4 underline"
+          style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-ui)' }}
+        >
+          Measure your reading speed ↗
+        </a>
+
+        <div className="mb-3">
+          <label className="text-xs font-medium block mb-1"
+            style={{ fontFamily: 'var(--font-ui)', color: 'var(--color-text-muted)' }}>
+            Words per minute (WPM)
+          </label>
+          <input
+            type="number"
+            inputMode="numeric"
+            min={0}
+            max={1000}
+            value={settings.readingWpm || ''}
+            placeholder="e.g. 238"
+            onChange={(e) => {
+              const v = parseInt(e.target.value, 10);
+              onUpdate('readingWpm', isNaN(v) ? 0 : Math.max(0, Math.min(1000, v)));
+            }}
+            className="w-32 px-3 py-2 rounded-lg border text-sm"
+            style={{
+              borderColor: 'var(--color-border)',
+              backgroundColor: 'var(--color-surface)',
+              color: 'var(--color-text)',
+              fontFamily: 'var(--font-ui)',
+            }}
+          />
+        </div>
+
+        <div className="mb-1">
+          <label className="text-xs font-medium block mb-1"
+            style={{ fontFamily: 'var(--font-ui)', color: 'var(--color-text-muted)' }}>
+            Comprehension rate (%)
+          </label>
+          <input
+            type="number"
+            inputMode="numeric"
+            min={0}
+            max={100}
+            value={settings.readingComprehension > 0 ? Math.round(settings.readingComprehension * 100) : ''}
+            placeholder="e.g. 85"
+            onChange={(e) => {
+              const v = parseInt(e.target.value, 10);
+              if (isNaN(v) || v <= 0) {
+                onUpdate('readingComprehension', 0);
+              } else {
+                onUpdate('readingComprehension', Math.min(100, v) / 100);
+              }
+            }}
+            className="w-32 px-3 py-2 rounded-lg border text-sm"
+            style={{
+              borderColor: 'var(--color-border)',
+              backgroundColor: 'var(--color-surface)',
+              color: 'var(--color-text)',
+              fontFamily: 'var(--font-ui)',
+            }}
+          />
+          <p className="text-xs mt-1" style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-ui)' }}>
+            From your reading speed test results
+          </p>
+        </div>
+
+        {(settings.readingWpm > 0 || settings.readingComprehension > 0) && (
+          <button
+            onClick={() => {
+              onUpdate('readingWpm', 0);
+              onUpdate('readingComprehension', 0);
+            }}
+            className="text-xs mt-2 underline"
+            style={{ color: 'var(--color-text-muted)', fontFamily: 'var(--font-ui)' }}
+          >
+            Clear reading speed
+          </button>
+        )}
+      </SettingGroup>
+
       {/* Confirmation modal for start date change */}
       {pendingDate && (
         <ConfirmModal
