@@ -31,11 +31,11 @@ export function ScriptureReading({ verses, superscription, highlightRange }: Pro
       )}
       {isPoetry ? (
         <div className="space-y-0.5">
-          {verses.map(v => {
+          {verses.map((v, i) => {
             const hl = isHighlighted(v.verse, highlightRange);
             return (
               <p
-                key={v.verse}
+                key={i}
                 className={hl ? 'rounded-r px-1 -mx-1' : ''}
                 style={{
                   paddingLeft: v.poetry ? `${v.poetry * 1.5}rem` : '0',
@@ -52,11 +52,11 @@ export function ScriptureReading({ verses, superscription, highlightRange }: Pro
         </div>
       ) : (
         <p>
-          {verses.map(v => {
+          {verses.map((v, i) => {
             const hl = isHighlighted(v.verse, highlightRange);
             return (
               <span
-                key={v.verse}
+                key={i}
                 className={hl ? 'rounded-r px-0.5' : ''}
                 style={hl ? HIGHLIGHT_STYLE : undefined}
               >
