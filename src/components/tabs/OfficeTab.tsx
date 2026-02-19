@@ -6,12 +6,14 @@ import { todayStr } from '../../utils/date';
 import { LiturgySection } from '../office/LiturgySection';
 import { BibleReaderModal } from '../office/BibleReaderModal';
 
+type LastReadChange = (date: string, session: Session) => void;
+
 interface Props {
   planId: PlanId;
   translation: Translation;
   lastReadDate: string;
   lastReadSession: Session;
-  onLastReadChange: (date: string, session: Session) => void;
+  onLastReadChange: LastReadChange;
   navigateDate?: string;
   navigateSession?: Session;
   onNavigateConsumed?: () => void;
@@ -46,24 +48,22 @@ export function OfficeTab({
   navigateDate, navigateSession,
   onNavigateConsumed,
 }: Props) {
-  // Determine initial date + session
+  // Determine initial date + session — always restore last-read position
   const [currentDateStr, setCurrentDateStr] = useState<string>(() => {
     if (navigateDate) return navigateDate;
-    // ?date= URL override for dev testing — use the raw param string directly
-    // to avoid timezone issues with toISOString() converting to UTC
+    // ?date= URL override for dev testing
     const dateParam = new URLSearchParams(window.location.search).get('date');
     if (dateParam) return dateParam;
-    // First launch or new day → today's morning
-    if (!lastReadDate || lastReadDate !== todayStr()) return todayStr();
-    return lastReadDate;
+    // Restore last-read position; first launch falls back to today
+    return lastReadDate || todayStr();
   });
 
   const [session, setSession] = useState<Session>(() => {
     if (navigateDate && navigateSession) return navigateSession;
     const params = new URLSearchParams(window.location.search);
     if (params.get('date')) return 'morning';
-    if (!lastReadDate || lastReadDate !== todayStr()) return 'morning';
-    return lastReadSession;
+    // Restore last-read session; first launch defaults to morning
+    return lastReadDate ? lastReadSession : 'morning';
   });
 
   // Handle navigation from History tab
@@ -95,10 +95,10 @@ export function OfficeTab({
 
   // Persist last-read when session or date changes
   useEffect(() => {
-    if (dateStr && !navigateDate) {
+    if (dateStr) {
       onLastReadChange(dateStr, session);
     }
-  }, [dateStr, session, navigateDate, onLastReadChange]);
+  }, [dateStr, session, onLastReadChange]);
 
   const handleSessionChange = useCallback((newSession: Session) => {
     setSession(newSession);

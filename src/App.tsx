@@ -21,6 +21,14 @@ function pathForTab(tab: Tab): string {
   return `${BASE}${tab}`;
 }
 
+function formatOfficeSubtext(dateStr: string, session: Session): string {
+  if (!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  const shortDate = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  const sessionAbbr = session === 'morning' ? 'MP' : 'EP';
+  return `${shortDate} \u00B7 ${sessionAbbr}`;
+}
+
 export function App() {
   const [activeTab, setActiveTab] = useState<Tab>(tabFromPath);
   const { settings, updateSetting, updateLastRead, loaded } = useSettings();
@@ -92,7 +100,12 @@ export function App() {
         className="fixed bottom-0 left-0 right-0 border-t flex justify-around items-center h-16 bg-white/95 backdrop-blur-sm"
         style={{ fontFamily: 'var(--font-ui)', borderColor: 'var(--color-border)' }}
       >
-        <TabButton active={activeTab === 'office'} onClick={() => navigate('office')} label="Office" />
+        <TabButton
+          active={activeTab === 'office'}
+          onClick={() => navigate('office')}
+          label="Office"
+          subtext={formatOfficeSubtext(settings.lastReadDate, settings.lastReadSession)}
+        />
         <TabButton active={activeTab === 'history'} onClick={() => navigate('history')} label="History" />
         <TabButton active={activeTab === 'settings'} onClick={() => navigate('settings')} label="Settings" />
       </nav>
@@ -100,15 +113,20 @@ export function App() {
   );
 }
 
-function TabButton({ active, onClick, label }: { active: boolean; onClick: () => void; label: string }) {
+function TabButton({ active, onClick, label, subtext }: { active: boolean; onClick: () => void; label: string; subtext?: string }) {
   return (
     <button
       onClick={onClick}
-      className={`flex-1 h-full flex items-center justify-center text-sm font-medium transition-colors ${
+      className={`flex-1 h-full flex flex-col items-center justify-center transition-colors ${
         active ? 'text-[var(--color-accent)]' : 'text-[var(--color-text-muted)]'
       }`}
     >
-      {label}
+      <span className="text-sm font-medium">{label}</span>
+      {subtext && (
+        <span className="text-[10px] leading-tight mt-0.5 opacity-70 truncate max-w-full px-1">
+          {subtext}
+        </span>
+      )}
     </button>
   );
 }
