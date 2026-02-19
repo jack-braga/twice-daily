@@ -1,0 +1,4017 @@
+[
+  {
+    "day": 1,
+    "family": [
+      "Genesis 1",
+      "Matthew 1"
+    ],
+    "secret": [
+      "Ezra 1",
+      "Acts 1"
+    ]
+  },
+  {
+    "day": 2,
+    "family": [
+      "Genesis 2",
+      "Matthew 2"
+    ],
+    "secret": [
+      "Ezra 2",
+      "Acts 2"
+    ]
+  },
+  {
+    "day": 3,
+    "family": [
+      "Genesis 3",
+      "Matthew 3"
+    ],
+    "secret": [
+      "Ezra 3",
+      "Acts 3"
+    ]
+  },
+  {
+    "day": 4,
+    "family": [
+      "Genesis 4",
+      "Matthew 4"
+    ],
+    "secret": [
+      "Ezra 4",
+      "Acts 4"
+    ]
+  },
+  {
+    "day": 5,
+    "family": [
+      "Genesis 5",
+      "Matthew 5"
+    ],
+    "secret": [
+      "Ezra 5",
+      "Acts 5"
+    ]
+  },
+  {
+    "day": 6,
+    "family": [
+      "Genesis 6",
+      "Matthew 6"
+    ],
+    "secret": [
+      "Ezra 6",
+      "Acts 6"
+    ]
+  },
+  {
+    "day": 7,
+    "family": [
+      "Genesis 7",
+      "Matthew 7"
+    ],
+    "secret": [
+      "Ezra 7",
+      "Acts 7"
+    ]
+  },
+  {
+    "day": 8,
+    "family": [
+      "Genesis 8",
+      "Matthew 8"
+    ],
+    "secret": [
+      "Ezra 8",
+      "Acts 8"
+    ]
+  },
+  {
+    "day": 9,
+    "family": [
+      "Genesis 9-10",
+      "Matthew 9"
+    ],
+    "secret": [
+      "Ezra 9",
+      "Acts 9"
+    ]
+  },
+  {
+    "day": 10,
+    "family": [
+      "Genesis 11",
+      "Matthew 10"
+    ],
+    "secret": [
+      "Ezra 10",
+      "Acts 10"
+    ]
+  },
+  {
+    "day": 11,
+    "family": [
+      "Genesis 12",
+      "Matthew 11"
+    ],
+    "secret": [
+      "Nehemiah 1",
+      "Acts 11"
+    ]
+  },
+  {
+    "day": 12,
+    "family": [
+      "Genesis 13",
+      "Matthew 12"
+    ],
+    "secret": [
+      "Nehemiah 2",
+      "Acts 12"
+    ]
+  },
+  {
+    "day": 13,
+    "family": [
+      "Genesis 14",
+      "Matthew 13"
+    ],
+    "secret": [
+      "Nehemiah 3",
+      "Acts 13"
+    ]
+  },
+  {
+    "day": 14,
+    "family": [
+      "Genesis 15",
+      "Matthew 14"
+    ],
+    "secret": [
+      "Nehemiah 4",
+      "Acts 14"
+    ]
+  },
+  {
+    "day": 15,
+    "family": [
+      "Genesis 16",
+      "Matthew 15"
+    ],
+    "secret": [
+      "Nehemiah 5",
+      "Acts 15"
+    ]
+  },
+  {
+    "day": 16,
+    "family": [
+      "Genesis 17",
+      "Matthew 16"
+    ],
+    "secret": [
+      "Nehemiah 6",
+      "Acts 16"
+    ]
+  },
+  {
+    "day": 17,
+    "family": [
+      "Genesis 18",
+      "Matthew 17"
+    ],
+    "secret": [
+      "Nehemiah 7",
+      "Acts 17"
+    ]
+  },
+  {
+    "day": 18,
+    "family": [
+      "Genesis 19",
+      "Matthew 18"
+    ],
+    "secret": [
+      "Nehemiah 8",
+      "Acts 18"
+    ]
+  },
+  {
+    "day": 19,
+    "family": [
+      "Genesis 20",
+      "Matthew 19"
+    ],
+    "secret": [
+      "Nehemiah 9",
+      "Acts 19"
+    ]
+  },
+  {
+    "day": 20,
+    "family": [
+      "Genesis 21",
+      "Matthew 20"
+    ],
+    "secret": [
+      "Nehemiah 10",
+      "Acts 20"
+    ]
+  },
+  {
+    "day": 21,
+    "family": [
+      "Genesis 22",
+      "Matthew 21"
+    ],
+    "secret": [
+      "Nehemiah 11",
+      "Acts 21"
+    ]
+  },
+  {
+    "day": 22,
+    "family": [
+      "Genesis 23",
+      "Matthew 22"
+    ],
+    "secret": [
+      "Nehemiah 12",
+      "Acts 22"
+    ]
+  },
+  {
+    "day": 23,
+    "family": [
+      "Genesis 24",
+      "Matthew 23"
+    ],
+    "secret": [
+      "Nehemiah 13",
+      "Acts 23"
+    ]
+  },
+  {
+    "day": 24,
+    "family": [
+      "Genesis 25",
+      "Matthew 24"
+    ],
+    "secret": [
+      "Esther 1",
+      "Acts 24"
+    ]
+  },
+  {
+    "day": 25,
+    "family": [
+      "Genesis 26",
+      "Matthew 25"
+    ],
+    "secret": [
+      "Esther 2",
+      "Acts 25"
+    ]
+  },
+  {
+    "day": 26,
+    "family": [
+      "Genesis 27",
+      "Matthew 26"
+    ],
+    "secret": [
+      "Esther 3",
+      "Acts 26"
+    ]
+  },
+  {
+    "day": 27,
+    "family": [
+      "Genesis 28",
+      "Matthew 27"
+    ],
+    "secret": [
+      "Esther 4",
+      "Acts 27"
+    ]
+  },
+  {
+    "day": 28,
+    "family": [
+      "Genesis 29",
+      "Matthew 28"
+    ],
+    "secret": [
+      "Esther 5",
+      "Acts 28"
+    ]
+  },
+  {
+    "day": 29,
+    "family": [
+      "Genesis 30",
+      "Mark 1"
+    ],
+    "secret": [
+      "Esther 6",
+      "Romans 1"
+    ]
+  },
+  {
+    "day": 30,
+    "family": [
+      "Genesis 31",
+      "Mark 2"
+    ],
+    "secret": [
+      "Esther 7",
+      "Romans 2"
+    ]
+  },
+  {
+    "day": 31,
+    "family": [
+      "Genesis 32",
+      "Mark 3"
+    ],
+    "secret": [
+      "Esther 8",
+      "Romans 3"
+    ]
+  },
+  {
+    "day": 32,
+    "family": [
+      "Genesis 33",
+      "Mark 4"
+    ],
+    "secret": [
+      "Esther 9-10",
+      "Romans 4"
+    ]
+  },
+  {
+    "day": 33,
+    "family": [
+      "Genesis 34",
+      "Mark 5"
+    ],
+    "secret": [
+      "Job 1",
+      "Romans 5"
+    ]
+  },
+  {
+    "day": 34,
+    "family": [
+      "Genesis 35-36",
+      "Mark 6"
+    ],
+    "secret": [
+      "Job 2",
+      "Romans 6"
+    ]
+  },
+  {
+    "day": 35,
+    "family": [
+      "Genesis 37",
+      "Mark 7"
+    ],
+    "secret": [
+      "Job 3",
+      "Romans 7"
+    ]
+  },
+  {
+    "day": 36,
+    "family": [
+      "Genesis 38",
+      "Mark 8"
+    ],
+    "secret": [
+      "Job 4",
+      "Romans 8"
+    ]
+  },
+  {
+    "day": 37,
+    "family": [
+      "Genesis 39",
+      "Mark 9"
+    ],
+    "secret": [
+      "Job 5",
+      "Romans 9"
+    ]
+  },
+  {
+    "day": 38,
+    "family": [
+      "Genesis 40",
+      "Mark 10"
+    ],
+    "secret": [
+      "Job 6",
+      "Romans 10"
+    ]
+  },
+  {
+    "day": 39,
+    "family": [
+      "Genesis 41",
+      "Mark 11"
+    ],
+    "secret": [
+      "Job 7",
+      "Romans 11"
+    ]
+  },
+  {
+    "day": 40,
+    "family": [
+      "Genesis 42",
+      "Mark 12"
+    ],
+    "secret": [
+      "Job 8",
+      "Romans 12"
+    ]
+  },
+  {
+    "day": 41,
+    "family": [
+      "Genesis 43",
+      "Mark 13"
+    ],
+    "secret": [
+      "Job 9",
+      "Romans 13"
+    ]
+  },
+  {
+    "day": 42,
+    "family": [
+      "Genesis 44",
+      "Mark 14"
+    ],
+    "secret": [
+      "Job 10",
+      "Romans 14"
+    ]
+  },
+  {
+    "day": 43,
+    "family": [
+      "Genesis 45",
+      "Mark 15"
+    ],
+    "secret": [
+      "Job 11",
+      "Romans 15"
+    ]
+  },
+  {
+    "day": 44,
+    "family": [
+      "Genesis 46",
+      "Mark 16"
+    ],
+    "secret": [
+      "Job 12",
+      "Romans 16"
+    ]
+  },
+  {
+    "day": 45,
+    "family": [
+      "Genesis 47",
+      "Luke 1:1-38"
+    ],
+    "secret": [
+      "Job 13",
+      "1 Corinthians 1"
+    ]
+  },
+  {
+    "day": 46,
+    "family": [
+      "Genesis 48",
+      "Luke 1:39-80"
+    ],
+    "secret": [
+      "Job 14",
+      "1 Corinthians 2"
+    ]
+  },
+  {
+    "day": 47,
+    "family": [
+      "Genesis 49",
+      "Luke 2"
+    ],
+    "secret": [
+      "Job 15",
+      "1 Corinthians 3"
+    ]
+  },
+  {
+    "day": 48,
+    "family": [
+      "Genesis 50",
+      "Luke 3"
+    ],
+    "secret": [
+      "Job 16-17",
+      "1 Corinthians 4"
+    ]
+  },
+  {
+    "day": 49,
+    "family": [
+      "Exodus 1",
+      "Luke 4"
+    ],
+    "secret": [
+      "Job 18",
+      "1 Corinthians 5"
+    ]
+  },
+  {
+    "day": 50,
+    "family": [
+      "Exodus 2",
+      "Luke 5"
+    ],
+    "secret": [
+      "Job 19",
+      "1 Corinthians 6"
+    ]
+  },
+  {
+    "day": 51,
+    "family": [
+      "Exodus 3",
+      "Luke 6"
+    ],
+    "secret": [
+      "Job 20",
+      "1 Corinthians 7"
+    ]
+  },
+  {
+    "day": 52,
+    "family": [
+      "Exodus 4",
+      "Luke 7"
+    ],
+    "secret": [
+      "Job 21",
+      "1 Corinthians 8"
+    ]
+  },
+  {
+    "day": 53,
+    "family": [
+      "Exodus 5",
+      "Luke 8"
+    ],
+    "secret": [
+      "Job 22",
+      "1 Corinthians 9"
+    ]
+  },
+  {
+    "day": 54,
+    "family": [
+      "Exodus 6",
+      "Luke 9"
+    ],
+    "secret": [
+      "Job 23",
+      "1 Corinthians 10"
+    ]
+  },
+  {
+    "day": 55,
+    "family": [
+      "Exodus 7",
+      "Luke 10"
+    ],
+    "secret": [
+      "Job 24",
+      "1 Corinthians 11"
+    ]
+  },
+  {
+    "day": 56,
+    "family": [
+      "Exodus 8",
+      "Luke 11"
+    ],
+    "secret": [
+      "Job 25-26",
+      "1 Corinthians 12"
+    ]
+  },
+  {
+    "day": 57,
+    "family": [
+      "Exodus 9",
+      "Luke 12"
+    ],
+    "secret": [
+      "Job 27",
+      "1 Corinthians 13"
+    ]
+  },
+  {
+    "day": 58,
+    "family": [
+      "Exodus 10",
+      "Luke 13"
+    ],
+    "secret": [
+      "Job 28",
+      "1 Corinthians 14"
+    ]
+  },
+  {
+    "day": 59,
+    "family": [
+      "Exodus 11:1-12:20",
+      "Luke 14"
+    ],
+    "secret": [
+      "Job 29",
+      "1 Corinthians 15"
+    ]
+  },
+  {
+    "day": 60,
+    "family": [
+      "Exodus 12:21-50",
+      "Luke 15"
+    ],
+    "secret": [
+      "Job 30",
+      "1 Corinthians 16"
+    ]
+  },
+  {
+    "day": 61,
+    "family": [
+      "Exodus 13",
+      "Luke 16"
+    ],
+    "secret": [
+      "Job 31",
+      "2 Corinthians 1"
+    ]
+  },
+  {
+    "day": 62,
+    "family": [
+      "Exodus 14",
+      "Luke 17"
+    ],
+    "secret": [
+      "Job 32",
+      "2 Corinthians 2"
+    ]
+  },
+  {
+    "day": 63,
+    "family": [
+      "Exodus 15",
+      "Luke 18"
+    ],
+    "secret": [
+      "Job 33",
+      "2 Corinthians 3"
+    ]
+  },
+  {
+    "day": 64,
+    "family": [
+      "Exodus 16",
+      "Luke 19"
+    ],
+    "secret": [
+      "Job 34",
+      "2 Corinthians 4"
+    ]
+  },
+  {
+    "day": 65,
+    "family": [
+      "Exodus 17",
+      "Luke 20"
+    ],
+    "secret": [
+      "Job 35",
+      "2 Corinthians 5"
+    ]
+  },
+  {
+    "day": 66,
+    "family": [
+      "Exodus 18",
+      "Luke 21"
+    ],
+    "secret": [
+      "Job 36",
+      "2 Corinthians 6"
+    ]
+  },
+  {
+    "day": 67,
+    "family": [
+      "Exodus 19",
+      "Luke 22"
+    ],
+    "secret": [
+      "Job 37",
+      "2 Corinthians 7"
+    ]
+  },
+  {
+    "day": 68,
+    "family": [
+      "Exodus 20",
+      "Luke 23"
+    ],
+    "secret": [
+      "Job 38",
+      "2 Corinthians 8"
+    ]
+  },
+  {
+    "day": 69,
+    "family": [
+      "Exodus 21",
+      "Luke 24"
+    ],
+    "secret": [
+      "Job 39",
+      "2 Corinthians 9"
+    ]
+  },
+  {
+    "day": 70,
+    "family": [
+      "Exodus 22",
+      "John 1"
+    ],
+    "secret": [
+      "Job 40",
+      "2 Corinthians 10"
+    ]
+  },
+  {
+    "day": 71,
+    "family": [
+      "Exodus 23",
+      "John 2"
+    ],
+    "secret": [
+      "Job 41",
+      "2 Corinthians 11"
+    ]
+  },
+  {
+    "day": 72,
+    "family": [
+      "Exodus 24",
+      "John 3"
+    ],
+    "secret": [
+      "Job 42",
+      "2 Corinthians 12"
+    ]
+  },
+  {
+    "day": 73,
+    "family": [
+      "Exodus 25",
+      "John 4"
+    ],
+    "secret": [
+      "Proverbs 1",
+      "2 Corinthians 13"
+    ]
+  },
+  {
+    "day": 74,
+    "family": [
+      "Exodus 26",
+      "John 5"
+    ],
+    "secret": [
+      "Proverbs 2",
+      "Galatians 1"
+    ]
+  },
+  {
+    "day": 75,
+    "family": [
+      "Exodus 27",
+      "John 6"
+    ],
+    "secret": [
+      "Proverbs 3",
+      "Galatians 2"
+    ]
+  },
+  {
+    "day": 76,
+    "family": [
+      "Exodus 28",
+      "John 7"
+    ],
+    "secret": [
+      "Proverbs 4",
+      "Galatians 3"
+    ]
+  },
+  {
+    "day": 77,
+    "family": [
+      "Exodus 29",
+      "John 8"
+    ],
+    "secret": [
+      "Proverbs 5",
+      "Galatians 4"
+    ]
+  },
+  {
+    "day": 78,
+    "family": [
+      "Exodus 30",
+      "John 9"
+    ],
+    "secret": [
+      "Proverbs 6",
+      "Galatians 5"
+    ]
+  },
+  {
+    "day": 79,
+    "family": [
+      "Exodus 31",
+      "John 10"
+    ],
+    "secret": [
+      "Proverbs 7",
+      "Galatians 6"
+    ]
+  },
+  {
+    "day": 80,
+    "family": [
+      "Exodus 32",
+      "John 11"
+    ],
+    "secret": [
+      "Proverbs 8",
+      "Ephesians 1"
+    ]
+  },
+  {
+    "day": 81,
+    "family": [
+      "Exodus 33",
+      "John 12"
+    ],
+    "secret": [
+      "Proverbs 9",
+      "Ephesians 2"
+    ]
+  },
+  {
+    "day": 82,
+    "family": [
+      "Exodus 34",
+      "John 13"
+    ],
+    "secret": [
+      "Proverbs 10",
+      "Ephesians 3"
+    ]
+  },
+  {
+    "day": 83,
+    "family": [
+      "Exodus 35",
+      "John 14"
+    ],
+    "secret": [
+      "Proverbs 11",
+      "Ephesians 4"
+    ]
+  },
+  {
+    "day": 84,
+    "family": [
+      "Exodus 36",
+      "John 15"
+    ],
+    "secret": [
+      "Proverbs 12",
+      "Ephesians 5"
+    ]
+  },
+  {
+    "day": 85,
+    "family": [
+      "Exodus 37",
+      "John 16"
+    ],
+    "secret": [
+      "Proverbs 13",
+      "Ephesians 6"
+    ]
+  },
+  {
+    "day": 86,
+    "family": [
+      "Exodus 38",
+      "John 17"
+    ],
+    "secret": [
+      "Proverbs 14",
+      "Philippians 1"
+    ]
+  },
+  {
+    "day": 87,
+    "family": [
+      "Exodus 39",
+      "John 18"
+    ],
+    "secret": [
+      "Proverbs 15",
+      "Philippians 2"
+    ]
+  },
+  {
+    "day": 88,
+    "family": [
+      "Exodus 40",
+      "John 19"
+    ],
+    "secret": [
+      "Proverbs 16",
+      "Philippians 3"
+    ]
+  },
+  {
+    "day": 89,
+    "family": [
+      "Leviticus 1",
+      "John 20"
+    ],
+    "secret": [
+      "Proverbs 17",
+      "Philippians 4"
+    ]
+  },
+  {
+    "day": 90,
+    "family": [
+      "Leviticus 2-3",
+      "John 21"
+    ],
+    "secret": [
+      "Proverbs 18",
+      "Colossians 1"
+    ]
+  },
+  {
+    "day": 91,
+    "family": [
+      "Leviticus 4",
+      "Psalm 1-2"
+    ],
+    "secret": [
+      "Proverbs 19",
+      "Colossians 2"
+    ]
+  },
+  {
+    "day": 92,
+    "family": [
+      "Leviticus 5",
+      "Psalm 3-4"
+    ],
+    "secret": [
+      "Proverbs 20",
+      "Colossians 3"
+    ]
+  },
+  {
+    "day": 93,
+    "family": [
+      "Leviticus 6",
+      "Psalm 5-6"
+    ],
+    "secret": [
+      "Proverbs 21",
+      "Colossians 4"
+    ]
+  },
+  {
+    "day": 94,
+    "family": [
+      "Leviticus 7",
+      "Psalm 7-8"
+    ],
+    "secret": [
+      "Proverbs 22",
+      "1 Thessalonians 1"
+    ]
+  },
+  {
+    "day": 95,
+    "family": [
+      "Leviticus 8",
+      "Psalm 9"
+    ],
+    "secret": [
+      "Proverbs 23",
+      "1 Thessalonians 2"
+    ]
+  },
+  {
+    "day": 96,
+    "family": [
+      "Leviticus 9",
+      "Psalm 10"
+    ],
+    "secret": [
+      "Proverbs 24",
+      "1 Thessalonians 3"
+    ]
+  },
+  {
+    "day": 97,
+    "family": [
+      "Leviticus 10",
+      "Psalm 11-12"
+    ],
+    "secret": [
+      "Proverbs 25",
+      "1 Thessalonians 4"
+    ]
+  },
+  {
+    "day": 98,
+    "family": [
+      "Leviticus 11-12",
+      "Psalm 13-14"
+    ],
+    "secret": [
+      "Proverbs 26",
+      "1 Thessalonians 5"
+    ]
+  },
+  {
+    "day": 99,
+    "family": [
+      "Leviticus 13",
+      "Psalm 15-16"
+    ],
+    "secret": [
+      "Proverbs 27",
+      "2 Thessalonians 1"
+    ]
+  },
+  {
+    "day": 100,
+    "family": [
+      "Leviticus 14",
+      "Psalm 17"
+    ],
+    "secret": [
+      "Proverbs 28",
+      "2 Thessalonians 2"
+    ]
+  },
+  {
+    "day": 101,
+    "family": [
+      "Leviticus 15",
+      "Psalm 18"
+    ],
+    "secret": [
+      "Proverbs 29",
+      "2 Thessalonians 3"
+    ]
+  },
+  {
+    "day": 102,
+    "family": [
+      "Leviticus 16",
+      "Psalm 19"
+    ],
+    "secret": [
+      "Proverbs 30",
+      "1 Timothy 1"
+    ]
+  },
+  {
+    "day": 103,
+    "family": [
+      "Leviticus 17",
+      "Psalm 20-21"
+    ],
+    "secret": [
+      "Proverbs 31",
+      "1 Timothy 2"
+    ]
+  },
+  {
+    "day": 104,
+    "family": [
+      "Leviticus 18",
+      "Psalm 22"
+    ],
+    "secret": [
+      "Ecclesiastes 1",
+      "1 Timothy 3"
+    ]
+  },
+  {
+    "day": 105,
+    "family": [
+      "Leviticus 19",
+      "Psalm 23-24"
+    ],
+    "secret": [
+      "Ecclesiastes 2",
+      "1 Timothy 4"
+    ]
+  },
+  {
+    "day": 106,
+    "family": [
+      "Leviticus 20",
+      "Psalm 25"
+    ],
+    "secret": [
+      "Ecclesiastes 3",
+      "1 Timothy 5"
+    ]
+  },
+  {
+    "day": 107,
+    "family": [
+      "Leviticus 21",
+      "Psalm 26-27"
+    ],
+    "secret": [
+      "Ecclesiastes 4",
+      "1 Timothy 6"
+    ]
+  },
+  {
+    "day": 108,
+    "family": [
+      "Leviticus 22",
+      "Psalm 28-29"
+    ],
+    "secret": [
+      "Ecclesiastes 5",
+      "2 Timothy 1"
+    ]
+  },
+  {
+    "day": 109,
+    "family": [
+      "Leviticus 23",
+      "Psalm 30"
+    ],
+    "secret": [
+      "Ecclesiastes 6",
+      "2 Timothy 2"
+    ]
+  },
+  {
+    "day": 110,
+    "family": [
+      "Leviticus 24",
+      "Psalm 31"
+    ],
+    "secret": [
+      "Ecclesiastes 7",
+      "2 Timothy 3"
+    ]
+  },
+  {
+    "day": 111,
+    "family": [
+      "Leviticus 25",
+      "Psalm 32"
+    ],
+    "secret": [
+      "Ecclesiastes 8",
+      "2 Timothy 4"
+    ]
+  },
+  {
+    "day": 112,
+    "family": [
+      "Leviticus 26",
+      "Psalm 33"
+    ],
+    "secret": [
+      "Ecclesiastes 9",
+      "Titus 1"
+    ]
+  },
+  {
+    "day": 113,
+    "family": [
+      "Leviticus 27",
+      "Psalm 34"
+    ],
+    "secret": [
+      "Ecclesiastes 10",
+      "Titus 2"
+    ]
+  },
+  {
+    "day": 114,
+    "family": [
+      "Numbers 1",
+      "Psalm 35"
+    ],
+    "secret": [
+      "Ecclesiastes 11",
+      "Titus 3"
+    ]
+  },
+  {
+    "day": 115,
+    "family": [
+      "Numbers 2",
+      "Psalm 36"
+    ],
+    "secret": [
+      "Ecclesiastes 12",
+      "Philemon 1"
+    ]
+  },
+  {
+    "day": 116,
+    "family": [
+      "Numbers 3",
+      "Psalm 37"
+    ],
+    "secret": [
+      "Song of Solomon 1",
+      "Hebrews 1"
+    ]
+  },
+  {
+    "day": 117,
+    "family": [
+      "Numbers 4",
+      "Psalm 38"
+    ],
+    "secret": [
+      "Song of Solomon 2",
+      "Hebrews 2"
+    ]
+  },
+  {
+    "day": 118,
+    "family": [
+      "Numbers 5",
+      "Psalm 39"
+    ],
+    "secret": [
+      "Song of Solomon 3",
+      "Hebrews 3"
+    ]
+  },
+  {
+    "day": 119,
+    "family": [
+      "Numbers 6",
+      "Psalm 40-41"
+    ],
+    "secret": [
+      "Song of Solomon 4",
+      "Hebrews 4"
+    ]
+  },
+  {
+    "day": 120,
+    "family": [
+      "Numbers 7",
+      "Psalm 42-43"
+    ],
+    "secret": [
+      "Song of Solomon 5",
+      "Hebrews 5"
+    ]
+  },
+  {
+    "day": 121,
+    "family": [
+      "Numbers 8",
+      "Psalm 44"
+    ],
+    "secret": [
+      "Song of Solomon 6",
+      "Hebrews 6"
+    ]
+  },
+  {
+    "day": 122,
+    "family": [
+      "Numbers 9",
+      "Psalm 45"
+    ],
+    "secret": [
+      "Song of Solomon 7",
+      "Hebrews 7"
+    ]
+  },
+  {
+    "day": 123,
+    "family": [
+      "Numbers 10",
+      "Psalm 46-47"
+    ],
+    "secret": [
+      "Song of Solomon 8",
+      "Hebrews 8"
+    ]
+  },
+  {
+    "day": 124,
+    "family": [
+      "Numbers 11",
+      "Psalm 48"
+    ],
+    "secret": [
+      "Isaiah 1",
+      "Hebrews 9"
+    ]
+  },
+  {
+    "day": 125,
+    "family": [
+      "Numbers 12-13",
+      "Psalm 49"
+    ],
+    "secret": [
+      "Isaiah 2",
+      "Hebrews 10"
+    ]
+  },
+  {
+    "day": 126,
+    "family": [
+      "Numbers 14",
+      "Psalm 50"
+    ],
+    "secret": [
+      "Isaiah 3-4",
+      "Hebrews 11"
+    ]
+  },
+  {
+    "day": 127,
+    "family": [
+      "Numbers 15",
+      "Psalm 51"
+    ],
+    "secret": [
+      "Isaiah 5",
+      "Hebrews 12"
+    ]
+  },
+  {
+    "day": 128,
+    "family": [
+      "Numbers 16",
+      "Psalm 52-54"
+    ],
+    "secret": [
+      "Isaiah 6",
+      "Hebrews 13"
+    ]
+  },
+  {
+    "day": 129,
+    "family": [
+      "Numbers 17-18",
+      "Psalm 55"
+    ],
+    "secret": [
+      "Isaiah 7",
+      "James 1"
+    ]
+  },
+  {
+    "day": 130,
+    "family": [
+      "Numbers 19",
+      "Psalm 56-57"
+    ],
+    "secret": [
+      "Isaiah 8:1-9:7",
+      "James 2"
+    ]
+  },
+  {
+    "day": 131,
+    "family": [
+      "Numbers 20",
+      "Psalm 58-59"
+    ],
+    "secret": [
+      "Isaiah 9:8-10:4",
+      "James 3"
+    ]
+  },
+  {
+    "day": 132,
+    "family": [
+      "Numbers 21",
+      "Psalm 60-61"
+    ],
+    "secret": [
+      "Isaiah 10:5-34",
+      "James 4"
+    ]
+  },
+  {
+    "day": 133,
+    "family": [
+      "Numbers 22",
+      "Psalm 62-63"
+    ],
+    "secret": [
+      "Isaiah 11-12",
+      "James 5"
+    ]
+  },
+  {
+    "day": 134,
+    "family": [
+      "Numbers 23",
+      "Psalm 64-65"
+    ],
+    "secret": [
+      "Isaiah 13",
+      "1 Peter 1"
+    ]
+  },
+  {
+    "day": 135,
+    "family": [
+      "Numbers 24",
+      "Psalm 66-67"
+    ],
+    "secret": [
+      "Isaiah 14",
+      "1 Peter 2"
+    ]
+  },
+  {
+    "day": 136,
+    "family": [
+      "Numbers 25",
+      "Psalm 68"
+    ],
+    "secret": [
+      "Isaiah 15",
+      "1 Peter 3"
+    ]
+  },
+  {
+    "day": 137,
+    "family": [
+      "Numbers 26",
+      "Psalm 69"
+    ],
+    "secret": [
+      "Isaiah 16",
+      "1 Peter 4"
+    ]
+  },
+  {
+    "day": 138,
+    "family": [
+      "Numbers 27",
+      "Psalm 70-71"
+    ],
+    "secret": [
+      "Isaiah 17-18",
+      "1 Peter 5"
+    ]
+  },
+  {
+    "day": 139,
+    "family": [
+      "Numbers 28",
+      "Psalm 72"
+    ],
+    "secret": [
+      "Isaiah 19-20",
+      "2 Peter 1"
+    ]
+  },
+  {
+    "day": 140,
+    "family": [
+      "Numbers 29",
+      "Psalm 73"
+    ],
+    "secret": [
+      "Isaiah 21",
+      "2 Peter 2"
+    ]
+  },
+  {
+    "day": 141,
+    "family": [
+      "Numbers 30",
+      "Psalm 74"
+    ],
+    "secret": [
+      "Isaiah 22",
+      "2 Peter 3"
+    ]
+  },
+  {
+    "day": 142,
+    "family": [
+      "Numbers 31",
+      "Psalm 75-76"
+    ],
+    "secret": [
+      "Isaiah 23",
+      "1 John 1"
+    ]
+  },
+  {
+    "day": 143,
+    "family": [
+      "Numbers 32",
+      "Psalm 77"
+    ],
+    "secret": [
+      "Isaiah 24",
+      "1 John 2"
+    ]
+  },
+  {
+    "day": 144,
+    "family": [
+      "Numbers 33",
+      "Psalm 78:1-39"
+    ],
+    "secret": [
+      "Isaiah 25",
+      "1 John 3"
+    ]
+  },
+  {
+    "day": 145,
+    "family": [
+      "Numbers 34",
+      "Psalm 78:40-72"
+    ],
+    "secret": [
+      "Isaiah 26",
+      "1 John 4"
+    ]
+  },
+  {
+    "day": 146,
+    "family": [
+      "Numbers 35",
+      "Psalm 79"
+    ],
+    "secret": [
+      "Isaiah 27",
+      "1 John 5"
+    ]
+  },
+  {
+    "day": 147,
+    "family": [
+      "Numbers 36",
+      "Psalm 80"
+    ],
+    "secret": [
+      "Isaiah 28",
+      "2 John 1"
+    ]
+  },
+  {
+    "day": 148,
+    "family": [
+      "Deuteronomy 1",
+      "Psalm 81-82"
+    ],
+    "secret": [
+      "Isaiah 29",
+      "3 John 1"
+    ]
+  },
+  {
+    "day": 149,
+    "family": [
+      "Deuteronomy 2",
+      "Psalm 83-84"
+    ],
+    "secret": [
+      "Isaiah 30",
+      "Jude 1"
+    ]
+  },
+  {
+    "day": 150,
+    "family": [
+      "Deuteronomy 3",
+      "Psalm 85"
+    ],
+    "secret": [
+      "Isaiah 31",
+      "Revelation 1"
+    ]
+  },
+  {
+    "day": 151,
+    "family": [
+      "Deuteronomy 4",
+      "Psalm 86-87"
+    ],
+    "secret": [
+      "Isaiah 32",
+      "Revelation 2"
+    ]
+  },
+  {
+    "day": 152,
+    "family": [
+      "Deuteronomy 5",
+      "Psalm 88"
+    ],
+    "secret": [
+      "Isaiah 33",
+      "Revelation 3"
+    ]
+  },
+  {
+    "day": 153,
+    "family": [
+      "Deuteronomy 6",
+      "Psalm 89"
+    ],
+    "secret": [
+      "Isaiah 34",
+      "Revelation 4"
+    ]
+  },
+  {
+    "day": 154,
+    "family": [
+      "Deuteronomy 7",
+      "Psalm 90"
+    ],
+    "secret": [
+      "Isaiah 35",
+      "Revelation 5"
+    ]
+  },
+  {
+    "day": 155,
+    "family": [
+      "Deuteronomy 8",
+      "Psalm 91"
+    ],
+    "secret": [
+      "Isaiah 36",
+      "Revelation 6"
+    ]
+  },
+  {
+    "day": 156,
+    "family": [
+      "Deuteronomy 9",
+      "Psalm 92-93"
+    ],
+    "secret": [
+      "Isaiah 37",
+      "Revelation 7"
+    ]
+  },
+  {
+    "day": 157,
+    "family": [
+      "Deuteronomy 10",
+      "Psalm 94"
+    ],
+    "secret": [
+      "Isaiah 38",
+      "Revelation 8"
+    ]
+  },
+  {
+    "day": 158,
+    "family": [
+      "Deuteronomy 11",
+      "Psalm 95-96"
+    ],
+    "secret": [
+      "Isaiah 39",
+      "Revelation 9"
+    ]
+  },
+  {
+    "day": 159,
+    "family": [
+      "Deuteronomy 12",
+      "Psalm 97-98"
+    ],
+    "secret": [
+      "Isaiah 40",
+      "Revelation 10"
+    ]
+  },
+  {
+    "day": 160,
+    "family": [
+      "Deuteronomy 13-14",
+      "Psalm 99-101"
+    ],
+    "secret": [
+      "Isaiah 41",
+      "Revelation 11"
+    ]
+  },
+  {
+    "day": 161,
+    "family": [
+      "Deuteronomy 15",
+      "Psalm 102"
+    ],
+    "secret": [
+      "Isaiah 42",
+      "Revelation 12"
+    ]
+  },
+  {
+    "day": 162,
+    "family": [
+      "Deuteronomy 16",
+      "Psalm 103"
+    ],
+    "secret": [
+      "Isaiah 43",
+      "Revelation 13"
+    ]
+  },
+  {
+    "day": 163,
+    "family": [
+      "Deuteronomy 17",
+      "Psalm 104"
+    ],
+    "secret": [
+      "Isaiah 44",
+      "Revelation 14"
+    ]
+  },
+  {
+    "day": 164,
+    "family": [
+      "Deuteronomy 18",
+      "Psalm 105"
+    ],
+    "secret": [
+      "Isaiah 45",
+      "Revelation 15"
+    ]
+  },
+  {
+    "day": 165,
+    "family": [
+      "Deuteronomy 19",
+      "Psalm 106"
+    ],
+    "secret": [
+      "Isaiah 46",
+      "Revelation 16"
+    ]
+  },
+  {
+    "day": 166,
+    "family": [
+      "Deuteronomy 20",
+      "Psalm 107"
+    ],
+    "secret": [
+      "Isaiah 47",
+      "Revelation 17"
+    ]
+  },
+  {
+    "day": 167,
+    "family": [
+      "Deuteronomy 21",
+      "Psalm 108-109"
+    ],
+    "secret": [
+      "Isaiah 48",
+      "Revelation 18"
+    ]
+  },
+  {
+    "day": 168,
+    "family": [
+      "Deuteronomy 22",
+      "Psalm 110-111"
+    ],
+    "secret": [
+      "Isaiah 49",
+      "Revelation 19"
+    ]
+  },
+  {
+    "day": 169,
+    "family": [
+      "Deuteronomy 23",
+      "Psalm 112-113"
+    ],
+    "secret": [
+      "Isaiah 50",
+      "Revelation 20"
+    ]
+  },
+  {
+    "day": 170,
+    "family": [
+      "Deuteronomy 24",
+      "Psalm 114-115"
+    ],
+    "secret": [
+      "Isaiah 51",
+      "Revelation 21"
+    ]
+  },
+  {
+    "day": 171,
+    "family": [
+      "Deuteronomy 25",
+      "Psalm 116"
+    ],
+    "secret": [
+      "Isaiah 52",
+      "Revelation 22"
+    ]
+  },
+  {
+    "day": 172,
+    "family": [
+      "Deuteronomy 26",
+      "Psalm 117-118"
+    ],
+    "secret": [
+      "Isaiah 53",
+      "Matthew 1"
+    ]
+  },
+  {
+    "day": 173,
+    "family": [
+      "Deuteronomy 27:1-28:19",
+      "Psalm 119:1-24"
+    ],
+    "secret": [
+      "Isaiah 54",
+      "Matthew 2"
+    ]
+  },
+  {
+    "day": 174,
+    "family": [
+      "Deuteronomy 28:20-68",
+      "Psalm 119:25-48"
+    ],
+    "secret": [
+      "Isaiah 55",
+      "Matthew 3"
+    ]
+  },
+  {
+    "day": 175,
+    "family": [
+      "Deuteronomy 29",
+      "Psalm 119:49-72"
+    ],
+    "secret": [
+      "Isaiah 56",
+      "Matthew 4"
+    ]
+  },
+  {
+    "day": 176,
+    "family": [
+      "Deuteronomy 30",
+      "Psalm 119:73-96"
+    ],
+    "secret": [
+      "Isaiah 57",
+      "Matthew 5"
+    ]
+  },
+  {
+    "day": 177,
+    "family": [
+      "Deuteronomy 31",
+      "Psalm 119:97-120"
+    ],
+    "secret": [
+      "Isaiah 58",
+      "Matthew 6"
+    ]
+  },
+  {
+    "day": 178,
+    "family": [
+      "Deuteronomy 32",
+      "Psalm 119:121-144"
+    ],
+    "secret": [
+      "Isaiah 59",
+      "Matthew 7"
+    ]
+  },
+  {
+    "day": 179,
+    "family": [
+      "Deuteronomy 33-34",
+      "Psalm 119:145-176"
+    ],
+    "secret": [
+      "Isaiah 60",
+      "Matthew 8"
+    ]
+  },
+  {
+    "day": 180,
+    "family": [
+      "Joshua 1",
+      "Psalm 120-122"
+    ],
+    "secret": [
+      "Isaiah 61",
+      "Matthew 9"
+    ]
+  },
+  {
+    "day": 181,
+    "family": [
+      "Joshua 2",
+      "Psalm 123-125"
+    ],
+    "secret": [
+      "Isaiah 62",
+      "Matthew 10"
+    ]
+  },
+  {
+    "day": 182,
+    "family": [
+      "Joshua 3",
+      "Psalm 126-128"
+    ],
+    "secret": [
+      "Isaiah 63",
+      "Matthew 11"
+    ]
+  },
+  {
+    "day": 183,
+    "family": [
+      "Joshua 4",
+      "Psalm 129-131"
+    ],
+    "secret": [
+      "Isaiah 64",
+      "Matthew 12"
+    ]
+  },
+  {
+    "day": 184,
+    "family": [
+      "Joshua 5",
+      "Psalm 132-134"
+    ],
+    "secret": [
+      "Isaiah 65",
+      "Matthew 13"
+    ]
+  },
+  {
+    "day": 185,
+    "family": [
+      "Joshua 6",
+      "Psalm 135-136"
+    ],
+    "secret": [
+      "Isaiah 66",
+      "Matthew 14"
+    ]
+  },
+  {
+    "day": 186,
+    "family": [
+      "Joshua 7",
+      "Psalm 137-138"
+    ],
+    "secret": [
+      "Jeremiah 1",
+      "Matthew 15"
+    ]
+  },
+  {
+    "day": 187,
+    "family": [
+      "Joshua 8",
+      "Psalm 139"
+    ],
+    "secret": [
+      "Jeremiah 2",
+      "Matthew 16"
+    ]
+  },
+  {
+    "day": 188,
+    "family": [
+      "Joshua 9",
+      "Psalm 140-141"
+    ],
+    "secret": [
+      "Jeremiah 3",
+      "Matthew 17"
+    ]
+  },
+  {
+    "day": 189,
+    "family": [
+      "Joshua 10",
+      "Psalm 142-143"
+    ],
+    "secret": [
+      "Jeremiah 4",
+      "Matthew 18"
+    ]
+  },
+  {
+    "day": 190,
+    "family": [
+      "Joshua 11",
+      "Psalm 144"
+    ],
+    "secret": [
+      "Jeremiah 5",
+      "Matthew 19"
+    ]
+  },
+  {
+    "day": 191,
+    "family": [
+      "Joshua 12-13",
+      "Psalm 145"
+    ],
+    "secret": [
+      "Jeremiah 6",
+      "Matthew 20"
+    ]
+  },
+  {
+    "day": 192,
+    "family": [
+      "Joshua 14-15",
+      "Psalm 146-147"
+    ],
+    "secret": [
+      "Jeremiah 7",
+      "Matthew 21"
+    ]
+  },
+  {
+    "day": 193,
+    "family": [
+      "Joshua 16-17",
+      "Psalm 148"
+    ],
+    "secret": [
+      "Jeremiah 8",
+      "Matthew 22"
+    ]
+  },
+  {
+    "day": 194,
+    "family": [
+      "Joshua 18-19",
+      "Psalm 149-150"
+    ],
+    "secret": [
+      "Jeremiah 9",
+      "Matthew 23"
+    ]
+  },
+  {
+    "day": 195,
+    "family": [
+      "Joshua 20-21",
+      "Acts 1"
+    ],
+    "secret": [
+      "Jeremiah 10",
+      "Matthew 24"
+    ]
+  },
+  {
+    "day": 196,
+    "family": [
+      "Joshua 22",
+      "Acts 2"
+    ],
+    "secret": [
+      "Jeremiah 11",
+      "Matthew 25"
+    ]
+  },
+  {
+    "day": 197,
+    "family": [
+      "Joshua 23",
+      "Acts 3"
+    ],
+    "secret": [
+      "Jeremiah 12",
+      "Matthew 26"
+    ]
+  },
+  {
+    "day": 198,
+    "family": [
+      "Joshua 24",
+      "Acts 4"
+    ],
+    "secret": [
+      "Jeremiah 13",
+      "Matthew 27"
+    ]
+  },
+  {
+    "day": 199,
+    "family": [
+      "Judges 1",
+      "Acts 5"
+    ],
+    "secret": [
+      "Jeremiah 14",
+      "Matthew 28"
+    ]
+  },
+  {
+    "day": 200,
+    "family": [
+      "Judges 2",
+      "Acts 6"
+    ],
+    "secret": [
+      "Jeremiah 15",
+      "Mark 1"
+    ]
+  },
+  {
+    "day": 201,
+    "family": [
+      "Judges 3",
+      "Acts 7"
+    ],
+    "secret": [
+      "Jeremiah 16",
+      "Mark 2"
+    ]
+  },
+  {
+    "day": 202,
+    "family": [
+      "Judges 4",
+      "Acts 8"
+    ],
+    "secret": [
+      "Jeremiah 17",
+      "Mark 3"
+    ]
+  },
+  {
+    "day": 203,
+    "family": [
+      "Judges 5",
+      "Acts 9"
+    ],
+    "secret": [
+      "Jeremiah 18",
+      "Mark 4"
+    ]
+  },
+  {
+    "day": 204,
+    "family": [
+      "Judges 6",
+      "Acts 10"
+    ],
+    "secret": [
+      "Jeremiah 19",
+      "Mark 5"
+    ]
+  },
+  {
+    "day": 205,
+    "family": [
+      "Judges 7",
+      "Acts 11"
+    ],
+    "secret": [
+      "Jeremiah 20",
+      "Mark 6"
+    ]
+  },
+  {
+    "day": 206,
+    "family": [
+      "Judges 8",
+      "Acts 12"
+    ],
+    "secret": [
+      "Jeremiah 21",
+      "Mark 7"
+    ]
+  },
+  {
+    "day": 207,
+    "family": [
+      "Judges 9",
+      "Acts 13"
+    ],
+    "secret": [
+      "Jeremiah 22",
+      "Mark 8"
+    ]
+  },
+  {
+    "day": 208,
+    "family": [
+      "Judges 10",
+      "Acts 14"
+    ],
+    "secret": [
+      "Jeremiah 23",
+      "Mark 9"
+    ]
+  },
+  {
+    "day": 209,
+    "family": [
+      "Judges 11",
+      "Acts 15"
+    ],
+    "secret": [
+      "Jeremiah 24",
+      "Mark 10"
+    ]
+  },
+  {
+    "day": 210,
+    "family": [
+      "Judges 12",
+      "Acts 16"
+    ],
+    "secret": [
+      "Jeremiah 25",
+      "Mark 11"
+    ]
+  },
+  {
+    "day": 211,
+    "family": [
+      "Judges 13",
+      "Acts 17"
+    ],
+    "secret": [
+      "Jeremiah 26",
+      "Mark 12"
+    ]
+  },
+  {
+    "day": 212,
+    "family": [
+      "Judges 14",
+      "Acts 18"
+    ],
+    "secret": [
+      "Jeremiah 27",
+      "Mark 13"
+    ]
+  },
+  {
+    "day": 213,
+    "family": [
+      "Judges 15",
+      "Acts 19"
+    ],
+    "secret": [
+      "Jeremiah 28",
+      "Mark 14"
+    ]
+  },
+  {
+    "day": 214,
+    "family": [
+      "Judges 16",
+      "Acts 20"
+    ],
+    "secret": [
+      "Jeremiah 29",
+      "Mark 15"
+    ]
+  },
+  {
+    "day": 215,
+    "family": [
+      "Judges 17",
+      "Acts 21"
+    ],
+    "secret": [
+      "Jeremiah 30-31",
+      "Mark 16"
+    ]
+  },
+  {
+    "day": 216,
+    "family": [
+      "Judges 18",
+      "Acts 22"
+    ],
+    "secret": [
+      "Jeremiah 32",
+      "Psalm 1-2"
+    ]
+  },
+  {
+    "day": 217,
+    "family": [
+      "Judges 19",
+      "Acts 23"
+    ],
+    "secret": [
+      "Jeremiah 33",
+      "Psalm 3-4"
+    ]
+  },
+  {
+    "day": 218,
+    "family": [
+      "Judges 20",
+      "Acts 24"
+    ],
+    "secret": [
+      "Jeremiah 34",
+      "Psalm 5-6"
+    ]
+  },
+  {
+    "day": 219,
+    "family": [
+      "Judges 21",
+      "Acts 25"
+    ],
+    "secret": [
+      "Jeremiah 35",
+      "Psalm 7-8"
+    ]
+  },
+  {
+    "day": 220,
+    "family": [
+      "Ruth 1",
+      "Acts 26"
+    ],
+    "secret": [
+      "Jeremiah 36&45",
+      "Psalm 9"
+    ]
+  },
+  {
+    "day": 221,
+    "family": [
+      "Ruth 2",
+      "Acts 27"
+    ],
+    "secret": [
+      "Jeremiah 37",
+      "Psalm 10"
+    ]
+  },
+  {
+    "day": 222,
+    "family": [
+      "Ruth 3-4",
+      "Acts 28"
+    ],
+    "secret": [
+      "Jeremiah 38",
+      "Psalm 11-12"
+    ]
+  },
+  {
+    "day": 223,
+    "family": [
+      "1 Samuel 1",
+      "Romans 1"
+    ],
+    "secret": [
+      "Jeremiah 39",
+      "Psalm 13-14"
+    ]
+  },
+  {
+    "day": 224,
+    "family": [
+      "1 Samuel 2",
+      "Romans 2"
+    ],
+    "secret": [
+      "Jeremiah 40",
+      "Psalm 15-16"
+    ]
+  },
+  {
+    "day": 225,
+    "family": [
+      "1 Samuel 3",
+      "Romans 3"
+    ],
+    "secret": [
+      "Jeremiah 41",
+      "Psalm 17"
+    ]
+  },
+  {
+    "day": 226,
+    "family": [
+      "1 Samuel 4",
+      "Romans 4"
+    ],
+    "secret": [
+      "Jeremiah 42",
+      "Psalm 18"
+    ]
+  },
+  {
+    "day": 227,
+    "family": [
+      "1 Samuel 5-6",
+      "Romans 5"
+    ],
+    "secret": [
+      "Jeremiah 43",
+      "Psalm 19"
+    ]
+  },
+  {
+    "day": 228,
+    "family": [
+      "1 Samuel 7-8",
+      "Romans 6"
+    ],
+    "secret": [
+      "Jeremiah 44",
+      "Psalm 20-21"
+    ]
+  },
+  {
+    "day": 229,
+    "family": [
+      "1 Samuel 9",
+      "Romans 7"
+    ],
+    "secret": [
+      "Jeremiah 46",
+      "Psalm 22"
+    ]
+  },
+  {
+    "day": 230,
+    "family": [
+      "1 Samuel 10",
+      "Romans 8"
+    ],
+    "secret": [
+      "Jeremiah 47",
+      "Psalm 23-24"
+    ]
+  },
+  {
+    "day": 231,
+    "family": [
+      "1 Samuel 11",
+      "Romans 9"
+    ],
+    "secret": [
+      "Jeremiah 48",
+      "Psalm 25"
+    ]
+  },
+  {
+    "day": 232,
+    "family": [
+      "1 Samuel 12",
+      "Romans 10"
+    ],
+    "secret": [
+      "Jeremiah 49",
+      "Psalm 26-27"
+    ]
+  },
+  {
+    "day": 233,
+    "family": [
+      "1 Samuel 13",
+      "Romans 11"
+    ],
+    "secret": [
+      "Jeremiah 50",
+      "Psalm 28-29"
+    ]
+  },
+  {
+    "day": 234,
+    "family": [
+      "1 Samuel 14",
+      "Romans 12"
+    ],
+    "secret": [
+      "Jeremiah 51",
+      "Psalm 30"
+    ]
+  },
+  {
+    "day": 235,
+    "family": [
+      "1 Samuel 15",
+      "Romans 13"
+    ],
+    "secret": [
+      "Jeremiah 52",
+      "Psalm 31"
+    ]
+  },
+  {
+    "day": 236,
+    "family": [
+      "1 Samuel 16",
+      "Romans 14"
+    ],
+    "secret": [
+      "Lamentations 1",
+      "Psalm 32"
+    ]
+  },
+  {
+    "day": 237,
+    "family": [
+      "1 Samuel 17",
+      "Romans 15"
+    ],
+    "secret": [
+      "Lamentations 2",
+      "Psalm 33"
+    ]
+  },
+  {
+    "day": 238,
+    "family": [
+      "1 Samuel 18",
+      "Romans 16"
+    ],
+    "secret": [
+      "Lamentations 3",
+      "Psalm 34"
+    ]
+  },
+  {
+    "day": 239,
+    "family": [
+      "1 Samuel 19",
+      "1 Corinthians 1"
+    ],
+    "secret": [
+      "Lamentations 4",
+      "Psalm 35"
+    ]
+  },
+  {
+    "day": 240,
+    "family": [
+      "1 Samuel 20",
+      "1 Corinthians 2"
+    ],
+    "secret": [
+      "Lamentations 5",
+      "Psalm 36"
+    ]
+  },
+  {
+    "day": 241,
+    "family": [
+      "1 Samuel 21-22",
+      "1 Corinthians 3"
+    ],
+    "secret": [
+      "Ezekiel 1",
+      "Psalm 37"
+    ]
+  },
+  {
+    "day": 242,
+    "family": [
+      "1 Samuel 23",
+      "1 Corinthians 4"
+    ],
+    "secret": [
+      "Ezekiel 2",
+      "Psalm 38"
+    ]
+  },
+  {
+    "day": 243,
+    "family": [
+      "1 Samuel 24",
+      "1 Corinthians 5"
+    ],
+    "secret": [
+      "Ezekiel 3",
+      "Psalm 39"
+    ]
+  },
+  {
+    "day": 244,
+    "family": [
+      "1 Samuel 25",
+      "1 Corinthians 6"
+    ],
+    "secret": [
+      "Ezekiel 4",
+      "Psalm 40-41"
+    ]
+  },
+  {
+    "day": 245,
+    "family": [
+      "1 Samuel 26",
+      "1 Corinthians 7"
+    ],
+    "secret": [
+      "Ezekiel 5",
+      "Psalm 42-43"
+    ]
+  },
+  {
+    "day": 246,
+    "family": [
+      "1 Samuel 27",
+      "1 Corinthians 8"
+    ],
+    "secret": [
+      "Ezekiel 6",
+      "Psalm 44"
+    ]
+  },
+  {
+    "day": 247,
+    "family": [
+      "1 Samuel 28",
+      "1 Corinthians 9"
+    ],
+    "secret": [
+      "Ezekiel 7",
+      "Psalm 45"
+    ]
+  },
+  {
+    "day": 248,
+    "family": [
+      "1 Samuel 29-30",
+      "1 Corinthians 10"
+    ],
+    "secret": [
+      "Ezekiel 8",
+      "Psalm 46-47"
+    ]
+  },
+  {
+    "day": 249,
+    "family": [
+      "1 Samuel 31",
+      "1 Corinthians 11"
+    ],
+    "secret": [
+      "Ezekiel 9",
+      "Psalm 48"
+    ]
+  },
+  {
+    "day": 250,
+    "family": [
+      "2 Samuel 1",
+      "1 Corinthians 12"
+    ],
+    "secret": [
+      "Ezekiel 10",
+      "Psalm 49"
+    ]
+  },
+  {
+    "day": 251,
+    "family": [
+      "2 Samuel 2",
+      "1 Corinthians 13"
+    ],
+    "secret": [
+      "Ezekiel 11",
+      "Psalm 50"
+    ]
+  },
+  {
+    "day": 252,
+    "family": [
+      "2 Samuel 3",
+      "1 Corinthians 14"
+    ],
+    "secret": [
+      "Ezekiel 12",
+      "Psalm 51"
+    ]
+  },
+  {
+    "day": 253,
+    "family": [
+      "2 Samuel 4-5",
+      "1 Corinthians 15"
+    ],
+    "secret": [
+      "Ezekiel 13",
+      "Psalm 52-54"
+    ]
+  },
+  {
+    "day": 254,
+    "family": [
+      "2 Samuel 6",
+      "1 Corinthians 16"
+    ],
+    "secret": [
+      "Ezekiel 14",
+      "Psalm 55"
+    ]
+  },
+  {
+    "day": 255,
+    "family": [
+      "2 Samuel 7",
+      "2 Corinthians 1"
+    ],
+    "secret": [
+      "Ezekiel 15",
+      "Psalm 56-57"
+    ]
+  },
+  {
+    "day": 256,
+    "family": [
+      "2 Samuel 8-9",
+      "2 Corinthians 2"
+    ],
+    "secret": [
+      "Ezekiel 16",
+      "Psalm 58-59"
+    ]
+  },
+  {
+    "day": 257,
+    "family": [
+      "2 Samuel 10",
+      "2 Corinthians 3"
+    ],
+    "secret": [
+      "Ezekiel 17",
+      "Psalm 60-61"
+    ]
+  },
+  {
+    "day": 258,
+    "family": [
+      "2 Samuel 11",
+      "2 Corinthians 4"
+    ],
+    "secret": [
+      "Ezekiel 18",
+      "Psalm 62-63"
+    ]
+  },
+  {
+    "day": 259,
+    "family": [
+      "2 Samuel 12",
+      "2 Corinthians 5"
+    ],
+    "secret": [
+      "Ezekiel 19",
+      "Psalm 64-65"
+    ]
+  },
+  {
+    "day": 260,
+    "family": [
+      "2 Samuel 13",
+      "2 Corinthians 6"
+    ],
+    "secret": [
+      "Ezekiel 20",
+      "Psalm 66-67"
+    ]
+  },
+  {
+    "day": 261,
+    "family": [
+      "2 Samuel 14",
+      "2 Corinthians 7"
+    ],
+    "secret": [
+      "Ezekiel 21",
+      "Psalm 68"
+    ]
+  },
+  {
+    "day": 262,
+    "family": [
+      "2 Samuel 15",
+      "2 Corinthians 8"
+    ],
+    "secret": [
+      "Ezekiel 22",
+      "Psalm 69"
+    ]
+  },
+  {
+    "day": 263,
+    "family": [
+      "2 Samuel 16",
+      "2 Corinthians 9"
+    ],
+    "secret": [
+      "Ezekiel 23",
+      "Psalm 70-71"
+    ]
+  },
+  {
+    "day": 264,
+    "family": [
+      "2 Samuel 17",
+      "2 Corinthians 10"
+    ],
+    "secret": [
+      "Ezekiel 24",
+      "Psalm 72"
+    ]
+  },
+  {
+    "day": 265,
+    "family": [
+      "2 Samuel 18",
+      "2 Corinthians 11"
+    ],
+    "secret": [
+      "Ezekiel 25",
+      "Psalm 73"
+    ]
+  },
+  {
+    "day": 266,
+    "family": [
+      "2 Samuel 19",
+      "2 Corinthians 12"
+    ],
+    "secret": [
+      "Ezekiel 26",
+      "Psalm 74"
+    ]
+  },
+  {
+    "day": 267,
+    "family": [
+      "2 Samuel 20",
+      "2 Corinthians 13"
+    ],
+    "secret": [
+      "Ezekiel 27",
+      "Psalm 75-76"
+    ]
+  },
+  {
+    "day": 268,
+    "family": [
+      "2 Samuel 21",
+      "Galatians 1"
+    ],
+    "secret": [
+      "Ezekiel 28",
+      "Psalm 77"
+    ]
+  },
+  {
+    "day": 269,
+    "family": [
+      "2 Samuel 22",
+      "Galatians 2"
+    ],
+    "secret": [
+      "Ezekiel 29",
+      "Psalm 78:1-39"
+    ]
+  },
+  {
+    "day": 270,
+    "family": [
+      "2 Samuel 23",
+      "Galatians 3"
+    ],
+    "secret": [
+      "Ezekiel 30",
+      "Psalm 78:40-72"
+    ]
+  },
+  {
+    "day": 271,
+    "family": [
+      "2 Samuel 24",
+      "Galatians 4"
+    ],
+    "secret": [
+      "Ezekiel 31",
+      "Psalm 79"
+    ]
+  },
+  {
+    "day": 272,
+    "family": [
+      "1 Kings 1",
+      "Galatians 5"
+    ],
+    "secret": [
+      "Ezekiel 32",
+      "Psalm 80"
+    ]
+  },
+  {
+    "day": 273,
+    "family": [
+      "1 Kings 2",
+      "Galatians 6"
+    ],
+    "secret": [
+      "Ezekiel 33",
+      "Psalm 81-82"
+    ]
+  },
+  {
+    "day": 274,
+    "family": [
+      "1 Kings 3",
+      "Ephesians 1"
+    ],
+    "secret": [
+      "Ezekiel 34",
+      "Psalm 83-84"
+    ]
+  },
+  {
+    "day": 275,
+    "family": [
+      "1 Kings 4-5",
+      "Ephesians 2"
+    ],
+    "secret": [
+      "Ezekiel 35",
+      "Psalm 85"
+    ]
+  },
+  {
+    "day": 276,
+    "family": [
+      "1 Kings 6",
+      "Ephesians 3"
+    ],
+    "secret": [
+      "Ezekiel 36",
+      "Psalm 86"
+    ]
+  },
+  {
+    "day": 277,
+    "family": [
+      "1 Kings 7",
+      "Ephesians 4"
+    ],
+    "secret": [
+      "Ezekiel 37",
+      "Psalm 87-88"
+    ]
+  },
+  {
+    "day": 278,
+    "family": [
+      "1 Kings 8",
+      "Ephesians 5"
+    ],
+    "secret": [
+      "Ezekiel 38",
+      "Psalm 89"
+    ]
+  },
+  {
+    "day": 279,
+    "family": [
+      "1 Kings 9",
+      "Ephesians 6"
+    ],
+    "secret": [
+      "Ezekiel 39",
+      "Psalm 90"
+    ]
+  },
+  {
+    "day": 280,
+    "family": [
+      "1 Kings 10",
+      "Philippians 1"
+    ],
+    "secret": [
+      "Ezekiel 40",
+      "Psalm 91"
+    ]
+  },
+  {
+    "day": 281,
+    "family": [
+      "1 Kings 11",
+      "Philippians 2"
+    ],
+    "secret": [
+      "Ezekiel 41",
+      "Psalm 92-93"
+    ]
+  },
+  {
+    "day": 282,
+    "family": [
+      "1 Kings 12",
+      "Philippians 3"
+    ],
+    "secret": [
+      "Ezekiel 42",
+      "Psalm 94"
+    ]
+  },
+  {
+    "day": 283,
+    "family": [
+      "1 Kings 13",
+      "Philippians 4"
+    ],
+    "secret": [
+      "Ezekiel 43",
+      "Psalm 95-96"
+    ]
+  },
+  {
+    "day": 284,
+    "family": [
+      "1 Kings 14",
+      "Colossians 1"
+    ],
+    "secret": [
+      "Ezekiel 44",
+      "Psalm 97-98"
+    ]
+  },
+  {
+    "day": 285,
+    "family": [
+      "1 Kings 15",
+      "Colossians 2"
+    ],
+    "secret": [
+      "Ezekiel 45",
+      "Psalm 99-101"
+    ]
+  },
+  {
+    "day": 286,
+    "family": [
+      "1 Kings 16",
+      "Colossians 3"
+    ],
+    "secret": [
+      "Ezekiel 46",
+      "Psalm 102"
+    ]
+  },
+  {
+    "day": 287,
+    "family": [
+      "1 Kings 17",
+      "Colossians 4"
+    ],
+    "secret": [
+      "Ezekiel 47",
+      "Psalm 103"
+    ]
+  },
+  {
+    "day": 288,
+    "family": [
+      "1 Kings 18",
+      "1 Thessalonians 1"
+    ],
+    "secret": [
+      "Ezekiel 48",
+      "Psalm 104"
+    ]
+  },
+  {
+    "day": 289,
+    "family": [
+      "1 Kings 19",
+      "1 Thessalonians 2"
+    ],
+    "secret": [
+      "Daniel 1",
+      "Psalm 105"
+    ]
+  },
+  {
+    "day": 290,
+    "family": [
+      "1 Kings 20",
+      "1 Thessalonians 3"
+    ],
+    "secret": [
+      "Daniel 2",
+      "Psalm 106"
+    ]
+  },
+  {
+    "day": 291,
+    "family": [
+      "1 Kings 21",
+      "1 Thessalonians 4"
+    ],
+    "secret": [
+      "Daniel 3",
+      "Psalm 107"
+    ]
+  },
+  {
+    "day": 292,
+    "family": [
+      "1 Kings 22",
+      "1 Thessalonians 5"
+    ],
+    "secret": [
+      "Daniel 4",
+      "Psalm 108-109"
+    ]
+  },
+  {
+    "day": 293,
+    "family": [
+      "2 Kings 1",
+      "2 Thessalonians 1"
+    ],
+    "secret": [
+      "Daniel 5",
+      "Psalm 110-111"
+    ]
+  },
+  {
+    "day": 294,
+    "family": [
+      "2 Kings 2",
+      "2 Thessalonians 2"
+    ],
+    "secret": [
+      "Daniel 6",
+      "Psalm 112-113"
+    ]
+  },
+  {
+    "day": 295,
+    "family": [
+      "2 Kings 3",
+      "2 Thessalonians 3"
+    ],
+    "secret": [
+      "Daniel 7",
+      "Psalm 114-115"
+    ]
+  },
+  {
+    "day": 296,
+    "family": [
+      "2 Kings 4",
+      "1 Timothy 1"
+    ],
+    "secret": [
+      "Daniel 8",
+      "Psalm 116"
+    ]
+  },
+  {
+    "day": 297,
+    "family": [
+      "2 Kings 5",
+      "1 Timothy 2"
+    ],
+    "secret": [
+      "Daniel 9",
+      "Psalm 117-118"
+    ]
+  },
+  {
+    "day": 298,
+    "family": [
+      "2 Kings 6",
+      "1 Timothy 3"
+    ],
+    "secret": [
+      "Daniel 10",
+      "Psalm 119:1-24"
+    ]
+  },
+  {
+    "day": 299,
+    "family": [
+      "2 Kings 7",
+      "1 Timothy 4"
+    ],
+    "secret": [
+      "Daniel 11",
+      "Psalm 119:25-48"
+    ]
+  },
+  {
+    "day": 300,
+    "family": [
+      "2 Kings 8",
+      "1 Timothy 5"
+    ],
+    "secret": [
+      "Daniel 12",
+      "Psalm 119:49-72"
+    ]
+  },
+  {
+    "day": 301,
+    "family": [
+      "2 Kings 9",
+      "1 Timothy 6"
+    ],
+    "secret": [
+      "Hosea 1",
+      "Psalm 119:73-96"
+    ]
+  },
+  {
+    "day": 302,
+    "family": [
+      "2 Kings 10-11",
+      "2 Timothy 1"
+    ],
+    "secret": [
+      "Hosea 2",
+      "Psalm 119:97-120"
+    ]
+  },
+  {
+    "day": 303,
+    "family": [
+      "2 Kings 12",
+      "2 Timothy 2"
+    ],
+    "secret": [
+      "Hosea 3-4",
+      "Psalm 119:121-144"
+    ]
+  },
+  {
+    "day": 304,
+    "family": [
+      "2 Kings 13",
+      "2 Timothy 3"
+    ],
+    "secret": [
+      "Hosea 5-6",
+      "Psalm 119:145-176"
+    ]
+  },
+  {
+    "day": 305,
+    "family": [
+      "2 Kings 14",
+      "2 Timothy 4"
+    ],
+    "secret": [
+      "Hosea 7",
+      "Psalm 120-122"
+    ]
+  },
+  {
+    "day": 306,
+    "family": [
+      "2 Kings 15",
+      "Titus 1"
+    ],
+    "secret": [
+      "Hosea 8",
+      "Psalm 123-125"
+    ]
+  },
+  {
+    "day": 307,
+    "family": [
+      "2 Kings 16",
+      "Titus 2"
+    ],
+    "secret": [
+      "Hosea 9",
+      "Psalm 126-128"
+    ]
+  },
+  {
+    "day": 308,
+    "family": [
+      "2 Kings 17",
+      "Titus 3"
+    ],
+    "secret": [
+      "Hosea 10",
+      "Psalm 129-131"
+    ]
+  },
+  {
+    "day": 309,
+    "family": [
+      "2 Kings 18",
+      "Philemon 1"
+    ],
+    "secret": [
+      "Hosea 11",
+      "Psalm 132-134"
+    ]
+  },
+  {
+    "day": 310,
+    "family": [
+      "2 Kings 19",
+      "Hebrews 1"
+    ],
+    "secret": [
+      "Hosea 12",
+      "Psalm 135-136"
+    ]
+  },
+  {
+    "day": 311,
+    "family": [
+      "2 Kings 20",
+      "Hebrews 2"
+    ],
+    "secret": [
+      "Hosea 13",
+      "Psalm 137-138"
+    ]
+  },
+  {
+    "day": 312,
+    "family": [
+      "2 Kings 21",
+      "Hebrews 3"
+    ],
+    "secret": [
+      "Hosea 14",
+      "Psalm 139"
+    ]
+  },
+  {
+    "day": 313,
+    "family": [
+      "2 Kings 22",
+      "Hebrews 4"
+    ],
+    "secret": [
+      "Joel 1",
+      "Psalm 140-141"
+    ]
+  },
+  {
+    "day": 314,
+    "family": [
+      "2 Kings 23",
+      "Hebrews 5"
+    ],
+    "secret": [
+      "Joel 2",
+      "Psalm 142"
+    ]
+  },
+  {
+    "day": 315,
+    "family": [
+      "2 Kings 24",
+      "Hebrews 6"
+    ],
+    "secret": [
+      "Joel 3",
+      "Psalm 143"
+    ]
+  },
+  {
+    "day": 316,
+    "family": [
+      "2 Kings 25",
+      "Hebrews 7"
+    ],
+    "secret": [
+      "Amos 1",
+      "Psalm 144"
+    ]
+  },
+  {
+    "day": 317,
+    "family": [
+      "1 Chronicles 1-2",
+      "Hebrews 8"
+    ],
+    "secret": [
+      "Amos 2",
+      "Psalm 145"
+    ]
+  },
+  {
+    "day": 318,
+    "family": [
+      "1 Chronicles 3-4",
+      "Hebrews 9"
+    ],
+    "secret": [
+      "Amos 3",
+      "Psalm 146-147"
+    ]
+  },
+  {
+    "day": 319,
+    "family": [
+      "1 Chronicles 5-6",
+      "Hebrews 10"
+    ],
+    "secret": [
+      "Amos 4",
+      "Psalm 148-150"
+    ]
+  },
+  {
+    "day": 320,
+    "family": [
+      "1 Chronicles 7-8",
+      "Hebrews 11"
+    ],
+    "secret": [
+      "Amos 5",
+      "Luke 1:1-38"
+    ]
+  },
+  {
+    "day": 321,
+    "family": [
+      "1 Chronicles 9-10",
+      "Hebrews 12"
+    ],
+    "secret": [
+      "Amos 6",
+      "Luke 1:39-80"
+    ]
+  },
+  {
+    "day": 322,
+    "family": [
+      "1 Chronicles 11-12",
+      "Hebrews 13"
+    ],
+    "secret": [
+      "Amos 7",
+      "Luke 2"
+    ]
+  },
+  {
+    "day": 323,
+    "family": [
+      "1 Chronicles 13-14",
+      "James 1"
+    ],
+    "secret": [
+      "Amos 8",
+      "Luke 3"
+    ]
+  },
+  {
+    "day": 324,
+    "family": [
+      "1 Chronicles 15",
+      "James 2"
+    ],
+    "secret": [
+      "Amos 9",
+      "Luke 4"
+    ]
+  },
+  {
+    "day": 325,
+    "family": [
+      "1 Chronicles 16",
+      "James 3"
+    ],
+    "secret": [
+      "Obadiah 1",
+      "Luke 5"
+    ]
+  },
+  {
+    "day": 326,
+    "family": [
+      "1 Chronicles 17",
+      "James 4"
+    ],
+    "secret": [
+      "Jonah 1",
+      "Luke 6"
+    ]
+  },
+  {
+    "day": 327,
+    "family": [
+      "1 Chronicles 18",
+      "James 5"
+    ],
+    "secret": [
+      "Jonah 2",
+      "Luke 7"
+    ]
+  },
+  {
+    "day": 328,
+    "family": [
+      "1 Chronicles 19-20",
+      "1 Peter 1"
+    ],
+    "secret": [
+      "Jonah 3",
+      "Luke 8"
+    ]
+  },
+  {
+    "day": 329,
+    "family": [
+      "1 Chronicles 21",
+      "1 Peter 2"
+    ],
+    "secret": [
+      "Jonah 4",
+      "Luke 9"
+    ]
+  },
+  {
+    "day": 330,
+    "family": [
+      "1 Chronicles 22",
+      "1 Peter 3"
+    ],
+    "secret": [
+      "Micah 1",
+      "Luke 10"
+    ]
+  },
+  {
+    "day": 331,
+    "family": [
+      "1 Chronicles 23",
+      "1 Peter 4"
+    ],
+    "secret": [
+      "Micah 2",
+      "Luke 11"
+    ]
+  },
+  {
+    "day": 332,
+    "family": [
+      "1 Chronicles 24-25",
+      "1 Peter 5"
+    ],
+    "secret": [
+      "Micah 3",
+      "Luke 12"
+    ]
+  },
+  {
+    "day": 333,
+    "family": [
+      "1 Chronicles 26-27",
+      "2 Peter 1"
+    ],
+    "secret": [
+      "Micah 4",
+      "Luke 13"
+    ]
+  },
+  {
+    "day": 334,
+    "family": [
+      "1 Chronicles 28",
+      "2 Peter 2"
+    ],
+    "secret": [
+      "Micah 5",
+      "Luke 14"
+    ]
+  },
+  {
+    "day": 335,
+    "family": [
+      "1 Chronicles 29",
+      "2 Peter 3"
+    ],
+    "secret": [
+      "Micah 6",
+      "Luke 15"
+    ]
+  },
+  {
+    "day": 336,
+    "family": [
+      "2 Chronicles 1",
+      "1 John 1"
+    ],
+    "secret": [
+      "Micah 7",
+      "Luke 16"
+    ]
+  },
+  {
+    "day": 337,
+    "family": [
+      "2 Chronicles 2",
+      "1 John 2"
+    ],
+    "secret": [
+      "Nahum 1",
+      "Luke 17"
+    ]
+  },
+  {
+    "day": 338,
+    "family": [
+      "2 Chronicles 3-4",
+      "1 John 3"
+    ],
+    "secret": [
+      "Nahum 2",
+      "Luke 18"
+    ]
+  },
+  {
+    "day": 339,
+    "family": [
+      "2 Chronicles 5:1-6:11",
+      "1 John 4"
+    ],
+    "secret": [
+      "Nahum 3",
+      "Luke 19"
+    ]
+  },
+  {
+    "day": 340,
+    "family": [
+      "2 Chronicles 6:12-42",
+      "1 John 5"
+    ],
+    "secret": [
+      "Habakkuk 1",
+      "Luke 20"
+    ]
+  },
+  {
+    "day": 341,
+    "family": [
+      "2 Chronicles 7",
+      "2 John 1"
+    ],
+    "secret": [
+      "Habakkuk 2",
+      "Luke 21"
+    ]
+  },
+  {
+    "day": 342,
+    "family": [
+      "2 Chronicles 8",
+      "3 John 1"
+    ],
+    "secret": [
+      "Habakkuk 3",
+      "Luke 22"
+    ]
+  },
+  {
+    "day": 343,
+    "family": [
+      "2 Chronicles 9",
+      "Jude 1"
+    ],
+    "secret": [
+      "Zephaniah 1",
+      "Luke 23"
+    ]
+  },
+  {
+    "day": 344,
+    "family": [
+      "2 Chronicles 10",
+      "Revelation 1"
+    ],
+    "secret": [
+      "Zephaniah 2",
+      "Luke 24"
+    ]
+  },
+  {
+    "day": 345,
+    "family": [
+      "2 Chronicles 11-12",
+      "Revelation 2"
+    ],
+    "secret": [
+      "Zephaniah 3",
+      "John 1"
+    ]
+  },
+  {
+    "day": 346,
+    "family": [
+      "2 Chronicles 13",
+      "Revelation 3"
+    ],
+    "secret": [
+      "Haggai 1",
+      "John 2"
+    ]
+  },
+  {
+    "day": 347,
+    "family": [
+      "2 Chronicles 14-15",
+      "Revelation 4"
+    ],
+    "secret": [
+      "Haggai 2",
+      "John 3"
+    ]
+  },
+  {
+    "day": 348,
+    "family": [
+      "2 Chronicles 16",
+      "Revelation 5"
+    ],
+    "secret": [
+      "Zechariah 1",
+      "John 4"
+    ]
+  },
+  {
+    "day": 349,
+    "family": [
+      "2 Chronicles 17",
+      "Revelation 6"
+    ],
+    "secret": [
+      "Zechariah 2",
+      "John 5"
+    ]
+  },
+  {
+    "day": 350,
+    "family": [
+      "2 Chronicles 18",
+      "Revelation 7"
+    ],
+    "secret": [
+      "Zechariah 3",
+      "John 6"
+    ]
+  },
+  {
+    "day": 351,
+    "family": [
+      "2 Chronicles 19-20",
+      "Revelation 8"
+    ],
+    "secret": [
+      "Zechariah 4",
+      "John 7"
+    ]
+  },
+  {
+    "day": 352,
+    "family": [
+      "2 Chronicles 21",
+      "Revelation 9"
+    ],
+    "secret": [
+      "Zechariah 5",
+      "John 8"
+    ]
+  },
+  {
+    "day": 353,
+    "family": [
+      "2 Chronicles 22-23",
+      "Revelation 10"
+    ],
+    "secret": [
+      "Zechariah 6",
+      "John 9"
+    ]
+  },
+  {
+    "day": 354,
+    "family": [
+      "2 Chronicles 24",
+      "Revelation 11"
+    ],
+    "secret": [
+      "Zechariah 7",
+      "John 10"
+    ]
+  },
+  {
+    "day": 355,
+    "family": [
+      "2 Chronicles 25",
+      "Revelation 12"
+    ],
+    "secret": [
+      "Zechariah 8",
+      "John 11"
+    ]
+  },
+  {
+    "day": 356,
+    "family": [
+      "2 Chronicles 26",
+      "Revelation 13"
+    ],
+    "secret": [
+      "Zechariah 9",
+      "John 12"
+    ]
+  },
+  {
+    "day": 357,
+    "family": [
+      "2 Chronicles 27-28",
+      "Revelation 14"
+    ],
+    "secret": [
+      "Zechariah 10",
+      "John 13"
+    ]
+  },
+  {
+    "day": 358,
+    "family": [
+      "2 Chronicles 29",
+      "Revelation 15"
+    ],
+    "secret": [
+      "Zechariah 11",
+      "John 14"
+    ]
+  },
+  {
+    "day": 359,
+    "family": [
+      "2 Chronicles 30",
+      "Revelation 16"
+    ],
+    "secret": [
+      "Zechariah 12:1-13:1",
+      "John 15"
+    ]
+  },
+  {
+    "day": 360,
+    "family": [
+      "2 Chronicles 31",
+      "Revelation 17"
+    ],
+    "secret": [
+      "Zechariah 13:2-9",
+      "John 16"
+    ]
+  },
+  {
+    "day": 361,
+    "family": [
+      "2 Chronicles 32",
+      "Revelation 18"
+    ],
+    "secret": [
+      "Zechariah 14",
+      "John 17"
+    ]
+  },
+  {
+    "day": 362,
+    "family": [
+      "2 Chronicles 33",
+      "Revelation 19"
+    ],
+    "secret": [
+      "Malachi 1",
+      "John 18"
+    ]
+  },
+  {
+    "day": 363,
+    "family": [
+      "2 Chronicles 34",
+      "Revelation 20"
+    ],
+    "secret": [
+      "Malachi 2",
+      "John 19"
+    ]
+  },
+  {
+    "day": 364,
+    "family": [
+      "2 Chronicles 35",
+      "Revelation 21"
+    ],
+    "secret": [
+      "Malachi 3",
+      "John 20"
+    ]
+  },
+  {
+    "day": 365,
+    "family": [
+      "2 Chronicles 36",
+      "Revelation 22"
+    ],
+    "secret": [
+      "Malachi 4",
+      "John 21"
+    ]
+  }
+]

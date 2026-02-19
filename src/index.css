@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+:root {
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --text-base: 18px;
+  --line-height: 1.7;
+
+  --color-rubric: #8b0000;
+  --color-bg: #faf9f6;
+  --color-text: #1a1a2e;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e5e5;
+  --color-accent: #1a1a2e;
+  --color-check: #16a34a;
+
+  /* Liturgical season colours */
+  --color-season-advent: #6b21a8;
+  --color-season-christmas: #c9a84c;
+  --color-season-epiphany: #c9a84c;
+  --color-season-lent: #6b21a8;
+  --color-season-holy-week: #8b0000;
+  --color-season-easter: #c9a84c;
+  --color-season-ascension: #c9a84c;
+  --color-season-whitsun: #dc2626;
+  --color-season-trinity: #16a34a;
+}
+
+html {
+  font-size: var(--text-base);
+  line-height: var(--line-height);
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
